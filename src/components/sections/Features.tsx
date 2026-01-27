@@ -204,7 +204,17 @@ export function Features() {
 
   // Recalculate centers on mount and resize
   useEffect(() => {
+    // Calculate immediately
     calculateMarkerCenters();
+    
+    // Also calculate after a short delay to ensure DOM is ready
+    const timeoutId1 = setTimeout(() => {
+      calculateMarkerCenters();
+    }, 50);
+    
+    const timeoutId2 = setTimeout(() => {
+      calculateMarkerCenters();
+    }, 200);
     
     const resizeObserver = new ResizeObserver(() => {
       calculateMarkerCenters();
@@ -221,10 +231,12 @@ export function Features() {
     window.addEventListener('resize', calculateMarkerCenters);
     
     return () => {
+      clearTimeout(timeoutId1);
+      clearTimeout(timeoutId2);
       resizeObserver.disconnect();
       window.removeEventListener('resize', calculateMarkerCenters);
     };
-  }, [calculateMarkerCenters]);
+  }, [calculateMarkerCenters, cadenceSteps.length]);
 
   // Recalculate when active step changes (for mobile scroll)
   useEffect(() => {
@@ -262,16 +274,36 @@ export function Features() {
     const currentCenter = markerCenters[activeStep];
     const nextCenter = markerCenters[activeStep + 1];
     
-    if (!currentCenter || !nextCenter) {
+    if (!currentCenter || !nextCenter || currentCenter === undefined || nextCenter === undefined) {
       return { display: 'none' };
     }
     
     const lineLeft = currentCenter;
-    const lineWidth = (nextCenter - currentCenter) * progress;
+    const lineWidth = Math.max(0, (nextCenter - currentCenter) * progress);
     
     return {
       left: `${lineLeft}px`,
       width: `${lineWidth}px`,
+      display: lineWidth > 0 ? 'block' : 'none',
+    };
+  };
+  
+  // Get baseline style for connecting all dots
+  const getBaselineStyle = () => {
+    if (markerCenters.length < 2) {
+      return { display: 'none' };
+    }
+    
+    const firstCenter = markerCenters[0];
+    const lastCenter = markerCenters[markerCenters.length - 1];
+    
+    if (!firstCenter || !lastCenter || firstCenter === undefined || lastCenter === undefined) {
+      return { display: 'none' };
+    }
+    
+    return {
+      left: `${firstCenter}px`,
+      width: `${lastCenter - firstCenter}px`,
     };
   };
 
@@ -301,9 +333,8 @@ export function Features() {
                     className="absolute h-[1px] z-0"
                     style={{
                       top: '32px',
-                      left: `${markerCenters[0]}px`,
-                      width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
                       backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
+                      ...getBaselineStyle(),
                     }}
                   />
                 )}
@@ -404,9 +435,8 @@ export function Features() {
                     className="absolute h-[1px] z-0"
                     style={{
                       top: '32px',
-                      left: `${markerCenters[0]}px`,
-                      width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
                       backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
+                      ...getBaselineStyle(),
                     }}
                   />
                 )}
