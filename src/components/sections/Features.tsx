@@ -231,44 +231,46 @@ export function Features() {
                             : 'transform 300ms ease-out, opacity 300ms ease-out',
                         }}
                       >
-                        {/* Top row: Icon + Title */}
-                        <div className="flex items-center gap-3 mb-6">
-                          <div className="flex-shrink-0 p-3 rounded-xl bg-[#EFEDE5] border border-[#E6E2DA]">
-                            <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
+                        <div className="text-center">
+                          {/* Top row: Icon + Title */}
+                          <div className="flex flex-col items-center gap-3 mb-6">
+                            <div className="flex-shrink-0 p-3 rounded-xl bg-[#EFEDE5] border border-[#E6E2DA]">
+                              <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
+                            </div>
+                            <h4 className="font-semibold text-base text-[#1B1B1A]">
+                              {step.title}
+                            </h4>
                           </div>
-                          <h4 className="font-semibold text-base text-[#1B1B1A]">
-                            {step.title}
-                          </h4>
-                        </div>
 
-                        {/* How section */}
-                        <div className="mb-4">
-                          <p className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-1.5">
-                            How:
-                          </p>
-                          <p className="text-sm text-[#5F5B55] leading-relaxed">
-                            {step.how}
-                          </p>
-                        </div>
-
-                        {/* Impact section */}
-                        <div className="mb-4">
-                          <p className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-1.5">
-                            Impact:
-                          </p>
-                          <p className="text-sm text-[#5F5B55] leading-relaxed">
-                            {step.impact}
-                          </p>
-                        </div>
-
-                        {/* Optional example quote */}
-                        {step.example && (
-                          <div className="pt-3 border-t border-[#E6E2DA]">
-                            <p className="text-xs text-[#8A857E] italic leading-relaxed">
-                              {step.example}
+                          {/* How section */}
+                          <div className="mb-4">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-1.5">
+                              How:
+                            </p>
+                            <p className="text-sm text-[#5F5B55] leading-relaxed">
+                              {step.how}
                             </p>
                           </div>
-                        )}
+
+                          {/* Impact section */}
+                          <div className="mb-4">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-1.5">
+                              Impact:
+                            </p>
+                            <p className="text-sm text-[#5F5B55] leading-relaxed">
+                              {step.impact}
+                            </p>
+                          </div>
+
+                          {/* Optional example quote */}
+                          {step.example && (
+                            <div className="pt-3 border-t border-[#E6E2DA]">
+                              <p className="text-xs text-[#8A857E] italic leading-relaxed">
+                                {step.example}
+                              </p>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   );
