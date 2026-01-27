@@ -22,7 +22,7 @@ export function Hero() {
             
             <div className="space-y-4">
               <p className="text-lg text-[#5F5B55] leading-relaxed">
-                ChattaBox is an AI-powered companion that calls your parent or loved one for check-ins, friendly chats and gentle reminders — it gives you peace of mind.
+                ChattaBox is an AI-powered companion that calls your parent or loved one for check-ins, friendly chats and gentle reminders.
               </p>
               <ul className="space-y-2 text-base text-[#5F5B55] leading-relaxed">
                 <li className="flex items-baseline gap-2">
