@@ -287,53 +287,25 @@ export function Features() {
                 ref={scrollContainerRef}
                 className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative"
               >
-                {/* Base dashed line connecting all dots */}
-                {markerCenters.length > 1 && (
-                  <div
-                    className="absolute h-[1px] z-0"
-                    style={{
-                      top: '32px',
-                      backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
-                      ...getBaselineStyle(),
-                    }}
-                  />
-                )}
+                {/* Perforated baseline - faint dashes */}
+                <div
+                  className="absolute h-[1px] z-0 left-4 right-4"
+                  style={{
+                    top: '32px',
+                    backgroundImage: 'repeating-linear-gradient(to right, rgba(230, 226, 218, 0.4) 0, rgba(230, 226, 218, 0.4) 4px, transparent 4px, transparent 8px)',
+                  }}
+                />
                 
-                {/* Completed segments - solid lines */}
-                {markerCenters.length > 1 && activeStep > 0 && (
-                  <>
-                    {Array.from({ length: activeStep }).map((_, index) => {
-                      const startCenter = markerCenters[index];
-                      const endCenter = markerCenters[index + 1];
-                      if (!startCenter || !endCenter) return null;
-                      
-                      return (
-                        <div
-                          key={`completed-${index}`}
-                          className="absolute h-[1px] bg-[#C06040] z-0"
-                          style={{
-                            top: '32px',
-                            left: `${startCenter}px`,
-                            width: `${endCenter - startCenter}px`,
-                            opacity: 0.85,
-                          }}
-                        />
-                      );
-                    })}
-                  </>
-                )}
-                
-                {/* Progress line for active segment - fills in the dashes */}
-                {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
-                  <div
-                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out z-0"
-                    style={{
-                      top: '32px',
-                      opacity: 0.85,
-                      ...getProgressLineStyle(),
-                    }}
-                  />
-                )}
+                {/* Terracotta fill line - fills in dashes as progress advances */}
+                <div
+                  className="absolute h-[1px] bg-[#C06040] z-0 transition-all duration-500 ease-out"
+                  style={{
+                    top: '32px',
+                    left: '1rem',
+                    width: `calc(${overallProgress * 100}% - 2rem)`,
+                    opacity: 0.85,
+                  }}
+                />
                 
                 <div className="flex gap-8 min-w-max relative z-20">
                   {cadenceSteps.map((step, index) => {
@@ -344,10 +316,6 @@ export function Features() {
                         key={index}
                         ref={(el) => {
                           stepRefs.current[index] = el;
-                          // Recalculate centers when ref is set
-                          if (el && stepRefs.current.filter(Boolean).length === cadenceSteps.length) {
-                            setTimeout(() => calculateMarkerCenters(), 10);
-                          }
                         }}
                         onClick={() => handleStepClick(index)}
                         aria-pressed={isActive}
@@ -361,7 +329,6 @@ export function Features() {
                           {/* Fixed-size marker wrapper */}
                           <div 
                             className="relative w-8 h-8 flex items-center justify-center"
-                            data-marker-wrapper
                           >
                             {/* Selected ring using pseudo-element */}
                             {isActive && (
