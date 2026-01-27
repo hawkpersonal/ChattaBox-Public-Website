@@ -390,9 +390,6 @@ export function Features() {
             <h3 className="text-2xl font-serif font-semibold text-[#1B1B1A] mb-2 text-center">
               Benefits
             </h3>
-            <p className="text-sm text-[#8A857E] text-center">
-              Designed for both sides: your parent and you.
-            </p>
           </div>
 
           {/* Mobile: Segmented Toggle */}
