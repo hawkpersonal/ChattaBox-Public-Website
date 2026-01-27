@@ -336,18 +336,6 @@ export function Features() {
           {/* Detail Panel */}
           <div className="rounded-2xl border border-[#E6E2DA] bg-white p-5 md:p-6">
             <div className="space-y-4">
-              {/* Label Pills */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-3 py-1 rounded-full">
-                  {activeStepData.timeLabel}
-                </span>
-                {activeStepData.audience && (
-                  <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-3 py-1 rounded-full">
-                    {activeStepData.audience}
-                  </span>
-                )}
-              </div>
-
               {/* How Section */}
               <div>
                 <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
