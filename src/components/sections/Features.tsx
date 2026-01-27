@@ -323,7 +323,12 @@ export function Features() {
 
           {/* Detail Panel */}
           <div className="rounded-2xl border border-[#E6E2DA] bg-white p-5 md:p-6">
-            <div className="space-y-4">
+            <div className="space-y-4 text-center">
+              {/* Title */}
+              <h4 className="font-semibold text-base text-[#1B1B1A]">
+                {activeStepData.title}
+              </h4>
+
               {/* How Section */}
               <div>
                 <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
@@ -343,13 +348,6 @@ export function Features() {
                   {activeStepData.impact}
                 </p>
               </div>
-
-              {/* Example Quote (Secondary) */}
-              {activeStepData.example && (
-                <blockquote className="text-xs text-[#8A857E] italic border-l-2 border-[#E6E2DA] pl-3 pt-2">
-                  {activeStepData.example}
-                </blockquote>
-              )}
             </div>
           </div>
         </div>
