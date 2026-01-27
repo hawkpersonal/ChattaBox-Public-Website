@@ -280,9 +280,8 @@ export function Features() {
 
             {/* Navigation arrows - Desktop only, show on hover */}
             <button
-              onClick={() => handleStepClick(Math.max(0, activeStep - 1))}
-              disabled={activeStep === 0}
-              className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all opacity-0 group-hover:opacity-100 shadow-sm z-10"
+              onClick={() => handleStepClick(activeStep === 0 ? cadenceSteps.length - 1 : activeStep - 1)}
+              className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] transition-all opacity-0 group-hover:opacity-100 shadow-sm z-10"
               aria-label="Previous"
             >
               <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -290,9 +289,8 @@ export function Features() {
               </svg>
             </button>
             <button
-              onClick={() => handleStepClick(Math.min(cadenceSteps.length - 1, activeStep + 1))}
-              disabled={activeStep === cadenceSteps.length - 1}
-              className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all opacity-0 group-hover:opacity-100 shadow-sm z-10"
+              onClick={() => handleStepClick(activeStep === cadenceSteps.length - 1 ? 0 : activeStep + 1)}
+              className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] transition-all opacity-0 group-hover:opacity-100 shadow-sm z-10"
               aria-label="Next"
             >
               <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
