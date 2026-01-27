@@ -295,19 +295,44 @@ export function Features() {
             {/* Desktop: Horizontal timeline */}
             <div className="hidden md:block relative" ref={timelineContainerRef}>
               <div className="relative flex justify-between items-start">
-                {/* Base line connecting all dots */}
+                {/* Base dashed line connecting all dots */}
                 {markerCenters.length > 1 && (
                   <div
-                    className="absolute h-[1px] bg-[#E6E2DA]"
+                    className="absolute h-[1px]"
                     style={{
                       top: '20px',
                       left: `${markerCenters[0]}px`,
                       width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
+                      backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
                     }}
                   />
                 )}
                 
-                {/* Progress line for active segment */}
+                {/* Completed segments - solid lines */}
+                {markerCenters.length > 1 && activeStep > 0 && (
+                  <>
+                    {Array.from({ length: activeStep }).map((_, index) => {
+                      const startCenter = markerCenters[index];
+                      const endCenter = markerCenters[index + 1];
+                      if (!startCenter || !endCenter) return null;
+                      
+                      return (
+                        <div
+                          key={`completed-${index}`}
+                          className="absolute h-[1px] bg-[#C06040]"
+                          style={{
+                            top: '20px',
+                            left: `${startCenter}px`,
+                            width: `${endCenter - startCenter}px`,
+                            opacity: 0.85,
+                          }}
+                        />
+                      );
+                    })}
+                  </>
+                )}
+                
+                {/* Progress line for active segment - fills in the dashes */}
                 {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
                   <div
                     className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
@@ -373,19 +398,44 @@ export function Features() {
                 ref={scrollContainerRef}
                 className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative"
               >
-                {/* Base line connecting all dots */}
+                {/* Base dashed line connecting all dots */}
                 {markerCenters.length > 1 && (
                   <div
-                    className="absolute h-[1px] bg-[#E6E2DA]"
+                    className="absolute h-[1px]"
                     style={{
                       top: '20px',
                       left: `${markerCenters[0]}px`,
                       width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
+                      backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
                     }}
                   />
                 )}
                 
-                {/* Progress line for active segment */}
+                {/* Completed segments - solid lines */}
+                {markerCenters.length > 1 && activeStep > 0 && (
+                  <>
+                    {Array.from({ length: activeStep }).map((_, index) => {
+                      const startCenter = markerCenters[index];
+                      const endCenter = markerCenters[index + 1];
+                      if (!startCenter || !endCenter) return null;
+                      
+                      return (
+                        <div
+                          key={`completed-${index}`}
+                          className="absolute h-[1px] bg-[#C06040]"
+                          style={{
+                            top: '20px',
+                            left: `${startCenter}px`,
+                            width: `${endCenter - startCenter}px`,
+                            opacity: 0.85,
+                          }}
+                        />
+                      );
+                    })}
+                  </>
+                )}
+                
+                {/* Progress line for active segment - fills in the dashes */}
                 {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
                   <div
                     className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
