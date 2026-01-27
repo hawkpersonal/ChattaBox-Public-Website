@@ -117,6 +117,7 @@ export function Features() {
   const [activeStep, setActiveStep] = useState(0); // Start at Morning
   const [benefitAudience, setBenefitAudience] = useState<'parent' | 'you'>('parent');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isScrollingProgrammatically = useRef(false);
   const prefersReducedMotion = useRef(false);
 
   // Check for reduced motion preference
@@ -125,25 +126,32 @@ export function Features() {
     prefersReducedMotion.current = mediaQuery.matches;
   }, []);
 
-  // Sync scroll position with activeStep
+  // Sync scroll position with activeStep (when changed programmatically)
   useEffect(() => {
-    if (scrollContainerRef.current) {
+    if (scrollContainerRef.current && isScrollingProgrammatically.current) {
       const track = scrollContainerRef.current.querySelector('.flex') as HTMLElement;
       if (track) {
         const cardElement = track.children[activeStep] as HTMLElement;
         if (cardElement) {
           cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          // Reset flag after scroll completes
+          setTimeout(() => {
+            isScrollingProgrammatically.current = false;
+          }, 500);
         }
       }
     }
   }, [activeStep]);
 
-  // Handle scroll events to update activeStep
+  // Handle scroll events to update activeStep (only for user-initiated scrolls)
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
     const handleScroll = () => {
+      // Don't update if we're programmatically scrolling
+      if (isScrollingProgrammatically.current) return;
+      
       const track = container.querySelector('.flex') as HTMLElement;
       if (!track) return;
       
@@ -171,6 +179,8 @@ export function Features() {
 
 
   const handleStepClick = (index: number) => {
+    if (index === activeStep) return;
+    isScrollingProgrammatically.current = true;
     setActiveStep(index);
   };
 
