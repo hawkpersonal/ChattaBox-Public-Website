@@ -17,7 +17,7 @@ const steps = [
     number: "3",
     icon: MessageSquare,
     title: "You Get Updates",
-    description: "Receive simple daily summaries and gentle suggestions for when a call might be especially meaningful.",
+    description: "- Receive simple daily summaries about your loved ones progress\n- Receive insights in how best you can help their wellbeing",
   },
 ];
 
@@ -57,26 +57,25 @@ export function HowItWorks() {
                     <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
                       {step.title}
                     </h3>
-                    {step.number === "1" || step.number === "2" ? (
-                      <div className="text-sm text-[#5F5B55] leading-relaxed space-y-1">
-                        {step.number === "1" ? (
-                          <>
-                            <p>- Share info about your loved one to help ChattaBox to settle in</p>
-                            <p>- Configure reminders & check-ins & preferences through the family portal</p>
-                          </>
-                        ) : (
-                          <>
-                            <p>- ChattaBox calls as you configured</p>
-                            <p>- They can call ChattaBox whenever they want to talk too.</p>
-                            <p>It remembers their conversations and preferences.</p>
-                          </>
-                        )}
-                      </div>
-                    ) : (
-                      <p className="text-sm text-[#5F5B55] leading-relaxed">
-                        {step.description}
-                      </p>
-                    )}
+                    <div className="text-sm text-[#5F5B55] leading-relaxed space-y-1">
+                      {step.number === "1" ? (
+                        <>
+                          <p>- Share info about your loved one to help ChattaBox to settle in</p>
+                          <p>- Configure reminders & check-ins & preferences through the family portal</p>
+                        </>
+                      ) : step.number === "2" ? (
+                        <>
+                          <p>- ChattaBox calls as you configured</p>
+                          <p>- They can call ChattaBox whenever they want to talk too.</p>
+                          <p>It remembers their conversations and preferences.</p>
+                        </>
+                      ) : (
+                        <>
+                          <p>- Receive simple daily summaries about your loved ones progress</p>
+                          <p>- Receive insights in how best you can help their wellbeing</p>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
