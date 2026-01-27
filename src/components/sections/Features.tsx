@@ -119,7 +119,7 @@ export function Features() {
   const activeStepData = cadenceSteps[activeStep];
 
   return (
-    <section id="features" className="pt-16 pb-16 bg-[#F9F8F4]">
+    <section id="features" className="pt-16 pb-16 bg-[#EFEDE5]">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center space-y-4 mb-12">
           <h2 className="font-serif">
