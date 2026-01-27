@@ -326,8 +326,8 @@ export function Features() {
             </h3>
           </div>
 
-          {/* Mobile: Segmented Toggle */}
-          <div className="lg:hidden mb-8">
+          {/* Segmented Toggle - Always visible */}
+          <div className="mb-8">
             <div className="flex bg-[#EFEDE5] border border-[#E6E2DA] rounded-full p-1 max-w-md mx-auto">
               <button
                 onClick={() => setBenefitAudience('parent')}
@@ -356,83 +356,8 @@ export function Features() {
             </div>
           </div>
 
-          {/* Desktop: Two Columns */}
-          <div className="hidden lg:grid grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Left Column: For your parent */}
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
-                  For your parent
-                </h4>
-                <p className="text-sm text-[#5F5B55]">
-                  Simple, daily companionship that fits into their routine
-                </p>
-              </div>
-              <div className="space-y-0">
-                {parentBenefits.map((benefit, index) => {
-                  const Icon = benefit.icon;
-                  return (
-                    <div
-                      key={benefit.title}
-                      className="flex items-start gap-4 py-5 border-b border-[#E6E2DA] last:border-b-0"
-                      style={{ borderColor: 'rgba(230, 226, 218, 0.3)' }}
-                    >
-                      <div className="flex-shrink-0 h-11 w-11 rounded-xl border border-[#E6E2DA] bg-[#EFEDE5] flex items-center justify-center">
-                        <Icon className="h-5 w-5 text-[#C06040]" strokeWidth={2} />
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-base text-[#1B1B1A] mb-1">
-                          {benefit.title}
-                        </h5>
-                        <p className="text-sm text-[#5F5B55] leading-relaxed">
-                          {benefit.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Right Column: For you */}
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
-                  For you
-                </h4>
-                <p className="text-sm text-[#5F5B55]">
-                  Peace of mind through gentle insights and simple tools
-                </p>
-              </div>
-              <div className="space-y-0">
-                {youBenefits.map((benefit, index) => {
-                  const Icon = benefit.icon;
-                  return (
-                    <div
-                      key={benefit.title}
-                      className="flex items-start gap-4 py-5 border-b border-[#E6E2DA] last:border-b-0"
-                      style={{ borderColor: 'rgba(230, 226, 218, 0.3)' }}
-                    >
-                      <div className="flex-shrink-0 h-11 w-11 rounded-xl border border-[#E6E2DA] bg-[#EFEDE5] flex items-center justify-center">
-                        <Icon className="h-5 w-5 text-[#C06040]" strokeWidth={2} />
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-base text-[#1B1B1A] mb-1">
-                          {benefit.title}
-                        </h5>
-                        <p className="text-sm text-[#5F5B55] leading-relaxed">
-                          {benefit.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile: Single List Based on Toggle */}
-          <div className="lg:hidden max-w-2xl mx-auto">
+          {/* Single List Based on Toggle - Always visible */}
+          <div className="max-w-2xl mx-auto">
             {benefitAudience === 'parent' ? (
               <div className="space-y-6">
                 <div>
