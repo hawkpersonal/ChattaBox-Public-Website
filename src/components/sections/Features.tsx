@@ -348,14 +348,25 @@ export function Features() {
 
           {/* Detail Panel */}
           <div className="rounded-2xl border border-[#E6E2DA] bg-white p-5 md:p-6">
-            <div className="space-y-4 text-center">
-              {/* Title */}
-              <h4 className="font-semibold text-base text-[#1B1B1A]">
-                {activeStepData.title}
-              </h4>
+            <div className="space-y-4">
+              {/* Title with Icon */}
+              <div className="flex items-center gap-3">
+                {(() => {
+                  const Icon = activeStepData.icon;
+                  return (
+                    <Icon 
+                      className="h-6 w-6 text-[#C06040] flex-shrink-0" 
+                      strokeWidth={2} 
+                    />
+                  );
+                })()}
+                <h4 className="font-semibold text-base text-[#1B1B1A]">
+                  {activeStepData.title}
+                </h4>
+              </div>
 
               {/* How Section */}
-              <div>
+              <div className="text-center">
                 <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
                   How:
                 </h5>
@@ -365,7 +376,7 @@ export function Features() {
               </div>
 
               {/* Impact Section */}
-              <div>
+              <div className="text-center">
                 <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
                   Impact:
                 </h5>
