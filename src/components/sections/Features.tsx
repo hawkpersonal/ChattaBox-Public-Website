@@ -216,8 +216,8 @@ export function Features() {
           <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
             {/* Desktop: Horizontal timeline */}
             <div className="hidden md:block relative">
-              <div className="relative flex justify-between items-center">
-                {/* Base connecting lines between dots */}
+              <div className="relative flex justify-between items-start">
+                {/* Base connecting lines between dots - positioned at dot level */}
                 {cadenceSteps.slice(0, -1).map((_, index) => {
                   // Calculate progress for this specific segment (0 to 1)
                   const segmentStart = index / (cadenceSteps.length - 1);
@@ -233,8 +233,11 @@ export function Features() {
                   return (
                     <div
                       key={`line-${index}`}
-                      className="absolute top-1/2 h-[1px] -translate-y-1/2"
+                      className="absolute h-[1px]"
                       style={{
+                        // Position at dot level: align with center of dots
+                        // Icon (h-5 = 20px) + mb-2 (8px) + text (text-xs ~12px) + mb-1 (4px) + half dot (1.25px)
+                        top: '48px',
                         left: `${leftPercent}%`,
                         width: `${segmentWidth}%`,
                       }}
