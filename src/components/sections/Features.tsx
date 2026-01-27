@@ -216,17 +216,45 @@ export function Features() {
           <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
             {/* Desktop: Horizontal timeline */}
             <div className="hidden md:block relative">
-              {/* Base line */}
-              <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-[#E6E2DA] -translate-y-1/2" />
-              {/* Progress line overlay */}
-              <div 
-                className="absolute top-1/2 left-0 h-[1px] bg-[#C06040] -translate-y-1/2 transition-all duration-500 ease-out"
-                style={{ 
-                  width: `${overallProgress * 100}%`,
-                  opacity: 0.85
-                }}
-              />
               <div className="relative flex justify-between items-center">
+                {/* Base connecting lines between dots */}
+                {cadenceSteps.slice(0, -1).map((_, index) => {
+                  // Calculate progress for this specific segment (0 to 1)
+                  const segmentStart = index / (cadenceSteps.length - 1);
+                  const segmentEnd = (index + 1) / (cadenceSteps.length - 1);
+                  const segmentProgress = Math.max(0, Math.min(1, (overallProgress - segmentStart) / (segmentEnd - segmentStart)));
+                  const isSegmentComplete = index < activeStep;
+                  
+                  // Position: each segment spans from one dot center to the next
+                  // With justify-between, dots are at 0%, 25%, 50%, 75%, 100%
+                  const segmentWidth = 100 / (cadenceSteps.length - 1);
+                  const leftPercent = index * segmentWidth;
+                  
+                  return (
+                    <div
+                      key={`line-${index}`}
+                      className="absolute top-1/2 h-[1px] -translate-y-1/2"
+                      style={{
+                        left: `${leftPercent}%`,
+                        width: `${segmentWidth}%`,
+                      }}
+                    >
+                      {/* Base line */}
+                      <div className="absolute inset-0 h-[1px] bg-[#E6E2DA]" />
+                      {/* Progress line */}
+                      {(isSegmentComplete || segmentProgress > 0) && (
+                        <div
+                          className="absolute left-0 h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
+                          style={{
+                            width: isSegmentComplete ? '100%' : `${segmentProgress * 100}%`,
+                            opacity: 0.85,
+                          }}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+                
                 {cadenceSteps.map((step, index) => {
                   const isActive = index === activeStep;
                   const isCompleted = index < activeStep;
@@ -245,7 +273,7 @@ export function Features() {
                           {step.timeLabel}
                         </span>
                         <div
-                          className={`w-2.5 h-2.5 rounded-full ${
+                          className={`w-2.5 h-2.5 rounded-full relative z-20 ${
                             isActive
                               ? "bg-[#C06040] ring-2 ring-[#DED9D0] ring-offset-1"
                               : isCompleted
