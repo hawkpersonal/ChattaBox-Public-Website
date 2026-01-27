@@ -28,14 +28,6 @@ export function CTA() {
                 >
                   Request a Pilot
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => scrollToSection("how-it-works")}
-                  className="bg-white/10 hover:bg-white/20 border border-white/30 text-white hover:border-white/50"
-                >
-                  Learn More
-                </Button>
               </div>
             </div>
           </div>
