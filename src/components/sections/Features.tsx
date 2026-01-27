@@ -61,7 +61,7 @@ const cadenceSteps = [
   {
     key: 'daily-summary',
     icon: FileText,
-    timeLabel: "8am",
+    timeLabel: "Daily summary",
     title: "Your daily update",
     audience: "For you",
     how: "You receive a gentle summary of how your loved one is doing. Mood patterns, engagement levels, and any notable moments — all in one simple update.",
