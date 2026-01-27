@@ -24,16 +24,6 @@ export function Hero() {
               Regular check-ins <span className="underline-wiggly">by phone</span> for your parents. Warm chats and gentle reminders — no screens,
               no confusion. <span className="underline-wiggly">Peace of mind for you.</span>
             </p>
-
-            {/* Definition Lines */}
-            <div className="space-y-1">
-              <p className="text-base text-[#1B1B1A] leading-relaxed max-w-[65ch]">
-                ChattaBox is an AI-powered phone companion that calls your parent — and sends you a simple daily update.
-              </p>
-              <p className="text-sm text-[#8A857E] leading-relaxed max-w-[65ch]">
-                No apps. No screens. Works on mobiles and landlines.
-              </p>
-            </div>
             
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button size="lg" onClick={() => scrollToSection("contact")} className="group">
