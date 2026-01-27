@@ -27,7 +27,7 @@ export function Hero() {
               <ul className="space-y-2 text-base text-[#5F5B55] leading-relaxed">
                 <li className="flex items-baseline gap-2">
                   <span className="text-[#C06040]">•</span>
-                  <span>No apps, no screens, no confusion — it works on their normal phone</span>
+                  <span>No apps, no screens, no confusion — works on regular phones</span>
                 </li>
                 <li className="flex items-baseline gap-2">
                   <span className="text-[#C06040]">•</span>
