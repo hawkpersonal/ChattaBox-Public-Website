@@ -50,8 +50,10 @@ export function HowItWorks() {
                           {step.number}
                         </span>
                       </div>
-                      <div className="absolute -top-2 -right-2 h-12 w-12 rounded-[12px] bg-[#EFEDE5] flex items-center justify-center">
-                        <Icon className="h-6 w-6 text-[#C06040] flex-shrink-0" strokeWidth={2} />
+                      <div className="absolute -top-2 -right-2 h-12 w-12 rounded-[12px] bg-[#EFEDE5] flex items-center justify-center p-0">
+                        <div className="flex items-center justify-center w-full h-full">
+                          <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
+                        </div>
                       </div>
                     </div>
                     <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
