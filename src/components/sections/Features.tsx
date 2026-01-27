@@ -241,7 +241,22 @@ export function Features() {
   // Recalculate when active step changes (for mobile scroll)
   useEffect(() => {
     calculateMarkerCenters();
+    // Also recalculate after a short delay
+    const timeoutId = setTimeout(() => {
+      calculateMarkerCenters();
+    }, 100);
+    return () => clearTimeout(timeoutId);
   }, [activeStep, calculateMarkerCenters]);
+  
+  // Recalculate when buttons are rendered
+  useEffect(() => {
+    if (stepRefs.current.length === cadenceSteps.length) {
+      const timeoutId = setTimeout(() => {
+        calculateMarkerCenters();
+      }, 50);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [stepRefs.current.length, calculateMarkerCenters, cadenceSteps.length]);
 
   // Auto-scroll active step into view on mobile
   useEffect(() => {
@@ -383,6 +398,10 @@ export function Features() {
                       key={index}
                       ref={(el) => {
                         stepRefs.current[index] = el;
+                        // Recalculate centers when ref is set
+                        if (el && stepRefs.current.filter(Boolean).length === cadenceSteps.length) {
+                          setTimeout(() => calculateMarkerCenters(), 10);
+                        }
                       }}
                       onClick={() => handleStepClick(index)}
                       aria-pressed={isActive}
@@ -486,6 +505,10 @@ export function Features() {
                         key={index}
                         ref={(el) => {
                           stepRefs.current[index] = el;
+                          // Recalculate centers when ref is set
+                          if (el && stepRefs.current.filter(Boolean).length === cadenceSteps.length) {
+                            setTimeout(() => calculateMarkerCenters(), 10);
+                          }
                         }}
                         onClick={() => handleStepClick(index)}
                         aria-pressed={isActive}
