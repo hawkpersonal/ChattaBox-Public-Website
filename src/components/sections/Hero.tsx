@@ -31,7 +31,7 @@ export function Hero() {
                 </li>
                 <li className="flex items-baseline gap-2">
                   <span className="text-[#C06040]">•</span>
-                  <span>Warm daily calls with gentle reminders and check-in's built in</span>
+                  <span>Warm daily calls with gentle reminders and check-in's</span>
                 </li>
                 <li className="flex items-baseline gap-2">
                   <span className="text-[#C06040]">•</span>
