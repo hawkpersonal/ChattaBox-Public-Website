@@ -115,11 +115,8 @@ const youBenefits = [
 
 export function Features() {
   const [activeStep, setActiveStep] = useState(0); // Start at Morning
-  const [progress, setProgress] = useState(0); // 0 to 1
-  const [pausedUntil, setPausedUntil] = useState<number | null>(null);
   const [benefitAudience, setBenefitAudience] = useState<'parent' | 'you'>('parent');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const stepRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const prefersReducedMotion = useRef(false);
 
   // Check for reduced motion preference
@@ -128,61 +125,48 @@ export function Features() {
     prefersReducedMotion.current = mediaQuery.matches;
   }, []);
 
-  // Auto-advance with progress tracking (steps every 1 second)
+  // Sync scroll position with activeStep
   useEffect(() => {
-    if (prefersReducedMotion.current) {
-      return; // Disable autoplay for reduced motion
+    if (scrollContainerRef.current) {
+      const cardElement = scrollContainerRef.current.children[0].children[activeStep] as HTMLElement;
+      if (cardElement) {
+        cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
     }
+  }, [activeStep]);
 
-    const intervalId = setInterval(() => {
-      const now = Date.now();
-      
-      // Check if paused
-      if (pausedUntil && now < pausedUntil) {
-        return;
-      }
-      
-      // Clear pause if time has passed
-      if (pausedUntil && now >= pausedUntil) {
-        setPausedUntil(null);
-      }
-
-      setProgress((prev) => {
-        // Increment by 0.1 (10%) every second (10 seconds total = 1.0)
-        const newProgress = prev + 0.1;
-
-        if (newProgress >= 1) {
-          // Move to next step
-          setActiveStep((prevStep) => (prevStep + 1) % cadenceSteps.length);
-          return 0;
-        }
-
-        return newProgress;
-      });
-    }, 1000); // Update every 1 second
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [pausedUntil]);
-
-  // Reset progress when step changes (from auto-advance)
+  // Handle scroll events to update activeStep
   useEffect(() => {
-    setProgress(0);
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const cards = container.children[0].children;
+      const containerRect = container.getBoundingClientRect();
+      const containerCenter = containerRect.left + containerRect.width / 2;
+
+      for (let i = 0; i < cards.length; i++) {
+        const card = cards[i] as HTMLElement;
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+
+        if (Math.abs(cardCenter - containerCenter) < cardRect.width / 2) {
+          if (activeStep !== i) {
+            setActiveStep(i);
+          }
+          break;
+        }
+      }
+    };
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
   }, [activeStep]);
 
 
   const handleStepClick = (index: number) => {
     setActiveStep(index);
-    setProgress(0);
-    // Pause autoplay for 12 seconds
-    setPausedUntil(Date.now() + PAUSE_AFTER_MANUAL_MS);
   };
-
-  const activeStepData = cadenceSteps[activeStep];
-  
-  // Calculate overall progress (0 to 1) across all steps
-  const overallProgress = Math.min((activeStep + progress) / (cadenceSteps.length - 1), 1);
 
   return (
     <section id="features" className="pt-16 pb-16 bg-[#EFEDE5]">
@@ -196,159 +180,124 @@ export function Features() {
           </p>
         </div>
 
-        {/* Block 1: Carousel */}
+        {/* Block 1: Card Carousel */}
         <div className="mb-12 md:mb-16">
-          <div className="mb-8">
-            <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
-              {/* Carousel */}
-              <div className="relative">
-                {/* Carousel container */}
-                <div
-                  ref={scrollContainerRef}
-                  className="overflow-hidden relative"
-                  onTouchStart={(e) => {
-                    const touch = e.touches[0];
-                    scrollContainerRef.current?.setAttribute('data-touch-start', touch.clientX.toString());
-                  }}
-                  onTouchMove={(e) => {
-                    const touch = e.touches[0];
-                    const startX = parseFloat(scrollContainerRef.current?.getAttribute('data-touch-start') || '0');
-                    const diff = startX - touch.clientX;
-                    if (Math.abs(diff) > 50) {
-                      if (diff > 0 && activeStep < cadenceSteps.length - 1) {
-                        handleStepClick(activeStep + 1);
-                      } else if (diff < 0 && activeStep > 0) {
-                        handleStepClick(activeStep - 1);
-                      }
-                      scrollContainerRef.current?.removeAttribute('data-touch-start');
-                    }
-                  }}
-                >
-                  <div 
-                    className="flex transition-transform duration-300 ease-out"
-                    style={{
-                      transform: `translateX(-${activeStep * 100}%)`,
-                    }}
-                  >
-                    {cadenceSteps.map((step, index) => {
-                      const Icon = step.icon;
-                      const isActive = index === activeStep;
-                      return (
-                        <div
-                          key={index}
-                          className="min-w-full flex flex-col items-center justify-center px-4 py-6"
-                        >
-                          <div className="flex flex-col items-center gap-3">
-                            <div className={`p-4 rounded-2xl transition-all ${
-                              isActive 
-                                ? 'bg-white border-2 border-[#DED9D0]' 
-                                : 'bg-transparent'
-                            }`}>
-                              <Icon 
-                                className={`h-8 w-8 transition-colors ${
-                                  isActive ? 'text-[#C06040]' : 'text-[#8A857E]'
-                                }`} 
-                                strokeWidth={2} 
-                              />
-                            </div>
-                            <div className="text-center">
-                              <p className={`text-sm font-medium mb-1 transition-colors ${
-                                isActive ? 'text-[#1B1B1A]' : 'text-[#8A857E]'
-                              }`}>
-                                {step.timeLabel}
-                              </p>
-                              <p className={`text-base font-semibold transition-colors ${
-                                isActive ? 'text-[#1B1B1A]' : 'text-[#8A857E]'
-                              }`}>
-                                {step.title}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Navigation dots */}
-                <div className="flex justify-center gap-2 mt-6">
-                  {cadenceSteps.map((_, index) => (
-                    <button
+          <div className="relative group">
+            {/* Carousel container */}
+            <div
+              ref={scrollContainerRef}
+              className="overflow-x-auto scrollbar-hide snap-x snap-mandatory"
+              style={{
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+              }}
+            >
+              {/* Card track */}
+              <div className="flex gap-4 pb-4">
+                {cadenceSteps.map((step, index) => {
+                  const Icon = step.icon;
+                  const isActive = index === activeStep;
+                  return (
+                    <div
                       key={index}
+                      className="snap-center flex-shrink-0 w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]"
                       onClick={() => handleStepClick(index)}
-                      className={`h-2 rounded-full transition-all ${
-                        index === activeStep
-                          ? 'w-8 bg-[#C06040]'
-                          : 'w-2 bg-[#DED9D0]'
-                      }`}
-                      aria-label={`Go to step ${index + 1}`}
-                    />
-                  ))}
-                </div>
+                    >
+                      <div
+                        className={`rounded-3xl border border-[#E6E2DA] bg-white p-5 md:p-6 transition-all duration-300 ${
+                          isActive
+                            ? 'scale-100 opacity-100'
+                            : 'scale-95 opacity-60'
+                        }`}
+                        style={{
+                          transition: prefersReducedMotion.current
+                            ? 'none'
+                            : 'transform 300ms ease-out, opacity 300ms ease-out',
+                        }}
+                      >
+                        {/* Top row: Icon + Title */}
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="flex-shrink-0 p-3 rounded-xl bg-[#EFEDE5] border border-[#E6E2DA]">
+                            <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
+                          </div>
+                          <h4 className="font-semibold text-base text-[#1B1B1A]">
+                            {step.title}
+                          </h4>
+                        </div>
 
-                {/* Navigation arrows */}
-                <button
-                  onClick={() => handleStepClick(Math.max(0, activeStep - 1))}
-                  disabled={activeStep === 0}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                  aria-label="Previous"
-                >
-                  <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => handleStepClick(Math.min(cadenceSteps.length - 1, activeStep + 1))}
-                  disabled={activeStep === cadenceSteps.length - 1}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                  aria-label="Next"
-                >
-                  <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+                        {/* How section */}
+                        <div className="mb-4">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-1.5">
+                            How:
+                          </p>
+                          <p className="text-sm text-[#5F5B55] leading-relaxed">
+                            {step.how}
+                          </p>
+                        </div>
+
+                        {/* Impact section */}
+                        <div className="mb-4">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-1.5">
+                            Impact:
+                          </p>
+                          <p className="text-sm text-[#5F5B55] leading-relaxed">
+                            {step.impact}
+                          </p>
+                        </div>
+
+                        {/* Optional example quote */}
+                        {step.example && (
+                          <div className="pt-3 border-t border-[#E6E2DA]">
+                            <p className="text-xs text-[#8A857E] italic leading-relaxed">
+                              {step.example}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </div>
 
-          {/* Detail Panel */}
-          <div className="rounded-2xl border border-[#E6E2DA] bg-white p-5 md:p-6">
-            <div className="space-y-4">
-              {/* Title with Icon */}
-              <div className="flex items-center justify-center gap-3">
-                {(() => {
-                  const Icon = activeStepData.icon;
-                  return (
-                    <Icon 
-                      className="h-6 w-6 text-[#C06040] flex-shrink-0" 
-                      strokeWidth={2} 
-                    />
-                  );
-                })()}
-                <h4 className="font-semibold text-base text-[#1B1B1A]">
-                  {activeStepData.title}
-                </h4>
-              </div>
+            {/* Navigation arrows - Desktop only, show on hover */}
+            <button
+              onClick={() => handleStepClick(Math.max(0, activeStep - 1))}
+              disabled={activeStep === 0}
+              className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all opacity-0 group-hover:opacity-100 shadow-sm z-10"
+              aria-label="Previous"
+            >
+              <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={() => handleStepClick(Math.min(cadenceSteps.length - 1, activeStep + 1))}
+              disabled={activeStep === cadenceSteps.length - 1}
+              className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all opacity-0 group-hover:opacity-100 shadow-sm z-10"
+              aria-label="Next"
+            >
+              <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
 
-              {/* How Section */}
-              <div className="text-center">
-                <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
-                  How:
-                </h5>
-                <p className="text-sm text-[#5F5B55] leading-relaxed">
-                  {activeStepData.how}
-                </p>
+            {/* Progress bar and step indicator */}
+            <div className="mt-6 space-y-2">
+              {/* Progress bar */}
+              <div className="h-1 bg-[#E6E2DA] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#C06040] transition-all duration-300"
+                  style={{
+                    width: `${((activeStep + 1) / cadenceSteps.length) * 100}%`,
+                    transition: prefersReducedMotion.current ? 'none' : 'width 300ms ease-out',
+                  }}
+                />
               </div>
-
-              {/* Impact Section */}
-              <div className="text-center">
-                <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
-                  Impact:
-                </h5>
-                <p className="text-sm text-[#5F5B55] leading-relaxed">
-                  {activeStepData.impact}
-                </p>
-              </div>
+              {/* Step text */}
+              <p className="text-xs text-[#8A857E] text-center">
+                Step {activeStep + 1} of {cadenceSteps.length}
+              </p>
             </div>
           </div>
         </div>
