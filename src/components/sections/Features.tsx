@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
   Phone,
   Heart,
@@ -118,7 +118,9 @@ export function Features() {
   const [progress, setProgress] = useState(0); // 0 to 1
   const [pausedUntil, setPausedUntil] = useState<number | null>(null);
   const [benefitAudience, setBenefitAudience] = useState<'parent' | 'you'>('parent');
+  const [markerCenters, setMarkerCenters] = useState<number[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const timelineContainerRef = useRef<HTMLDivElement>(null);
   const stepRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const prefersReducedMotion = useRef(false);
 
@@ -171,6 +173,64 @@ export function Features() {
     setProgress(0);
   }, [activeStep]);
 
+  // Calculate marker centers
+  const calculateMarkerCenters = useCallback(() => {
+    // Use scroll container for mobile, timeline container for desktop
+    const container = scrollContainerRef.current || timelineContainerRef.current;
+    if (!container) return;
+    
+    const containerRect = container.getBoundingClientRect();
+    const centers: number[] = [];
+    
+    stepRefs.current.forEach((ref) => {
+      if (ref) {
+        // Find the marker wrapper (w-8 h-8) inside the button
+        const markerWrapper = ref.querySelector('[data-marker-wrapper]') as HTMLElement;
+        if (markerWrapper) {
+          const wrapperRect = markerWrapper.getBoundingClientRect();
+          const centerX = wrapperRect.left - containerRect.left + wrapperRect.width / 2;
+          centers.push(centerX);
+        } else {
+          // Fallback: use button center
+          const markerRect = ref.getBoundingClientRect();
+          const centerX = markerRect.left - containerRect.left + markerRect.width / 2;
+          centers.push(centerX);
+        }
+      }
+    });
+    
+    setMarkerCenters(centers);
+  }, []);
+
+  // Recalculate centers on mount and resize
+  useEffect(() => {
+    calculateMarkerCenters();
+    
+    const resizeObserver = new ResizeObserver(() => {
+      calculateMarkerCenters();
+    });
+    
+    if (timelineContainerRef.current) {
+      resizeObserver.observe(timelineContainerRef.current);
+    }
+    if (scrollContainerRef.current) {
+      resizeObserver.observe(scrollContainerRef.current);
+    }
+    
+    // Also observe window resize
+    window.addEventListener('resize', calculateMarkerCenters);
+    
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', calculateMarkerCenters);
+    };
+  }, [calculateMarkerCenters]);
+
+  // Recalculate when active step changes (for mobile scroll)
+  useEffect(() => {
+    calculateMarkerCenters();
+  }, [activeStep, calculateMarkerCenters]);
+
   // Auto-scroll active step into view on mobile
   useEffect(() => {
     if (stepRefs.current[activeStep] && scrollContainerRef.current) {
@@ -179,8 +239,10 @@ export function Features() {
         block: "nearest",
         inline: "center",
       });
+      // Recalculate after scroll
+      setTimeout(calculateMarkerCenters, 300);
     }
-  }, [activeStep]);
+  }, [activeStep, calculateMarkerCenters]);
 
   const handleStepClick = (index: number) => {
     setActiveStep(index);
@@ -191,11 +253,27 @@ export function Features() {
 
   const activeStepData = cadenceSteps[activeStep];
   
-  // Calculate overall progress for the progress line (0 to 1)
-  const overallProgress = Math.min(
-    (activeStep + progress) / (cadenceSteps.length - 1),
-    1
-  );
+  // Calculate progress line position for active segment
+  const getProgressLineStyle = () => {
+    if (markerCenters.length < 2 || activeStep >= cadenceSteps.length - 1) {
+      return { display: 'none' };
+    }
+    
+    const currentCenter = markerCenters[activeStep];
+    const nextCenter = markerCenters[activeStep + 1];
+    
+    if (!currentCenter || !nextCenter) {
+      return { display: 'none' };
+    }
+    
+    const lineLeft = currentCenter;
+    const lineWidth = (nextCenter - currentCenter) * progress;
+    
+    return {
+      left: `${lineLeft}px`,
+      width: `${lineWidth}px`,
+    };
+  };
 
   return (
     <section id="features" className="pt-16 pb-16 bg-[#EFEDE5]">
@@ -215,48 +293,31 @@ export function Features() {
           <div className="mb-8">
           <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
             {/* Desktop: Horizontal timeline */}
-            <div className="hidden md:block relative">
+            <div className="hidden md:block relative" ref={timelineContainerRef}>
               <div className="relative flex justify-between items-start">
-                {/* Base connecting lines between dots - positioned at dot level */}
-                {cadenceSteps.slice(0, -1).map((_, index) => {
-                  // Calculate progress for this specific segment (0 to 1)
-                  const segmentStart = index / (cadenceSteps.length - 1);
-                  const segmentEnd = (index + 1) / (cadenceSteps.length - 1);
-                  const segmentProgress = Math.max(0, Math.min(1, (overallProgress - segmentStart) / (segmentEnd - segmentStart)));
-                  const isSegmentComplete = index < activeStep;
-                  
-                  // Position: each segment spans from one dot center to the next
-                  // With justify-between, dots are at 0%, 25%, 50%, 75%, 100%
-                  const segmentWidth = 100 / (cadenceSteps.length - 1);
-                  const leftPercent = index * segmentWidth;
-                  
-                  return (
-                    <div
-                      key={`line-${index}`}
-                      className="absolute h-[1px]"
-                      style={{
-                        // Position at dot level: align with center of dots
-                        // Text (text-xs ~12px) + mb-1 (4px) + half dot (1.25px)
-                        top: '20px',
-                        left: `${leftPercent}%`,
-                        width: `${segmentWidth}%`,
-                      }}
-                    >
-                      {/* Base line */}
-                      <div className="absolute inset-0 h-[1px] bg-[#E6E2DA]" />
-                      {/* Progress line */}
-                      {(isSegmentComplete || segmentProgress > 0) && (
-                        <div
-                          className="absolute left-0 h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
-                          style={{
-                            width: isSegmentComplete ? '100%' : `${segmentProgress * 100}%`,
-                            opacity: 0.85,
-                          }}
-                        />
-                      )}
-                    </div>
-                  );
-                })}
+                {/* Base line connecting all dots */}
+                {markerCenters.length > 1 && (
+                  <div
+                    className="absolute h-[1px] bg-[#E6E2DA]"
+                    style={{
+                      top: '20px',
+                      left: `${markerCenters[0]}px`,
+                      width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
+                    }}
+                  />
+                )}
+                
+                {/* Progress line for active segment */}
+                {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
+                  <div
+                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
+                    style={{
+                      top: '20px',
+                      opacity: 0.85,
+                      ...getProgressLineStyle(),
+                    }}
+                  />
+                )}
                 
                 {cadenceSteps.map((step, index) => {
                   const isActive = index === activeStep;
@@ -264,24 +325,41 @@ export function Features() {
                   return (
                     <button
                       key={index}
+                      ref={(el) => {
+                        stepRefs.current[index] = el;
+                      }}
                       onClick={() => handleStepClick(index)}
                       aria-pressed={isActive}
                       className="flex flex-col items-center relative z-10 min-h-[44px] focus:outline-none rounded-lg transition-all"
                       style={{ outline: 'none' }}
                     >
-                      <div className={`flex flex-col items-center mb-2 ${isActive ? "px-3 py-2 rounded-lg border border-[#DED9D0] bg-[#F9F8F4]" : ""}`}>
+                      <div className="flex flex-col items-center">
                         <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
                           {step.timeLabel}
                         </span>
-                        <div
-                          className={`w-2.5 h-2.5 rounded-full relative z-20 ${
-                            isActive
-                              ? "bg-[#C06040] ring-2 ring-[#DED9D0] ring-offset-1"
-                              : isCompleted
-                              ? "bg-[#C06040]"
-                              : "bg-[#DED9D0]"
-                          }`}
-                        />
+                        {/* Fixed-size marker wrapper */}
+                        <div 
+                          className="relative w-8 h-8 flex items-center justify-center"
+                          data-marker-wrapper
+                        >
+                          {/* Selected ring using pseudo-element */}
+                          {isActive && (
+                            <div 
+                              className="absolute inset-0 rounded-full border-2 border-[#DED9D0] pointer-events-none"
+                              style={{
+                                boxShadow: '0 0 0 2px rgba(222, 217, 208, 0.3)',
+                              }}
+                            />
+                          )}
+                          {/* Fixed-size dot */}
+                          <div
+                            className={`w-2.5 h-2.5 rounded-full relative z-10 ${
+                              isActive || isCompleted
+                                ? "bg-[#C06040]"
+                                : "bg-[#DED9D0]"
+                            }`}
+                          />
+                        </div>
                       </div>
                     </button>
                   );
@@ -295,15 +373,30 @@ export function Features() {
                 ref={scrollContainerRef}
                 className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative"
               >
-                {/* Progress line for mobile (horizontal) */}
-                <div className="absolute top-12 left-4 right-4 h-[1px] bg-[#E6E2DA]" />
-                <div 
-                  className="absolute top-12 left-4 h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
-                  style={{ 
-                    width: `calc(${overallProgress * 100}% - 2rem)`,
-                    opacity: 0.85
-                  }}
-                />
+                {/* Base line connecting all dots */}
+                {markerCenters.length > 1 && (
+                  <div
+                    className="absolute h-[1px] bg-[#E6E2DA]"
+                    style={{
+                      top: '20px',
+                      left: `${markerCenters[0]}px`,
+                      width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
+                    }}
+                  />
+                )}
+                
+                {/* Progress line for active segment */}
+                {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
+                  <div
+                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
+                    style={{
+                      top: '20px',
+                      opacity: 0.85,
+                      ...getProgressLineStyle(),
+                    }}
+                  />
+                )}
+                
                 <div className="flex gap-8 min-w-max relative z-10">
                   {cadenceSteps.map((step, index) => {
                     const isActive = index === activeStep;
@@ -319,19 +412,33 @@ export function Features() {
                         className="snap-center flex flex-col items-center min-w-[100px] min-h-[44px] focus:outline-none rounded-lg transition-all"
                         style={{ outline: 'none' }}
                       >
-                        <div className={`flex flex-col items-center mb-2 ${isActive ? "px-2 py-1.5 rounded-lg border border-[#DED9D0] bg-[#F9F8F4]" : ""}`}>
+                        <div className="flex flex-col items-center">
                           <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
                             {step.timeLabel}
                           </span>
-                          <div
-                            className={`w-2.5 h-2.5 rounded-full ${
-                              isActive
-                                ? "bg-[#C06040] ring-2 ring-[#DED9D0] ring-offset-1"
-                                : isCompleted
-                                ? "bg-[#C06040]"
-                                : "bg-[#DED9D0]"
-                            }`}
-                          />
+                          {/* Fixed-size marker wrapper */}
+                          <div 
+                            className="relative w-8 h-8 flex items-center justify-center"
+                            data-marker-wrapper
+                          >
+                            {/* Selected ring using pseudo-element */}
+                            {isActive && (
+                              <div 
+                                className="absolute inset-0 rounded-full border-2 border-[#DED9D0] pointer-events-none"
+                                style={{
+                                  boxShadow: '0 0 0 2px rgba(222, 217, 208, 0.3)',
+                                }}
+                              />
+                            )}
+                            {/* Fixed-size dot */}
+                            <div
+                              className={`w-2.5 h-2.5 rounded-full relative z-10 ${
+                                isActive || isCompleted
+                                  ? "bg-[#C06040]"
+                                  : "bg-[#DED9D0]"
+                              }`}
+                            />
+                          </div>
                         </div>
                       </button>
                     );
