@@ -118,9 +118,7 @@ export function Features() {
   const [progress, setProgress] = useState(0); // 0 to 1
   const [pausedUntil, setPausedUntil] = useState<number | null>(null);
   const [benefitAudience, setBenefitAudience] = useState<'parent' | 'you'>('parent');
-  const [markerCenters, setMarkerCenters] = useState<number[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const timelineContainerRef = useRef<HTMLDivElement>(null);
   const stepRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const prefersReducedMotion = useRef(false);
 
@@ -173,91 +171,6 @@ export function Features() {
     setProgress(0);
   }, [activeStep]);
 
-  // Calculate marker centers
-  const calculateMarkerCenters = useCallback(() => {
-    // Use scroll container for mobile, timeline container for desktop
-    const container = scrollContainerRef.current || timelineContainerRef.current;
-    if (!container) return;
-    
-    const containerRect = container.getBoundingClientRect();
-    const centers: number[] = [];
-    
-    stepRefs.current.forEach((ref) => {
-      if (ref) {
-        // Find the marker wrapper (w-8 h-8) inside the button
-        const markerWrapper = ref.querySelector('[data-marker-wrapper]') as HTMLElement;
-        if (markerWrapper) {
-          const wrapperRect = markerWrapper.getBoundingClientRect();
-          const centerX = wrapperRect.left - containerRect.left + wrapperRect.width / 2;
-          centers.push(centerX);
-        } else {
-          // Fallback: use button center
-          const markerRect = ref.getBoundingClientRect();
-          const centerX = markerRect.left - containerRect.left + markerRect.width / 2;
-          centers.push(centerX);
-        }
-      }
-    });
-    
-    setMarkerCenters(centers);
-  }, []);
-
-  // Recalculate centers on mount and resize
-  useEffect(() => {
-    // Calculate immediately
-    calculateMarkerCenters();
-    
-    // Also calculate after a short delay to ensure DOM is ready
-    const timeoutId1 = setTimeout(() => {
-      calculateMarkerCenters();
-    }, 50);
-    
-    const timeoutId2 = setTimeout(() => {
-      calculateMarkerCenters();
-    }, 200);
-    
-    const resizeObserver = new ResizeObserver(() => {
-      calculateMarkerCenters();
-    });
-    
-    if (timelineContainerRef.current) {
-      resizeObserver.observe(timelineContainerRef.current);
-    }
-    if (scrollContainerRef.current) {
-      resizeObserver.observe(scrollContainerRef.current);
-    }
-    
-    // Also observe window resize
-    window.addEventListener('resize', calculateMarkerCenters);
-    
-    return () => {
-      clearTimeout(timeoutId1);
-      clearTimeout(timeoutId2);
-      resizeObserver.disconnect();
-      window.removeEventListener('resize', calculateMarkerCenters);
-    };
-  }, [calculateMarkerCenters, cadenceSteps.length]);
-
-  // Recalculate when active step changes (for mobile scroll)
-  useEffect(() => {
-    calculateMarkerCenters();
-    // Also recalculate after a short delay
-    const timeoutId = setTimeout(() => {
-      calculateMarkerCenters();
-    }, 100);
-    return () => clearTimeout(timeoutId);
-  }, [activeStep, calculateMarkerCenters]);
-  
-  // Recalculate when buttons are rendered
-  useEffect(() => {
-    if (stepRefs.current.length === cadenceSteps.length) {
-      const timeoutId = setTimeout(() => {
-        calculateMarkerCenters();
-      }, 50);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [stepRefs.current.length, calculateMarkerCenters, cadenceSteps.length]);
-
   // Auto-scroll active step into view on mobile
   useEffect(() => {
     if (stepRefs.current[activeStep] && scrollContainerRef.current) {
@@ -266,10 +179,8 @@ export function Features() {
         block: "nearest",
         inline: "center",
       });
-      // Recalculate after scroll
-      setTimeout(calculateMarkerCenters, 300);
     }
-  }, [activeStep, calculateMarkerCenters]);
+  }, [activeStep]);
 
   const handleStepClick = (index: number) => {
     setActiveStep(index);
@@ -280,47 +191,8 @@ export function Features() {
 
   const activeStepData = cadenceSteps[activeStep];
   
-  // Calculate progress line position for active segment
-  const getProgressLineStyle = () => {
-    if (markerCenters.length < 2 || activeStep >= cadenceSteps.length - 1) {
-      return { display: 'none' };
-    }
-    
-    const currentCenter = markerCenters[activeStep];
-    const nextCenter = markerCenters[activeStep + 1];
-    
-    if (!currentCenter || !nextCenter || currentCenter === undefined || nextCenter === undefined) {
-      return { display: 'none' };
-    }
-    
-    const lineLeft = currentCenter;
-    const lineWidth = Math.max(0, (nextCenter - currentCenter) * progress);
-    
-    return {
-      left: `${lineLeft}px`,
-      width: `${lineWidth}px`,
-      display: lineWidth > 0 ? 'block' : 'none',
-    };
-  };
-  
-  // Get baseline style for connecting all dots
-  const getBaselineStyle = () => {
-    if (markerCenters.length < 2) {
-      return { display: 'none' };
-    }
-    
-    const firstCenter = markerCenters[0];
-    const lastCenter = markerCenters[markerCenters.length - 1];
-    
-    if (!firstCenter || !lastCenter || firstCenter === undefined || lastCenter === undefined) {
-      return { display: 'none' };
-    }
-    
-    return {
-      left: `${firstCenter}px`,
-      width: `${lastCenter - firstCenter}px`,
-    };
-  };
+  // Calculate overall progress (0 to 1) across all steps
+  const overallProgress = Math.min((activeStep + progress) / (cadenceSteps.length - 1), 1);
 
   return (
     <section id="features" className="pt-16 pb-16 bg-[#EFEDE5]">
@@ -340,55 +212,27 @@ export function Features() {
           <div className="mb-8">
           <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
             {/* Desktop: Horizontal timeline */}
-            <div className="hidden md:block relative" ref={timelineContainerRef}>
+            <div className="hidden md:block relative">
               <div className="relative flex justify-between items-start">
-                {/* Base dashed line connecting all dots */}
-                {markerCenters.length > 1 && (
-                  <div
-                    className="absolute h-[1px] z-0"
-                    style={{
-                      top: '32px',
-                      backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
-                      ...getBaselineStyle(),
-                    }}
-                  />
-                )}
+                {/* Perforated baseline - faint dashes */}
+                <div
+                  className="absolute h-[1px] z-0 left-0 right-0"
+                  style={{
+                    top: '32px',
+                    backgroundImage: 'repeating-linear-gradient(to right, rgba(230, 226, 218, 0.4) 0, rgba(230, 226, 218, 0.4) 4px, transparent 4px, transparent 8px)',
+                  }}
+                />
                 
-                {/* Completed segments - solid lines */}
-                {markerCenters.length > 1 && activeStep > 0 && (
-                  <>
-                    {Array.from({ length: activeStep }).map((_, index) => {
-                      const startCenter = markerCenters[index];
-                      const endCenter = markerCenters[index + 1];
-                      if (!startCenter || !endCenter) return null;
-                      
-                      return (
-                        <div
-                          key={`completed-${index}`}
-                          className="absolute h-[1px] bg-[#C06040] z-0"
-                          style={{
-                            top: '32px',
-                            left: `${startCenter}px`,
-                            width: `${endCenter - startCenter}px`,
-                            opacity: 0.85,
-                          }}
-                        />
-                      );
-                    })}
-                  </>
-                )}
-                
-                {/* Progress line for active segment - fills in the dashes */}
-                {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
-                  <div
-                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out z-0"
-                    style={{
-                      top: '32px',
-                      opacity: 0.85,
-                      ...getProgressLineStyle(),
-                    }}
-                  />
-                )}
+                {/* Terracotta fill line - fills in dashes as progress advances */}
+                <div
+                  className="absolute h-[1px] bg-[#C06040] z-0 transition-all duration-500 ease-out"
+                  style={{
+                    top: '32px',
+                    left: 0,
+                    width: `${overallProgress * 100}%`,
+                    opacity: 0.85,
+                  }}
+                />
                 
                 {cadenceSteps.map((step, index) => {
                   const isActive = index === activeStep;
@@ -398,10 +242,6 @@ export function Features() {
                       key={index}
                       ref={(el) => {
                         stepRefs.current[index] = el;
-                        // Recalculate centers when ref is set
-                        if (el && stepRefs.current.filter(Boolean).length === cadenceSteps.length) {
-                          setTimeout(() => calculateMarkerCenters(), 10);
-                        }
                       }}
                       onClick={() => handleStepClick(index)}
                       aria-pressed={isActive}
@@ -415,7 +255,6 @@ export function Features() {
                         {/* Fixed-size marker wrapper */}
                         <div 
                           className="relative w-8 h-8 flex items-center justify-center z-20"
-                          data-marker-wrapper
                         >
                           {/* Selected ring using pseudo-element */}
                           {isActive && (
