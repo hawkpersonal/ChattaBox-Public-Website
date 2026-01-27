@@ -310,7 +310,6 @@ export function Features() {
               </div>
             </div>
           </div>
-        </div>
 
           {/* Detail Panel */}
           <div className="rounded-2xl border border-[#E6E2DA] bg-white p-5 md:p-6">
