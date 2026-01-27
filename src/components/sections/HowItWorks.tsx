@@ -11,7 +11,7 @@ const steps = [
     number: "2",
     icon: Phone,
     title: "ChattaBox Calls Them",
-    description: "They can call ChattaBox whenever they want to talk. It remembers their conversations and preferences.",
+    description: "- ChattaBox calls as you configured\n- They can call ChattaBox whenever they want to talk too.\nIt remembers their conversations and preferences.",
   },
   {
     number: "3",
@@ -57,9 +57,17 @@ export function HowItWorks() {
                     <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
                       {step.title}
                     </h3>
-                    <p className="text-sm text-[#5F5B55] leading-relaxed">
-                      {step.description}
-                    </p>
+                    {step.number === "2" ? (
+                      <div className="text-sm text-[#5F5B55] leading-relaxed space-y-1">
+                        <p>- ChattaBox calls as you configured</p>
+                        <p>- They can call ChattaBox whenever they want to talk too.</p>
+                        <p>It remembers their conversations and preferences.</p>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-[#5F5B55] leading-relaxed">
+                        {step.description}
+                      </p>
+                    )}
                   </div>
                 </div>
                 {index < steps.length - 1 && (
