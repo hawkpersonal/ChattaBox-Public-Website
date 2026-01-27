@@ -179,7 +179,7 @@ export function Features() {
       <div className="container">
         <div className="mx-auto max-w-3xl text-center space-y-4 mb-12">
           <h2 className="font-serif">
-            How It Helps
+            How we help
           </h2>
           <p className="text-lg text-[#5F5B55] leading-relaxed">
             Simple <span className="underline-wiggly">companionship & routine</span> support that brings <span className="underline-wiggly">help & comfort</span> to older adults & <span className="underline-wiggly">peace of mind</span> to families
