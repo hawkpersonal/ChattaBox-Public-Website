@@ -236,8 +236,8 @@ export function Features() {
                       className="absolute h-[1px]"
                       style={{
                         // Position at dot level: align with center of dots
-                        // Icon (h-5 = 20px) + mb-2 (8px) + text (text-xs ~12px) + mb-1 (4px) + half dot (1.25px)
-                        top: '48px',
+                        // Text (text-xs ~12px) + mb-1 (4px) + half dot (1.25px)
+                        top: '20px',
                         left: `${leftPercent}%`,
                         width: `${segmentWidth}%`,
                       }}
@@ -261,7 +261,6 @@ export function Features() {
                 {cadenceSteps.map((step, index) => {
                   const isActive = index === activeStep;
                   const isCompleted = index < activeStep;
-                  const Icon = step.icon;
                   return (
                     <button
                       key={index}
@@ -271,7 +270,6 @@ export function Features() {
                       style={{ outline: 'none' }}
                     >
                       <div className={`flex flex-col items-center mb-2 ${isActive ? "px-3 py-2 rounded-lg border border-[#DED9D0] bg-[#F9F8F4]" : ""}`}>
-                        <Icon className={`h-5 w-5 mb-2 ${isActive || isCompleted ? "text-[#C06040]" : "text-[#8A857E]"}`} strokeWidth={2} />
                         <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
                           {step.timeLabel}
                         </span>
@@ -310,7 +308,6 @@ export function Features() {
                   {cadenceSteps.map((step, index) => {
                     const isActive = index === activeStep;
                     const isCompleted = index < activeStep;
-                    const Icon = step.icon;
                     return (
                       <button
                         key={index}
@@ -323,7 +320,6 @@ export function Features() {
                         style={{ outline: 'none' }}
                       >
                         <div className={`flex flex-col items-center mb-2 ${isActive ? "px-2 py-1.5 rounded-lg border border-[#DED9D0] bg-[#F9F8F4]" : ""}`}>
-                          <Icon className={`h-5 w-5 mb-2 ${isActive || isCompleted ? "text-[#C06040]" : "text-[#8A857E]"}`} strokeWidth={2} />
                           <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
                             {step.timeLabel}
                           </span>
@@ -350,7 +346,7 @@ export function Features() {
           <div className="rounded-2xl border border-[#E6E2DA] bg-white p-5 md:p-6">
             <div className="space-y-4">
               {/* Title with Icon */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 {(() => {
                   const Icon = activeStepData.icon;
                   return (
