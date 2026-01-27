@@ -120,7 +120,6 @@ export function Features() {
   const [benefitAudience, setBenefitAudience] = useState<'parent' | 'you'>('parent');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const stepRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const animationFrameRef = useRef<number>();
   const prefersReducedMotion = useRef(false);
 
   // Check for reduced motion preference
@@ -129,19 +128,17 @@ export function Features() {
     prefersReducedMotion.current = mediaQuery.matches;
   }, []);
 
-  // Auto-advance with progress tracking
+  // Auto-advance with progress tracking (steps every 1 second)
   useEffect(() => {
     if (prefersReducedMotion.current) {
       return; // Disable autoplay for reduced motion
     }
 
-    let lastTime = Date.now();
-    const updateProgress = () => {
+    const intervalId = setInterval(() => {
       const now = Date.now();
       
       // Check if paused
       if (pausedUntil && now < pausedUntil) {
-        animationFrameRef.current = requestAnimationFrame(updateProgress);
         return;
       }
       
@@ -150,12 +147,9 @@ export function Features() {
         setPausedUntil(null);
       }
 
-      const deltaTime = now - lastTime;
-      lastTime = now;
-
       setProgress((prev) => {
-        const increment = deltaTime / STEP_DURATION_MS;
-        const newProgress = prev + increment;
+        // Increment by 0.1 (10%) every second (10 seconds total = 1.0)
+        const newProgress = prev + 0.1;
 
         if (newProgress >= 1) {
           // Move to next step
@@ -165,16 +159,10 @@ export function Features() {
 
         return newProgress;
       });
-
-      animationFrameRef.current = requestAnimationFrame(updateProgress);
-    };
-
-    animationFrameRef.current = requestAnimationFrame(updateProgress);
+    }, 1000); // Update every 1 second
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
+      clearInterval(intervalId);
     };
   }, [pausedUntil]);
 
@@ -232,10 +220,10 @@ export function Features() {
               <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-[#E6E2DA] -translate-y-1/2" />
               {/* Progress line overlay */}
               <div 
-                className="absolute top-1/2 left-0 h-[1px] bg-[#C06040] -translate-y-1/2 transition-all duration-100"
+                className="absolute top-1/2 left-0 h-[1px] bg-[#C06040] -translate-y-1/2 transition-all duration-500 ease-out"
                 style={{ 
                   width: `${overallProgress * 100}%`,
-                  opacity: 0.8
+                  opacity: 0.85
                 }}
               />
               <div className="relative flex justify-between items-center">
@@ -284,10 +272,10 @@ export function Features() {
                 {/* Progress line for mobile (horizontal) */}
                 <div className="absolute top-12 left-4 right-4 h-[1px] bg-[#E6E2DA]" />
                 <div 
-                  className="absolute top-12 left-4 h-[1px] bg-[#C06040] transition-all duration-100"
+                  className="absolute top-12 left-4 h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
                   style={{ 
                     width: `calc(${overallProgress * 100}% - 2rem)`,
-                    opacity: 0.8
+                    opacity: 0.85
                   }}
                 />
                 <div className="flex gap-8 min-w-max relative z-10">
