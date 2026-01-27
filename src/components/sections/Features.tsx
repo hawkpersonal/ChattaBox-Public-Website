@@ -171,16 +171,6 @@ export function Features() {
     setProgress(0);
   }, [activeStep]);
 
-  // Auto-scroll active step into view on mobile
-  useEffect(() => {
-    if (stepRefs.current[activeStep] && scrollContainerRef.current) {
-      stepRefs.current[activeStep]?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-    }
-  }, [activeStep]);
 
   const handleStepClick = (index: number) => {
     setActiveStep(index);
