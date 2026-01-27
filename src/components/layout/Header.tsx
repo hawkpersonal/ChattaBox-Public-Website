@@ -49,9 +49,11 @@ export function Header() {
             <Button
               size="sm"
               variant="ghost"
-              onClick={() => scrollToSection("contact")}
+              onClick={() => {
+                // TODO: Wire up login functionality
+              }}
             >
-              Request a Pilot
+              Login
             </Button>
           </div>
         </div>
