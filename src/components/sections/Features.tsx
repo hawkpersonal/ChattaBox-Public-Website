@@ -244,10 +244,7 @@ export function Features() {
 
                           {/* How section */}
                           <div className="mb-4">
-                            <p className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-1.5">
-                              How:
-                            </p>
-                            <p className="text-sm text-[#5F5B55] leading-relaxed">
+                            <p className="text-sm text-[#5F5B55] leading-relaxed -mt-2">
                               {step.how}
                             </p>
                           </div>
@@ -308,9 +305,9 @@ export function Features() {
                   aria-label={`Go to step ${index + 1}`}
                 >
                   {index === activeStep ? (
-                    <div className="w-8 h-0.5 bg-[#C06040] rounded-full" />
+                    <div className="w-8 h-0.5 bg-accent-green rounded-full" />
                   ) : (
-                    <div className="w-2 h-2 rounded-full bg-[#DED9D0] hover:bg-[#C06040] transition-colors" />
+                    <div className="w-2 h-2 rounded-full bg-[#DED9D0] hover:bg-accent-green transition-colors" />
                   )}
                 </button>
               ))}

@@ -28,17 +28,17 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-4 text-[#F0F0F0]">Product</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#features" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors">
+                <a href="#features" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
                   How It Helps
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors">
+                <a href="#how-it-works" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
                   How It Works
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors">
+                <a href="#contact" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
                   Contact
                 </a>
               </li>
@@ -49,12 +49,12 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-4 text-[#F0F0F0]">Company</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#about" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors">
+                <a href="#about" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
                   About
                 </a>
               </li>
               <li>
-                <a href="#pricing" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors">
+                <a href="#pricing" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
                   Pilot Program
                 </a>
               </li>
@@ -65,17 +65,17 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-4 text-[#F0F0F0]">Contact</h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:hello@chattabox.io" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors flex items-center gap-2">
+                <a href="mailto:hello@chattabox.io" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors flex items-center gap-2">
                   <Mail className="h-4 w-4" />
                   hello@chattabox.io
                 </a>
               </li>
             </ul>
             <div className="flex gap-4 mt-4">
-              <a href="#" className="text-[#8A857E] hover:text-[#F0F0F0] transition-colors">
+              <a href="#" className="text-[#8A857E] hover:text-accent-green transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-[#8A857E] hover:text-[#F0F0F0] transition-colors">
+              <a href="#" className="text-[#8A857E] hover:text-accent-green transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>

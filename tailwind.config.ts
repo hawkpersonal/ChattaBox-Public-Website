@@ -15,6 +15,12 @@ const config: Config = {
       },
     },
     extend: {
+      colors: {
+        "accent-green": {
+          DEFAULT: "#2FAE6A",
+          hover: "#27985C",
+        },
+      },
       fontFamily: {
         serif: ["Fraunces", "serif"],
         sans: ["Inter", "sans-serif"],

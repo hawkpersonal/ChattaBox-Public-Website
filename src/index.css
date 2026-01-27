@@ -32,6 +32,8 @@
     --accent: 96 96 160; /* #6060A0 - secondary accent */
     --accent-foreground: 255 255 255;
     --accent-secondary-muted: 123 118 181; /* #7B76B5 */
+    --accent-green: 47 174 106; /* #2FAE6A - success/reassurance */
+    --accent-green-hover: 39 152 92; /* #27985C */
     
     /* States */
     --ring: 192 96 64 / 0.35; /* focus ring */

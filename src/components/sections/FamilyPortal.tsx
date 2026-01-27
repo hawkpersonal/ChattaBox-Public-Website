@@ -33,7 +33,7 @@ const dailyUpdateRows = [
 
 export function FamilyPortal() {
   return (
-    <section className="py-14 md:py-24 bg-[#F9F8F4]">
+    <section id="family-portal" className="py-14 md:py-24 bg-[#F9F8F4]">
       <div className="container">
         {/* Section Heading */}
         <div className="mx-auto max-w-3xl text-center space-y-4 mb-12 md:mb-16">
@@ -56,7 +56,7 @@ export function FamilyPortal() {
               {valueBullets.map((bullet, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-0.5">
-                    <Check className="h-5 w-5 text-[#C06040]" strokeWidth={2} />
+                    <Check className="h-5 w-5 text-accent-green" strokeWidth={2} />
                   </div>
                   <p className="text-base text-[#5F5B55] leading-relaxed">
                     {bullet}
@@ -72,7 +72,7 @@ export function FamilyPortal() {
             <div className="rounded-3xl border border-[#E6E2DA] bg-white p-5 md:p-6 shadow-elegant">
               {/* Card Header */}
               <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-3 py-1 rounded-full">
+                <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-3 py-1 rounded-full">
                   Daily update
                 </span>
                 <span className="text-xs text-[#8A857E]">
@@ -110,13 +110,13 @@ export function FamilyPortal() {
 
               {/* Footer Chips */}
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-2.5 py-1 rounded-md">
+                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-2.5 py-1 rounded-md">
                   Mood: stable
                 </span>
-                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-2.5 py-1 rounded-md">
+                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-2.5 py-1 rounded-md">
                   Routine: on track
                 </span>
-                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-2.5 py-1 rounded-md">
+                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-2.5 py-1 rounded-md">
                   Engagement: normal
                 </span>
               </div>

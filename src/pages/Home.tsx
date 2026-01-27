@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SectionRail } from "@/components/layout/SectionRail";
 import { Hero } from "@/components/sections/Hero";
 import { Features } from "@/components/sections/Features";
 import { FamilyPortal } from "@/components/sections/FamilyPortal";
@@ -14,6 +15,7 @@ export function Home() {
   return (
     <main>
       <Header />
+      <SectionRail />
       <Hero />
       <Features />
       <FamilyPortal />

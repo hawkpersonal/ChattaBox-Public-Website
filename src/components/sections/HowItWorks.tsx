@@ -42,7 +42,7 @@ export function HowItWorks() {
             const Icon = step.icon;
             return (
               <div key={index} className="relative">
-                <div className="bg-[#EFEDE5] rounded-[12px] p-6 border border-[#E6E2DA] shadow-elegant">
+                <div className="bg-white rounded-[12px] p-6 border border-[#E6E2DA] shadow-elegant">
                   <div className="flex flex-col items-center text-center space-y-4">
                     <div className="relative">
                       <div className="h-16 w-16 rounded-full bg-[#EFEDE5] border border-[#E6E2DA] flex items-center justify-center mb-4">
@@ -82,11 +82,11 @@ export function HowItWorks() {
                       ) : (
                         <>
                           <li className="flex items-baseline gap-2">
-                            <span className="text-[#C06040]">•</span>
+                            <span className="text-accent-green">•</span>
                             <span>Receive simple daily summaries about your loved ones progress</span>
                           </li>
                           <li className="flex items-baseline gap-2">
-                            <span className="text-[#C06040]">•</span>
+                            <span className="text-accent-green">•</span>
                             <span>Receive insights in how best you can help their wellbeing</span>
                           </li>
                         </>
