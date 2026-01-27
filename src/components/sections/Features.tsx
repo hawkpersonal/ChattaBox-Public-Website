@@ -17,7 +17,7 @@ const cadenceSteps = [
   {
     key: 'morning',
     icon: Bell,
-    timeLabel: "Morning",
+    timeLabel: "9am",
     title: "Gentle reminders",
     audience: "For your parent",
     how: "ChattaBox calls with helpful reminders for medications, meals, or daily routines — friendly prompts that feel like a caring check-in.",
@@ -28,7 +28,7 @@ const cadenceSteps = [
   {
     key: 'midday',
     icon: MessageCircle,
-    timeLabel: "Midday",
+    timeLabel: "2pm",
     title: "Friendly check-in",
     audience: "For your parent",
     how: "A warm conversation during the day to see how things are going. ChattaBox asks about their day and listens to what matters to them.",
@@ -39,7 +39,7 @@ const cadenceSteps = [
   {
     key: 'evening',
     icon: Heart,
-    timeLabel: "Evening",
+    timeLabel: "6pm",
     title: "A comforting chat",
     audience: "For your parent",
     how: "An evening conversation to wind down the day. ChattaBox remembers their stories and asks about the things they care about.",
@@ -61,7 +61,7 @@ const cadenceSteps = [
   {
     key: 'daily-summary',
     icon: FileText,
-    timeLabel: "Daily summary",
+    timeLabel: "8am",
     title: "Your daily update",
     audience: "For you",
     how: "You receive a gentle summary of how your loved one is doing. Mood patterns, engagement levels, and any notable moments — all in one simple update.",
