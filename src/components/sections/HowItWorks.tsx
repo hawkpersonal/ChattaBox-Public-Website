@@ -5,7 +5,7 @@ const steps = [
     number: "1",
     icon: Settings,
     title: "You Set It Up",
-    description: "Configure reminders, check-in times, and preferences through the family portal.",
+    description: "- Share info about your loved one to help ChattaBox to settle in\n- Configure reminders & check-ins & preferences through the family portal",
   },
   {
     number: "2",
@@ -57,11 +57,20 @@ export function HowItWorks() {
                     <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
                       {step.title}
                     </h3>
-                    {step.number === "2" ? (
+                    {step.number === "1" || step.number === "2" ? (
                       <div className="text-sm text-[#5F5B55] leading-relaxed space-y-1">
-                        <p>- ChattaBox calls as you configured</p>
-                        <p>- They can call ChattaBox whenever they want to talk too.</p>
-                        <p>It remembers their conversations and preferences.</p>
+                        {step.number === "1" ? (
+                          <>
+                            <p>- Share info about your loved one to help ChattaBox to settle in</p>
+                            <p>- Configure reminders & check-ins & preferences through the family portal</p>
+                          </>
+                        ) : (
+                          <>
+                            <p>- ChattaBox calls as you configured</p>
+                            <p>- They can call ChattaBox whenever they want to talk too.</p>
+                            <p>It remembers their conversations and preferences.</p>
+                          </>
+                        )}
                       </div>
                     ) : (
                       <p className="text-sm text-[#5F5B55] leading-relaxed">
