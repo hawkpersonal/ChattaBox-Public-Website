@@ -104,7 +104,7 @@ export function Contact() {
                   <h3 className="font-semibold text-base text-[#1B1B1A] mb-1">
                     Email
                   </h3>
-                  <p className="text-base text-[#5F5B55]">hello@chattabox.com</p>
+                  <p className="text-base text-[#5F5B55]">hello@chattabox.io</p>
                 </div>
               </div>
             </div>

@@ -65,9 +65,9 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-4 text-[#F0F0F0]">Contact</h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:hello@chattabox.com" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors flex items-center gap-2">
+                <a href="mailto:hello@chattabox.io" className="text-sm text-[#8A857E] hover:text-[#F0F0F0] transition-colors flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  hello@chattabox.com
+                  hello@chattabox.io
                 </a>
               </li>
             </ul>
