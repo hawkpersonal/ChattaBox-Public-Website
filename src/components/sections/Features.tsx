@@ -178,6 +178,11 @@ export function Features() {
     };
   }, [pausedUntil]);
 
+  // Reset progress when step changes (from auto-advance)
+  useEffect(() => {
+    setProgress(0);
+  }, [activeStep]);
+
   // Auto-scroll active step into view on mobile
   useEffect(() => {
     if (stepRefs.current[activeStep] && scrollContainerRef.current) {
