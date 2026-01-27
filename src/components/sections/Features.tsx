@@ -298,9 +298,9 @@ export function Features() {
                 {/* Base dashed line connecting all dots */}
                 {markerCenters.length > 1 && (
                   <div
-                    className="absolute h-[1px]"
+                    className="absolute h-[1px] z-0"
                     style={{
-                      top: '20px',
+                      top: '32px',
                       left: `${markerCenters[0]}px`,
                       width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
                       backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
@@ -319,9 +319,9 @@ export function Features() {
                       return (
                         <div
                           key={`completed-${index}`}
-                          className="absolute h-[1px] bg-[#C06040]"
+                          className="absolute h-[1px] bg-[#C06040] z-0"
                           style={{
-                            top: '20px',
+                            top: '32px',
                             left: `${startCenter}px`,
                             width: `${endCenter - startCenter}px`,
                             opacity: 0.85,
@@ -335,9 +335,9 @@ export function Features() {
                 {/* Progress line for active segment - fills in the dashes */}
                 {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
                   <div
-                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
+                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out z-0"
                     style={{
-                      top: '20px',
+                      top: '32px',
                       opacity: 0.85,
                       ...getProgressLineStyle(),
                     }}
@@ -355,7 +355,7 @@ export function Features() {
                       }}
                       onClick={() => handleStepClick(index)}
                       aria-pressed={isActive}
-                      className="flex flex-col items-center relative z-10 min-h-[44px] focus:outline-none rounded-lg transition-all"
+                      className="flex flex-col items-center relative z-20 min-h-[44px] focus:outline-none rounded-lg transition-all"
                       style={{ outline: 'none' }}
                     >
                       <div className="flex flex-col items-center">
@@ -364,7 +364,7 @@ export function Features() {
                         </span>
                         {/* Fixed-size marker wrapper */}
                         <div 
-                          className="relative w-8 h-8 flex items-center justify-center"
+                          className="relative w-8 h-8 flex items-center justify-center z-20"
                           data-marker-wrapper
                         >
                           {/* Selected ring using pseudo-element */}
@@ -401,9 +401,9 @@ export function Features() {
                 {/* Base dashed line connecting all dots */}
                 {markerCenters.length > 1 && (
                   <div
-                    className="absolute h-[1px]"
+                    className="absolute h-[1px] z-0"
                     style={{
-                      top: '20px',
+                      top: '32px',
                       left: `${markerCenters[0]}px`,
                       width: `${markerCenters[markerCenters.length - 1] - markerCenters[0]}px`,
                       backgroundImage: 'repeating-linear-gradient(to right, #E6E2DA 0, #E6E2DA 4px, transparent 4px, transparent 8px)',
@@ -422,9 +422,9 @@ export function Features() {
                       return (
                         <div
                           key={`completed-${index}`}
-                          className="absolute h-[1px] bg-[#C06040]"
+                          className="absolute h-[1px] bg-[#C06040] z-0"
                           style={{
-                            top: '20px',
+                            top: '32px',
                             left: `${startCenter}px`,
                             width: `${endCenter - startCenter}px`,
                             opacity: 0.85,
@@ -438,16 +438,16 @@ export function Features() {
                 {/* Progress line for active segment - fills in the dashes */}
                 {markerCenters.length > 1 && activeStep < cadenceSteps.length - 1 && (
                   <div
-                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out"
+                    className="absolute h-[1px] bg-[#C06040] transition-all duration-500 ease-out z-0"
                     style={{
-                      top: '20px',
+                      top: '32px',
                       opacity: 0.85,
                       ...getProgressLineStyle(),
                     }}
                   />
                 )}
                 
-                <div className="flex gap-8 min-w-max relative z-10">
+                <div className="flex gap-8 min-w-max relative z-20">
                   {cadenceSteps.map((step, index) => {
                     const isActive = index === activeStep;
                     const isCompleted = index < activeStep;
