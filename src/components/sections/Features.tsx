@@ -10,44 +10,62 @@ import {
   FileText,
 } from "lucide-react";
 
+const STEP_DURATION_MS = 10000;
+const PAUSE_AFTER_MANUAL_MS = 12000;
+
 const cadenceSteps = [
   {
+    key: 'morning',
     icon: Bell,
     timeLabel: "Morning",
     title: "Gentle reminders",
-    detail: "ChattaBox calls with helpful reminders for medications, meals, or daily routines. Simple, friendly prompts that feel like a caring check-in.",
-    example: "\"Good morning! It's time for your morning vitamins. How did you sleep?\"",
+    audience: "For your parent",
+    how: "ChattaBox calls with helpful reminders for medications, meals, or daily routines — friendly prompts that feel like a caring check-in.",
+    impact: "Your loved one stays on track with important routines, and you get reassurance that the essentials are being covered.",
+    example: "\"Good morning! It's time for your vitamins. How did you sleep?\"",
     linkedBenefits: ["Works on Their Phone", "Helpful Reminders"],
   },
   {
+    key: 'midday',
     icon: MessageCircle,
     timeLabel: "Midday",
     title: "Friendly check-in",
-    detail: "A warm conversation during the day to see how things are going. ChattaBox asks about their day and listens to what matters to them.",
+    audience: "For your parent",
+    how: "A warm conversation during the day to see how things are going. ChattaBox asks about their day and listens to what matters to them.",
+    impact: "Small check-ins catch issues early and help them feel supported — without you needing to call constantly.",
     example: "\"How's your day going? Did you get a chance to work on your garden today?\"",
     linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
   },
   {
+    key: 'evening',
     icon: Heart,
     timeLabel: "Evening",
     title: "A comforting chat",
-    detail: "An evening conversation to wind down the day. ChattaBox remembers their stories and asks about the things they care about.",
+    audience: "For your parent",
+    how: "An evening conversation to wind down the day. ChattaBox remembers their stories and asks about the things they care about.",
+    impact: "Regular conversation helps reduce loneliness and keeps their day feeling connected and positive.",
     example: "\"Tell me about your day. I remember you mentioned your woodworking project yesterday.\"",
     linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
   },
   {
+    key: 'anytime',
     icon: Phone,
     timeLabel: "Anytime",
     title: "They can call",
-    detail: "Your loved one can call ChattaBox whenever they want to talk. No schedules, no waiting — just a friendly voice ready to chat.",
+    audience: "For your parent",
+    how: "Your loved one can call ChattaBox whenever they want to talk. No schedules, no waiting — just a friendly voice ready to chat.",
+    impact: "They can reach a friendly voice whenever they want, building confidence and reducing reliance on you for every small need.",
     example: "\"I'm here whenever you'd like to talk. What's on your mind today?\"",
     linkedBenefits: ["Daily Companionship", "Works on Their Phone"],
   },
   {
+    key: 'daily-summary',
     icon: FileText,
     timeLabel: "Daily summary",
     title: "Your daily update",
-    detail: "You receive a gentle summary of how your loved one is doing. Mood patterns, engagement levels, and any notable moments — all in one simple update.",
+    audience: "For you",
+    how: "You receive a gentle summary of how your loved one is doing. Mood patterns, engagement levels, and any notable moments — all in one simple update.",
+    impact: "You get a simple, readable snapshot of how they're doing — plus gentle suggestions if a call might help.",
     example: "\"Your loved one had a positive day with good engagement. They mentioned feeling happy about their garden progress.\"",
     linkedBenefits: ["Daily Summary / Insights", "Family Portal"],
   },
@@ -96,10 +114,69 @@ const youBenefits = [
 ];
 
 export function Features() {
-  const [activeStep, setActiveStep] = useState(4); // Default to "Daily summary" (index 4)
+  const [activeStep, setActiveStep] = useState(0); // Start at Morning
+  const [progress, setProgress] = useState(0); // 0 to 1
+  const [pausedUntil, setPausedUntil] = useState<number | null>(null);
   const [benefitAudience, setBenefitAudience] = useState<'parent' | 'you'>('parent');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const stepRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const animationFrameRef = useRef<number>();
+  const prefersReducedMotion = useRef(false);
+
+  // Check for reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersReducedMotion.current = mediaQuery.matches;
+  }, []);
+
+  // Auto-advance with progress tracking
+  useEffect(() => {
+    if (prefersReducedMotion.current) {
+      return; // Disable autoplay for reduced motion
+    }
+
+    let lastTime = Date.now();
+    const updateProgress = () => {
+      const now = Date.now();
+      
+      // Check if paused
+      if (pausedUntil && now < pausedUntil) {
+        animationFrameRef.current = requestAnimationFrame(updateProgress);
+        return;
+      }
+      
+      // Clear pause if time has passed
+      if (pausedUntil && now >= pausedUntil) {
+        setPausedUntil(null);
+      }
+
+      const deltaTime = now - lastTime;
+      lastTime = now;
+
+      setProgress((prev) => {
+        const increment = deltaTime / STEP_DURATION_MS;
+        const newProgress = prev + increment;
+
+        if (newProgress >= 1) {
+          // Move to next step
+          setActiveStep((prevStep) => (prevStep + 1) % cadenceSteps.length);
+          return 0;
+        }
+
+        return newProgress;
+      });
+
+      animationFrameRef.current = requestAnimationFrame(updateProgress);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(updateProgress);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [pausedUntil]);
 
   // Auto-scroll active step into view on mobile
   useEffect(() => {
@@ -114,9 +191,18 @@ export function Features() {
 
   const handleStepClick = (index: number) => {
     setActiveStep(index);
+    setProgress(0);
+    // Pause autoplay for 12 seconds
+    setPausedUntil(Date.now() + PAUSE_AFTER_MANUAL_MS);
   };
 
   const activeStepData = cadenceSteps[activeStep];
+  
+  // Calculate overall progress for the progress line (0 to 1)
+  const overallProgress = Math.min(
+    (activeStep + progress) / (cadenceSteps.length - 1),
+    1
+  );
 
   return (
     <section id="features" className="pt-16 pb-16 bg-[#EFEDE5]">
@@ -137,10 +223,20 @@ export function Features() {
           <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
             {/* Desktop: Horizontal timeline */}
             <div className="hidden md:block relative">
+              {/* Base line */}
               <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-[#E6E2DA] -translate-y-1/2" />
+              {/* Progress line overlay */}
+              <div 
+                className="absolute top-1/2 left-0 h-[1px] bg-[#C06040] -translate-y-1/2 transition-all duration-100"
+                style={{ 
+                  width: `${overallProgress * 100}%`,
+                  opacity: 0.8
+                }}
+              />
               <div className="relative flex justify-between items-center">
                 {cadenceSteps.map((step, index) => {
                   const isActive = index === activeStep;
+                  const isCompleted = index < activeStep;
                   const Icon = step.icon;
                   return (
                     <button
@@ -151,13 +247,15 @@ export function Features() {
                       style={{ outline: 'none' }}
                     >
                       <div className={`flex flex-col items-center mb-2 ${isActive ? "px-3 py-2 rounded-lg border border-[#DED9D0] bg-[#F9F8F4]" : ""}`}>
-                        <Icon className={`h-5 w-5 mb-2 ${isActive ? "text-[#C06040]" : "text-[#8A857E]"}`} strokeWidth={2} />
+                        <Icon className={`h-5 w-5 mb-2 ${isActive || isCompleted ? "text-[#C06040]" : "text-[#8A857E]"}`} strokeWidth={2} />
                         <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
                           {step.timeLabel}
                         </span>
                         <div
                           className={`w-2.5 h-2.5 rounded-full ${
                             isActive
+                              ? "bg-[#C06040] ring-2 ring-[#DED9D0] ring-offset-1"
+                              : isCompleted
                               ? "bg-[#C06040]"
                               : "bg-[#DED9D0]"
                           }`}
@@ -173,14 +271,25 @@ export function Features() {
             </div>
 
             {/* Mobile: Horizontal scrollable timeline */}
-            <div className="md:hidden">
+            <div className="md:hidden relative">
+              {/* Base vertical line */}
+              <div className="absolute left-3 top-0 bottom-0 w-[1px] bg-[#E6E2DA]" />
+              {/* Progress line overlay */}
+              <div 
+                className="absolute left-3 top-0 w-[1px] bg-[#C06040] transition-all duration-100"
+                style={{ 
+                  height: `${overallProgress * 100}%`,
+                  opacity: 0.8
+                }}
+              />
               <div
                 ref={scrollContainerRef}
-                className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4"
+                className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative pl-6"
               >
                 <div className="flex gap-8 min-w-max">
                   {cadenceSteps.map((step, index) => {
                     const isActive = index === activeStep;
+                    const isCompleted = index < activeStep;
                     const Icon = step.icon;
                     return (
                       <button
@@ -194,13 +303,15 @@ export function Features() {
                         style={{ outline: 'none' }}
                       >
                         <div className={`flex flex-col items-center mb-2 ${isActive ? "px-2 py-1.5 rounded-lg border border-[#DED9D0] bg-[#F9F8F4]" : ""}`}>
-                          <Icon className={`h-5 w-5 mb-2 ${isActive ? "text-[#C06040]" : "text-[#8A857E]"}`} strokeWidth={2} />
+                          <Icon className={`h-5 w-5 mb-2 ${isActive || isCompleted ? "text-[#C06040]" : "text-[#8A857E]"}`} strokeWidth={2} />
                           <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
                             {step.timeLabel}
                           </span>
                           <div
                             className={`w-2.5 h-2.5 rounded-full ${
                               isActive
+                                ? "bg-[#C06040] ring-2 ring-[#DED9D0] ring-offset-1"
+                                : isCompleted
                                 ? "bg-[#C06040]"
                                 : "bg-[#DED9D0]"
                             }`}
@@ -219,16 +330,43 @@ export function Features() {
         </div>
 
           {/* Detail Panel */}
-          <div className="rounded-2xl border border-[#E6E2DA] bg-[#F9F8F4] p-4">
-            <div className="space-y-3">
-              <h4 className="font-semibold text-base text-[#1B1B1A]">
-                {activeStepData.title}
-              </h4>
-              <p className="text-sm text-[#5F5B55] leading-relaxed">
-                {activeStepData.detail}
-              </p>
+          <div className="rounded-2xl border border-[#E6E2DA] bg-white p-5 md:p-6">
+            <div className="space-y-4">
+              {/* Label Pills */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-3 py-1 rounded-full">
+                  {activeStepData.timeLabel}
+                </span>
+                {activeStepData.audience && (
+                  <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-3 py-1 rounded-full">
+                    {activeStepData.audience}
+                  </span>
+                )}
+              </div>
+
+              {/* How Section */}
+              <div>
+                <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
+                  How:
+                </h5>
+                <p className="text-sm text-[#5F5B55] leading-relaxed">
+                  {activeStepData.how}
+                </p>
+              </div>
+
+              {/* Impact Section */}
+              <div>
+                <h5 className="text-xs font-semibold uppercase tracking-wide text-[#1B1B1A] mb-2">
+                  Impact:
+                </h5>
+                <p className="text-sm text-[#5F5B55] leading-relaxed">
+                  {activeStepData.impact}
+                </p>
+              </div>
+
+              {/* Example Quote (Secondary) */}
               {activeStepData.example && (
-                <blockquote className="text-sm text-[#5F5B55] italic border-l-2 border-[#E6E2DA] pl-3">
+                <blockquote className="text-xs text-[#8A857E] italic border-l-2 border-[#E6E2DA] pl-3 pt-2">
                   {activeStepData.example}
                 </blockquote>
               )}
