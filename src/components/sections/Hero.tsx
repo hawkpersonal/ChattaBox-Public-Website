@@ -20,10 +20,25 @@ export function Hero() {
               <span className="text-[#C06040]">For Your Loved Ones</span>
             </h1>
             
-            <p className="text-lg text-[#5F5B55] leading-relaxed">
-              Regular check-ins <span className="underline-wiggly">by phone</span> for your parents. Warm chats and gentle reminders — no screens,
-              no confusion. <span className="underline-wiggly">Peace of mind for you.</span>
-            </p>
+            <div className="space-y-4">
+              <p className="text-lg text-[#5F5B55] leading-relaxed">
+                ChattaBox is an AI-powered companion that calls your parent or loved one for check-ins, friendly chats and gentle reminders — it gives you peace of mind.
+              </p>
+              <ul className="space-y-2 text-base text-[#5F5B55] leading-relaxed">
+                <li className="flex items-start gap-2">
+                  <span className="text-[#C06040] mt-1">•</span>
+                  <span>No apps, no screens, no confusion — it works on their normal phone</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#C06040] mt-1">•</span>
+                  <span>Warm daily calls with gentle reminders and check-in's built in</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#C06040] mt-1">•</span>
+                  <span>Simple family portal + daily updates so you stay in the loop and in control</span>
+                </li>
+              </ul>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button size="lg" onClick={() => scrollToSection("contact")} className="group">
