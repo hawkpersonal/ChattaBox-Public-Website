@@ -196,137 +196,117 @@ export function Features() {
           </p>
         </div>
 
-        {/* Block 1: A day with ChattaBox */}
+        {/* Block 1: Carousel */}
         <div className="mb-12 md:mb-16">
-          {/* Daily Cadence Strip */}
           <div className="mb-8">
-          <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
-            {/* Desktop: Horizontal timeline */}
-            <div className="hidden md:block relative">
-              <div className="relative flex justify-between items-start">
-                {cadenceSteps.map((step, index) => {
-                  const isActive = index === activeStep;
-                  const isCompleted = index < activeStep;
-                  return (
-                    <div key={index} className="flex items-center">
-                      <button
-                        ref={(el) => {
-                          stepRefs.current[index] = el;
-                        }}
-                        onClick={() => handleStepClick(index)}
-                        aria-pressed={isActive}
-                        className="flex flex-col items-center relative z-20 min-h-[44px] focus:outline-none rounded-lg transition-all"
-                        style={{ outline: 'none' }}
-                      >
-                        <div className="flex flex-col items-center">
-                          <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
-                            {step.timeLabel}
-                          </span>
-                          {/* Fixed-size marker wrapper */}
-                          <div 
-                            className="relative w-8 h-8 flex items-center justify-center z-20"
-                          >
-                            {/* Selected ring using pseudo-element */}
-                            {isActive && (
-                              <div 
-                                className="absolute inset-0 rounded-full border-2 border-[#DED9D0] pointer-events-none"
-                                style={{
-                                  boxShadow: '0 0 0 2px rgba(222, 217, 208, 0.3)',
-                                }}
-                              />
-                            )}
-                            {/* Fixed-size dot */}
-                            <div
-                              className={`w-2.5 h-2.5 rounded-full relative z-10 ${
-                                isActive || isCompleted
-                                  ? "bg-[#C06040]"
-                                  : "bg-[#DED9D0]"
-                              }`}
-                            />
-                          </div>
-                        </div>
-                      </button>
-                      {/* 4 dashes between dots (except after last dot) */}
-                      {index < cadenceSteps.length - 1 && (
-                        <div className="flex items-center gap-1 mx-2" style={{ top: '32px', position: 'relative' }}>
-                          {Array.from({ length: 4 }).map((_, dashIndex) => (
-                            <div
-                              key={dashIndex}
-                              className="w-1 h-[1px] bg-[#E6E2DA]"
-                            />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Mobile: Horizontal scrollable timeline */}
-            <div className="md:hidden">
-              <div
-                ref={scrollContainerRef}
-                className="overflow-x-auto scrollbar-hide -mx-4 px-4 relative"
-              >
-                <div className="flex gap-4 min-w-max relative z-20">
-                  {cadenceSteps.map((step, index) => {
-                    const isActive = index === activeStep;
-                    const isCompleted = index < activeStep;
-                    return (
-                      <div key={index} className="flex items-center">
-                        <button
-                          ref={(el) => {
-                            stepRefs.current[index] = el;
-                          }}
-                          onClick={() => handleStepClick(index)}
-                          aria-pressed={isActive}
-                          className="flex flex-col items-center min-w-[100px] min-h-[44px] focus:outline-none rounded-lg transition-all"
-                          style={{ outline: 'none' }}
+            <div className="rounded-2xl border border-[#E6E2DA] bg-[#EFEDE5] p-4 md:p-5">
+              {/* Carousel */}
+              <div className="relative">
+                {/* Carousel container */}
+                <div
+                  ref={scrollContainerRef}
+                  className="overflow-hidden relative"
+                  onTouchStart={(e) => {
+                    const touch = e.touches[0];
+                    scrollContainerRef.current?.setAttribute('data-touch-start', touch.clientX.toString());
+                  }}
+                  onTouchMove={(e) => {
+                    const touch = e.touches[0];
+                    const startX = parseFloat(scrollContainerRef.current?.getAttribute('data-touch-start') || '0');
+                    const diff = startX - touch.clientX;
+                    if (Math.abs(diff) > 50) {
+                      if (diff > 0 && activeStep < cadenceSteps.length - 1) {
+                        handleStepClick(activeStep + 1);
+                      } else if (diff < 0 && activeStep > 0) {
+                        handleStepClick(activeStep - 1);
+                      }
+                      scrollContainerRef.current?.removeAttribute('data-touch-start');
+                    }
+                  }}
+                >
+                  <div 
+                    className="flex transition-transform duration-300 ease-out"
+                    style={{
+                      transform: `translateX(-${activeStep * 100}%)`,
+                    }}
+                  >
+                    {cadenceSteps.map((step, index) => {
+                      const Icon = step.icon;
+                      const isActive = index === activeStep;
+                      return (
+                        <div
+                          key={index}
+                          className="min-w-full flex flex-col items-center justify-center px-4 py-6"
                         >
-                          <div className="flex flex-col items-center">
-                            <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
-                              {step.timeLabel}
-                            </span>
-                            {/* Fixed-size marker wrapper */}
-                            <div 
-                              className="relative w-8 h-8 flex items-center justify-center"
-                            >
-                              {/* Selected ring using pseudo-element */}
-                              {isActive && (
-                                <div 
-                                  className="absolute inset-0 rounded-full border-2 border-[#DED9D0] pointer-events-none"
-                                  style={{
-                                    boxShadow: '0 0 0 2px rgba(222, 217, 208, 0.3)',
-                                  }}
-                                />
-                              )}
-                              {/* Fixed-size dot */}
-                              <div
-                                className={`w-2.5 h-2.5 rounded-full relative z-10 ${
-                                  isActive || isCompleted
-                                    ? "bg-[#C06040]"
-                                    : "bg-[#DED9D0]"
-                                }`}
+                          <div className="flex flex-col items-center gap-3">
+                            <div className={`p-4 rounded-2xl transition-all ${
+                              isActive 
+                                ? 'bg-white border-2 border-[#DED9D0]' 
+                                : 'bg-transparent'
+                            }`}>
+                              <Icon 
+                                className={`h-8 w-8 transition-colors ${
+                                  isActive ? 'text-[#C06040]' : 'text-[#8A857E]'
+                                }`} 
+                                strokeWidth={2} 
                               />
                             </div>
+                            <div className="text-center">
+                              <p className={`text-sm font-medium mb-1 transition-colors ${
+                                isActive ? 'text-[#1B1B1A]' : 'text-[#8A857E]'
+                              }`}>
+                                {step.timeLabel}
+                              </p>
+                              <p className={`text-base font-semibold transition-colors ${
+                                isActive ? 'text-[#1B1B1A]' : 'text-[#8A857E]'
+                              }`}>
+                                {step.title}
+                              </p>
+                            </div>
                           </div>
-                        </button>
-                        {/* 4 dashes between dots (except after last dot) */}
-                        {index < cadenceSteps.length - 1 && (
-                          <div className="flex items-center gap-1 mx-2" style={{ top: '32px', position: 'relative' }}>
-                            {Array.from({ length: 4 }).map((_, dashIndex) => (
-                              <div
-                                key={dashIndex}
-                                className="w-1 h-[1px] bg-[#E6E2DA]"
-                              />
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
+
+                {/* Navigation dots */}
+                <div className="flex justify-center gap-2 mt-6">
+                  {cadenceSteps.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleStepClick(index)}
+                      className={`h-2 rounded-full transition-all ${
+                        index === activeStep
+                          ? 'w-8 bg-[#C06040]'
+                          : 'w-2 bg-[#DED9D0]'
+                      }`}
+                      aria-label={`Go to step ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Navigation arrows */}
+                <button
+                  onClick={() => handleStepClick(Math.max(0, activeStep - 1))}
+                  disabled={activeStep === 0}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                  aria-label="Previous"
+                >
+                  <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => handleStepClick(Math.min(cadenceSteps.length - 1, activeStep + 1))}
+                  disabled={activeStep === cadenceSteps.length - 1}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-[#E6E2DA] hover:bg-[#F9F8F4] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                  aria-label="Next"
+                >
+                  <svg className="w-5 h-5 text-[#1B1B1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
