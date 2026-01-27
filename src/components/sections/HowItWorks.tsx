@@ -45,15 +45,8 @@ export function HowItWorks() {
                 <div className="bg-[#EFEDE5] rounded-[12px] p-6 border border-[#E6E2DA] shadow-elegant">
                   <div className="flex flex-col items-center text-center space-y-4">
                     <div className="relative">
-                      <div className="h-16 w-16 rounded-full bg-[#E6E2DA] flex items-center justify-center mb-4">
-                        <span className="text-2xl font-serif text-[#E6E2DA] font-bold">
-                          {step.number}
-                        </span>
-                      </div>
-                      <div className="absolute -top-2 -right-2 h-12 w-12 rounded-[12px] bg-[#EFEDE5] flex items-center justify-center p-0">
-                        <div className="flex items-center justify-center w-full h-full">
-                          <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
-                        </div>
+                      <div className="h-16 w-16 rounded-full bg-[#EFEDE5] border border-[#E6E2DA] flex items-center justify-center mb-4">
+                        <Icon className="h-8 w-8 text-[#C06040]" strokeWidth={2} />
                       </div>
                     </div>
                     <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
