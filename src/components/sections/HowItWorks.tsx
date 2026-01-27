@@ -57,25 +57,46 @@ export function HowItWorks() {
                     <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
                       {step.title}
                     </h3>
-                    <div className="text-sm text-[#5F5B55] leading-relaxed space-y-1">
+                    <ul className="text-sm text-[#5F5B55] leading-relaxed space-y-2 text-left w-full">
                       {step.number === "1" ? (
                         <>
-                          <p>- Share info about your loved one to help ChattaBox to settle in</p>
-                          <p>- Configure reminders & check-ins & preferences through the family portal</p>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-[#C06040]">•</span>
+                            <span>Share info about your loved one to help ChattaBox to settle in</span>
+                          </li>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-[#C06040]">•</span>
+                            <span>Configure reminders & check-ins & preferences through the family portal</span>
+                          </li>
                         </>
                       ) : step.number === "2" ? (
                         <>
-                          <p>- ChattaBox calls as you configured</p>
-                          <p>- They can call ChattaBox whenever they want to talk too.</p>
-                          <p>It remembers their conversations and preferences.</p>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-[#C06040]">•</span>
+                            <span>ChattaBox calls as you configured</span>
+                          </li>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-[#C06040]">•</span>
+                            <span>They can call ChattaBox whenever they want to talk too.</span>
+                          </li>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-[#C06040]">•</span>
+                            <span>It remembers their conversations and preferences.</span>
+                          </li>
                         </>
                       ) : (
                         <>
-                          <p>- Receive simple daily summaries about your loved ones progress</p>
-                          <p>- Receive insights in how best you can help their wellbeing</p>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-[#C06040]">•</span>
+                            <span>Receive simple daily summaries about your loved ones progress</span>
+                          </li>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-[#C06040]">•</span>
+                            <span>Receive insights in how best you can help their wellbeing</span>
+                          </li>
                         </>
                       )}
-                    </div>
+                    </ul>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
