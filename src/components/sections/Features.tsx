@@ -271,22 +271,21 @@ export function Features() {
             </div>
 
             {/* Mobile: Horizontal scrollable timeline */}
-            <div className="md:hidden relative">
-              {/* Base vertical line */}
-              <div className="absolute left-3 top-0 bottom-0 w-[1px] bg-[#E6E2DA]" />
-              {/* Progress line overlay */}
-              <div 
-                className="absolute left-3 top-0 w-[1px] bg-[#C06040] transition-all duration-100"
-                style={{ 
-                  height: `${overallProgress * 100}%`,
-                  opacity: 0.8
-                }}
-              />
+            <div className="md:hidden">
               <div
                 ref={scrollContainerRef}
-                className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative pl-6"
+                className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative"
               >
-                <div className="flex gap-8 min-w-max">
+                {/* Progress line for mobile (horizontal) */}
+                <div className="absolute top-12 left-4 right-4 h-[1px] bg-[#E6E2DA]" />
+                <div 
+                  className="absolute top-12 left-4 h-[1px] bg-[#C06040] transition-all duration-100"
+                  style={{ 
+                    width: `calc(${overallProgress * 100}% - 2rem)`,
+                    opacity: 0.8
+                  }}
+                />
+                <div className="flex gap-8 min-w-max relative z-10">
                   {cadenceSteps.map((step, index) => {
                     const isActive = index === activeStep;
                     const isCompleted = index < activeStep;
