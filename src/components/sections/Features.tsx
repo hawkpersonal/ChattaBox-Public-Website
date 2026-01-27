@@ -214,112 +214,18 @@ export function Features() {
             {/* Desktop: Horizontal timeline */}
             <div className="hidden md:block relative">
               <div className="relative flex justify-between items-start">
-                {/* Perforated baseline - faint dashes */}
-                <div
-                  className="absolute h-[1px] z-0 left-0 right-0"
-                  style={{
-                    top: '32px',
-                    backgroundImage: 'repeating-linear-gradient(to right, rgba(230, 226, 218, 0.4) 0, rgba(230, 226, 218, 0.4) 4px, transparent 4px, transparent 8px)',
-                  }}
-                />
-                
-                {/* Terracotta fill line - fills in dashes as progress advances */}
-                <div
-                  className="absolute h-[1px] bg-[#C06040] z-0 transition-all duration-500 ease-out"
-                  style={{
-                    top: '32px',
-                    left: 0,
-                    width: `${overallProgress * 100}%`,
-                    opacity: 0.85,
-                  }}
-                />
-                
                 {cadenceSteps.map((step, index) => {
                   const isActive = index === activeStep;
                   const isCompleted = index < activeStep;
                   return (
-                    <button
-                      key={index}
-                      ref={(el) => {
-                        stepRefs.current[index] = el;
-                      }}
-                      onClick={() => handleStepClick(index)}
-                      aria-pressed={isActive}
-                      className="flex flex-col items-center relative z-20 min-h-[44px] focus:outline-none rounded-lg transition-all"
-                      style={{ outline: 'none' }}
-                    >
-                      <div className="flex flex-col items-center">
-                        <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
-                          {step.timeLabel}
-                        </span>
-                        {/* Fixed-size marker wrapper */}
-                        <div 
-                          className="relative w-8 h-8 flex items-center justify-center z-20"
-                        >
-                          {/* Selected ring using pseudo-element */}
-                          {isActive && (
-                            <div 
-                              className="absolute inset-0 rounded-full border-2 border-[#DED9D0] pointer-events-none"
-                              style={{
-                                boxShadow: '0 0 0 2px rgba(222, 217, 208, 0.3)',
-                              }}
-                            />
-                          )}
-                          {/* Fixed-size dot */}
-                          <div
-                            className={`w-2.5 h-2.5 rounded-full relative z-10 ${
-                              isActive || isCompleted
-                                ? "bg-[#C06040]"
-                                : "bg-[#DED9D0]"
-                            }`}
-                          />
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Mobile: Horizontal scrollable timeline */}
-            <div className="md:hidden">
-              <div
-                ref={scrollContainerRef}
-                className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative"
-              >
-                {/* Perforated baseline - faint dashes */}
-                <div
-                  className="absolute h-[1px] z-0 left-4 right-4"
-                  style={{
-                    top: '32px',
-                    backgroundImage: 'repeating-linear-gradient(to right, rgba(230, 226, 218, 0.4) 0, rgba(230, 226, 218, 0.4) 4px, transparent 4px, transparent 8px)',
-                  }}
-                />
-                
-                {/* Terracotta fill line - fills in dashes as progress advances */}
-                <div
-                  className="absolute h-[1px] bg-[#C06040] z-0 transition-all duration-500 ease-out"
-                  style={{
-                    top: '32px',
-                    left: '1rem',
-                    width: `calc(${overallProgress * 100}% - 2rem)`,
-                    opacity: 0.85,
-                  }}
-                />
-                
-                <div className="flex gap-8 min-w-max relative z-20">
-                  {cadenceSteps.map((step, index) => {
-                    const isActive = index === activeStep;
-                    const isCompleted = index < activeStep;
-                    return (
+                    <div key={index} className="flex items-center">
                       <button
-                        key={index}
                         ref={(el) => {
                           stepRefs.current[index] = el;
                         }}
                         onClick={() => handleStepClick(index)}
                         aria-pressed={isActive}
-                        className="snap-center flex flex-col items-center min-w-[100px] min-h-[44px] focus:outline-none rounded-lg transition-all"
+                        className="flex flex-col items-center relative z-20 min-h-[44px] focus:outline-none rounded-lg transition-all"
                         style={{ outline: 'none' }}
                       >
                         <div className="flex flex-col items-center">
@@ -328,7 +234,7 @@ export function Features() {
                           </span>
                           {/* Fixed-size marker wrapper */}
                           <div 
-                            className="relative w-8 h-8 flex items-center justify-center"
+                            className="relative w-8 h-8 flex items-center justify-center z-20"
                           >
                             {/* Selected ring using pseudo-element */}
                             {isActive && (
@@ -350,6 +256,84 @@ export function Features() {
                           </div>
                         </div>
                       </button>
+                      {/* 4 dashes between dots (except after last dot) */}
+                      {index < cadenceSteps.length - 1 && (
+                        <div className="flex items-center gap-1 mx-2" style={{ top: '32px', position: 'relative' }}>
+                          {Array.from({ length: 4 }).map((_, dashIndex) => (
+                            <div
+                              key={dashIndex}
+                              className="w-1 h-[1px] bg-[#E6E2DA]"
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile: Horizontal scrollable timeline */}
+            <div className="md:hidden">
+              <div
+                ref={scrollContainerRef}
+                className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative"
+              >
+                <div className="flex gap-4 min-w-max relative z-20">
+                  {cadenceSteps.map((step, index) => {
+                    const isActive = index === activeStep;
+                    const isCompleted = index < activeStep;
+                    return (
+                      <div key={index} className="flex items-center snap-center">
+                        <button
+                          ref={(el) => {
+                            stepRefs.current[index] = el;
+                          }}
+                          onClick={() => handleStepClick(index)}
+                          aria-pressed={isActive}
+                          className="flex flex-col items-center min-w-[100px] min-h-[44px] focus:outline-none rounded-lg transition-all"
+                          style={{ outline: 'none' }}
+                        >
+                          <div className="flex flex-col items-center">
+                            <span className={`text-xs mb-1 ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
+                              {step.timeLabel}
+                            </span>
+                            {/* Fixed-size marker wrapper */}
+                            <div 
+                              className="relative w-8 h-8 flex items-center justify-center"
+                            >
+                              {/* Selected ring using pseudo-element */}
+                              {isActive && (
+                                <div 
+                                  className="absolute inset-0 rounded-full border-2 border-[#DED9D0] pointer-events-none"
+                                  style={{
+                                    boxShadow: '0 0 0 2px rgba(222, 217, 208, 0.3)',
+                                  }}
+                                />
+                              )}
+                              {/* Fixed-size dot */}
+                              <div
+                                className={`w-2.5 h-2.5 rounded-full relative z-10 ${
+                                  isActive || isCompleted
+                                    ? "bg-[#C06040]"
+                                    : "bg-[#DED9D0]"
+                                }`}
+                              />
+                            </div>
+                          </div>
+                        </button>
+                        {/* 4 dashes between dots (except after last dot) */}
+                        {index < cadenceSteps.length - 1 && (
+                          <div className="flex items-center gap-1 mx-2" style={{ top: '32px', position: 'relative' }}>
+                            {Array.from({ length: 4 }).map((_, dashIndex) => (
+                              <div
+                                key={dashIndex}
+                                className="w-1 h-[1px] bg-[#E6E2DA]"
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     );
                   })}
                 </div>
