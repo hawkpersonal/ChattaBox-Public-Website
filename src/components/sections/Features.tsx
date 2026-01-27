@@ -267,7 +267,7 @@ export function Features() {
             <div className="md:hidden">
               <div
                 ref={scrollContainerRef}
-                className="overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 relative"
+                className="overflow-x-auto scrollbar-hide -mx-4 px-4 relative"
               >
                 <div className="flex gap-4 min-w-max relative z-20">
                   {cadenceSteps.map((step, index) => {
