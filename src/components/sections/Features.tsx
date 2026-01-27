@@ -128,9 +128,12 @@ export function Features() {
   // Sync scroll position with activeStep
   useEffect(() => {
     if (scrollContainerRef.current) {
-      const cardElement = scrollContainerRef.current.children[0].children[activeStep] as HTMLElement;
-      if (cardElement) {
-        cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      const track = scrollContainerRef.current.querySelector('.flex') as HTMLElement;
+      if (track) {
+        const cardElement = track.children[activeStep] as HTMLElement;
+        if (cardElement) {
+          cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
       }
     }
   }, [activeStep]);
@@ -141,7 +144,10 @@ export function Features() {
     if (!container) return;
 
     const handleScroll = () => {
-      const cards = container.children[0].children;
+      const track = container.querySelector('.flex') as HTMLElement;
+      if (!track) return;
+      
+      const cards = track.children;
       const containerRect = container.getBoundingClientRect();
       const containerCenter = containerRect.left + containerRect.width / 2;
 
@@ -282,22 +288,22 @@ export function Features() {
               </svg>
             </button>
 
-            {/* Progress bar and step indicator */}
-            <div className="mt-6 space-y-2">
-              {/* Progress bar */}
-              <div className="h-1 bg-[#E6E2DA] rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#C06040] transition-all duration-300"
-                  style={{
-                    width: `${((activeStep + 1) / cadenceSteps.length) * 100}%`,
-                    transition: prefersReducedMotion.current ? 'none' : 'width 300ms ease-out',
-                  }}
-                />
-              </div>
-              {/* Step text */}
-              <p className="text-xs text-[#8A857E] text-center">
-                Step {activeStep + 1} of {cadenceSteps.length}
-              </p>
+            {/* Dot menu indicator */}
+            <div className="mt-6 flex justify-center items-center gap-2">
+              {cadenceSteps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleStepClick(index)}
+                  className="focus:outline-none transition-all"
+                  aria-label={`Go to step ${index + 1}`}
+                >
+                  {index === activeStep ? (
+                    <div className="w-8 h-0.5 bg-[#C06040] rounded-full" />
+                  ) : (
+                    <div className="w-2 h-2 rounded-full bg-[#DED9D0] hover:bg-[#C06040] transition-colors" />
+                  )}
+                </button>
+              ))}
             </div>
           </div>
         </div>
