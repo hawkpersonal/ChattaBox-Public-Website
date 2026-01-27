@@ -254,9 +254,6 @@ export function Features() {
                           }`}
                         />
                       </div>
-                      <span className={`text-sm font-medium text-center max-w-[120px] ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
-                        {step.title}
-                      </span>
                     </button>
                   );
                 })}
@@ -309,9 +306,6 @@ export function Features() {
                             }`}
                           />
                         </div>
-                        <span className={`text-sm font-medium text-center ${isActive ? "text-[#1B1B1A]" : "text-[#8A857E]"}`}>
-                          {step.title}
-                        </span>
                       </button>
                     );
                   })}
