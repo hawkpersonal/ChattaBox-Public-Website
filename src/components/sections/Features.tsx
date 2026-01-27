@@ -274,7 +274,7 @@ export function Features() {
                     const isActive = index === activeStep;
                     const isCompleted = index < activeStep;
                     return (
-                      <div key={index} className="flex items-center snap-center">
+                      <div key={index} className="flex items-center">
                         <button
                           ref={(el) => {
                             stepRefs.current[index] = el;
