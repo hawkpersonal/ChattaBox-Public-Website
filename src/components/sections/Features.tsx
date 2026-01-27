@@ -200,7 +200,7 @@ export function Features() {
                   return (
                     <div
                       key={index}
-                      className="snap-center flex-shrink-0 w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]"
+                      className="snap-center flex-shrink-0 w-full"
                       onClick={() => handleStepClick(index)}
                     >
                       <div
