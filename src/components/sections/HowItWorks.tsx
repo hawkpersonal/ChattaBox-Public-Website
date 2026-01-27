@@ -1,9 +1,9 @@
-import { Settings, Phone, MessageSquare } from "lucide-react";
+import { Wrench, Phone, FileText } from "lucide-react";
 
 const steps = [
   {
     number: "1",
-    icon: Settings,
+    icon: Wrench,
     title: "You Set It Up",
     description: "- Share info about your loved one to help ChattaBox to settle in\n- Configure reminders & check-ins & preferences through the family portal",
   },
@@ -15,7 +15,7 @@ const steps = [
   },
   {
     number: "3",
-    icon: MessageSquare,
+    icon: FileText,
     title: "You Get Updates",
     description: "- Receive simple daily summaries about your loved ones progress\n- Receive insights in how best you can help their wellbeing",
   },
@@ -51,7 +51,7 @@ export function HowItWorks() {
                         </span>
                       </div>
                       <div className="absolute -top-2 -right-2 h-12 w-12 rounded-[12px] bg-[#EFEDE5] flex items-center justify-center">
-                        <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
+                        <Icon className="h-6 w-6 text-[#C06040] flex-shrink-0" strokeWidth={2} />
                       </div>
                     </div>
                     <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
