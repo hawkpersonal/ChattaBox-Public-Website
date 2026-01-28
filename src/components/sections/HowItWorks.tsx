@@ -11,7 +11,7 @@ const steps = [
     number: "2",
     icon: Phone,
     title: "ChattaBox Calls Them",
-    description: "- ChattaBox calls as you configured\n- They can call ChattaBox whenever they want to talk too.\nIt remembers their conversations and preferences.",
+    description: "- ChattaBox calls as you configured it to\n- Your loved one can call ChattaBox whenever they want to talk.\nIt remembers their conversations and preferences.",
   },
   {
     number: "3",
@@ -68,11 +68,11 @@ export function HowItWorks() {
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>ChattaBox calls as you configured</span>
+                            <span>ChattaBox calls as you configured it to</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>They can call ChattaBox whenever they want to talk too.</span>
+                            <span>Your loved one can call ChattaBox whenever they want to talk.</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
