@@ -14,7 +14,7 @@ export function Contact() {
       <div className="container">
         <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
           <h2 className="font-serif">
-            Get early access
+            Contact Us
           </h2>
           <p className="text-lg text-[#5F5B55] leading-relaxed">
             Tell us a little about your loved one — we'll reply within 24 hours.
