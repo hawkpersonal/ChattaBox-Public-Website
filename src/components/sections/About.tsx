@@ -2,17 +2,20 @@ import { Heart, Shield, Users } from "lucide-react";
 
 const highlights = [
   {
+    iconImage: "/icons/Built with care.png",
     icon: Heart,
     title: "Built with care",
     description: "We started ChattaBox because too many older adults spend their days alone, and we think families need more support too.",
   },
   {
+    iconImage: "/icons/Privacy first.png",
     icon: Shield,
     title: "Privacy first",
     description:
       "Your family’s information is encrypted and stored securely, with restricted access so only authorised systems can use it to run our service. We only collect what we need, and we never sell your data.",
   },
   {
+    iconImage: "/icons/Family-focused.png",
     icon: Users,
     title: "Family-focused",
     description:
@@ -22,7 +25,7 @@ const highlights = [
 
 export function About() {
   return (
-    <section id="about" className="py-14 md:py-24 bg-[#F9F8F4]">
+    <section id="about" className="py-14 md:py-24 bg-[#EFEDE5]">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
           <h2 className="font-serif">
@@ -39,11 +42,22 @@ export function About() {
             return (
               <div
                 key={index}
-                className="bg-white rounded-[18px] border border-[#E6E2DA] p-6 shadow-elegant hover:shadow-elegant-hover transition-all"
+                className="bg-white rounded-[18px] border border-[#E6E2DA] p-6 shadow-elegant hover:shadow-elegant-hover transition-all text-center"
               >
-                <div className="h-12 w-12 rounded-[12px] bg-[#EFEDE5] flex items-center justify-center mb-4">
-                  <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
-                </div>
+                {"iconImage" in highlight && highlight.iconImage ? (
+                  <div className="flex justify-center mb-4">
+                    <img
+                      src={highlight.iconImage}
+                      alt={`${highlight.title} icon`}
+                      className="h-36 w-36 object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-12 w-12 rounded-[12px] bg-[#EFEDE5] flex items-center justify-center mb-4 mx-auto">
+                    <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
+                  </div>
+                )}
                 <h3 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
                   {highlight.title}
                 </h3>

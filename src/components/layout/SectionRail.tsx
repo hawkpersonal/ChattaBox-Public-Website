@@ -5,8 +5,8 @@ const sectionIds = [
   "family-portal",
   "how-it-works",
   "testimonials",
-  "pricing",
   "about",
+  "pricing",
   "contact",
 ];
 

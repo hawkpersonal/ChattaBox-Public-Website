@@ -1,4 +1,4 @@
-import { Wrench, Phone, FileText, ChevronRight } from "lucide-react";
+import { Wrench, Phone, FileText, ChevronRight, ChevronDown } from "lucide-react";
 
 const steps = [
   {
@@ -95,11 +95,20 @@ export function HowItWorks() {
                   </div>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -right-7 w-9 h-9 items-center justify-center">
-                    <div className="rounded-full bg-[#EFEDE5] border border-[#E6E2DA] w-7 h-7 flex items-center justify-center shadow-elegant">
-                      <ChevronRight className="h-5 w-5 text-accent-green" strokeWidth={2.5} />
+                  <>
+                    {/* Desktop: arrow right between cards */}
+                    <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -right-7 w-9 h-9 items-center justify-center">
+                      <div className="rounded-full bg-[#EFEDE5] border border-[#E6E2DA] w-7 h-7 flex items-center justify-center shadow-elegant">
+                        <ChevronRight className="h-5 w-5 text-accent-green" strokeWidth={2.5} />
+                      </div>
                     </div>
-                  </div>
+                    {/* Mobile: arrow down to next card */}
+                    <div className="flex md:hidden justify-center py-4">
+                      <div className="rounded-full bg-[#EFEDE5] border border-[#E6E2DA] w-7 h-7 flex items-center justify-center shadow-elegant">
+                        <ChevronDown className="h-5 w-5 text-accent-green" strokeWidth={2.5} />
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
             );

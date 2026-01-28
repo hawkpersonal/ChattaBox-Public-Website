@@ -24,6 +24,7 @@ export function Header() {
               onClick={() => {
                 // TODO: Wire up login functionality
               }}
+              className="text-accent-green hover:text-accent-green"
             >
               Login
             </Button>

@@ -372,7 +372,7 @@ export function Features() {
                     For your parent
                   </h4>
                   <p className="text-sm text-[#5F5B55]">
-                    Simple, daily companionship that fits into their routine
+                    Simple, daily support and companionship that fits into their routine
                   </p>
                 </div>
                 <div className="space-y-0">
@@ -407,7 +407,7 @@ export function Features() {
                     For you
                   </h4>
                   <p className="text-sm text-[#5F5B55]">
-                    Peace of mind through gentle insights and simple tools
+                    Peace of mind through routine support and gentle insights on your loved ones wellbeing
                   </p>
                 </div>
                 <div className="space-y-0">

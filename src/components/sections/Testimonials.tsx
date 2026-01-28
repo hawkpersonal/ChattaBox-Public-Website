@@ -8,17 +8,17 @@ const testimonials = [
     role: "Daughter",
   },
   {
-    quote: "Mum was skeptical at first, but now she talks to ChattaBox every morning. It helps her with her routine and asks about her garden. She seems genuinely happier, and I love the weekly insights.",
+    quote: "Mum was skeptical at first, but now she talks to ChattaBox every morning. It helps her with her routine and asks about her garden. She seems genuinely happier, and I love the daily insights.",
     author: "James T.",
     role: "Son",
   },
   {
-    quote: "I can't visit my grandmother as often as I'd like. Knowing ChattaBox checks in daily gives me peace of mind. The insights help me understand how she's really doing without constant check-ins.",
+    quote: "I can't visit my grandmother as often as I'd like. Knowing ChattaBox checks in daily gives me peace of mind. The insights help me understand how she's really doing without constantly worrying about her.",
     author: "Emma L.",
     role: "Granddaughter",
   },
   {
-    quote: "My parents don't do well with technology, but this just uses their regular phone. They call ChattaBox when they're lonely, and it remembers their stories. It's been wonderful for them.",
+    quote: "My mum doesn't do well with technology, but this just uses her regular phone. She can call ChattaBox whenever she's feeling lonely, and it remembers her stories and the little things she cares about. It's been genuinely wonderful for her.",
     author: "Michael R.",
     role: "Son",
   },

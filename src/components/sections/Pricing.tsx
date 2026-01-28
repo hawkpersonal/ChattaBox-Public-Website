@@ -7,9 +7,9 @@ const plan = {
   price: "Free",
   features: [
     "Daily phone calls for your loved one",
-    "Family portal access",
-    "Daily wellbeing updates",
     "Customizable reminders",
+    "Daily wellbeing updates",
+    "Family portal access",
     "Priority support",
   ],
 };
@@ -23,7 +23,7 @@ export function Pricing() {
   };
 
   return (
-    <section id="pricing" className="py-14 md:py-24 bg-[#EFEDE5]">
+    <section id="pricing" className="py-14 md:py-24 bg-[#F9F8F4]">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
           <h2 className="font-serif">
@@ -69,7 +69,7 @@ export function Pricing() {
               onClick={() => scrollToSection("contact")}
               className="w-full"
             >
-              Request a Pilot Spot
+              Join Our Pilot
             </Button>
           </div>
         </div>

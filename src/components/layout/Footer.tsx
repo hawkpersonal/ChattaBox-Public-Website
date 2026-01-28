@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="border-t border-[#E6E2DA] bg-[#101010] text-[#F0F0F0]">
       <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3">
@@ -62,6 +62,32 @@ export function Footer() {
           </div>
 
           <div>
+            <h4 className="font-semibold text-sm mb-4 text-[#F0F0F0]">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/privacy" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link to="/cookies" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
+                  Cookies
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link to="/company-details" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
+                  Company details
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
             <h4 className="font-semibold text-sm mb-4 text-[#F0F0F0]">Contact</h4>
             <ul className="space-y-2">
               <li>
@@ -82,7 +108,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[#E6E2DA]/20 mt-12 pt-8 text-center">
+        <div className="border-t border-[#E6E2DA]/20 mt-12 pt-8 text-center space-y-2">
+          <p className="text-sm text-[#8A857E]">
+            Chattabox is operated by SN PARTNERS LIMITED (Company No. 13400816).
+            Registered office: The Warehouse, Anchor Quay, Penryn, Cornwall,
+            TR10 8GZ.
+          </p>
           <p className="text-sm text-[#8A857E]">
             © {new Date().getFullYear()} ChattaBox. All rights reserved.
           </p>

@@ -20,8 +20,8 @@ export function Home() {
       <FamilyPortal />
       <HowItWorks />
       <Testimonials />
-      <Pricing />
       <About />
+      <Pricing />
       <Contact />
       <Footer />
     </main>

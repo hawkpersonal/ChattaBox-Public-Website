@@ -75,9 +75,6 @@ export function FamilyPortal() {
                 <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-3 py-1 rounded-full">
                   Daily update
                 </span>
-                <span className="text-xs text-[#8A857E]">
-                  Delivered each morning
-                </span>
               </div>
 
               <h3 className="text-lg font-semibold font-serif text-[#1B1B1A] mb-6">
