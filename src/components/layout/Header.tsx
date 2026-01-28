@@ -22,7 +22,7 @@ export function Header() {
               size="sm"
               variant="ghost"
               onClick={() => {
-                // TODO: Wire up login functionality
+                window.location.href = 'https://app.chattabox.io';
               }}
               className="text-accent-green hover:text-accent-green"
             >
