@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
-const sections = [
-  { id: "features", label: "How It Helps" },
-  { id: "family-portal", label: "Family Portal" },
-  { id: "how-it-works", label: "How It Works" },
-  { id: "testimonials", label: "Stories" },
-  { id: "pricing", label: "Pilot" },
-  { id: "contact", label: "Contact" },
+const sectionIds = [
+  "features",
+  "family-portal",
+  "how-it-works",
+  "testimonials",
+  "pricing",
+  "about",
+  "contact",
 ];
 
 export function SectionRail() {
@@ -14,15 +15,8 @@ export function SectionRail() {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    // Create intersection observer
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        // Find the entry with the highest intersection ratio
         let maxRatio = 0;
         let mostVisibleSection = "";
 
@@ -33,6 +27,8 @@ export function SectionRail() {
           }
         });
 
+        // Simple, stable behaviour: only switch when a section
+        // is clearly in view (at least ~40%).
         if (mostVisibleSection && maxRatio > 0.4) {
           setActiveSection(mostVisibleSection);
         }
@@ -43,15 +39,13 @@ export function SectionRail() {
       }
     );
 
-    // Observe all sections
-    sections.forEach(({ id }) => {
+    sectionIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element && observerRef.current) {
         observerRef.current.observe(element);
       }
     });
 
-    // Cleanup
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
@@ -59,60 +53,26 @@ export function SectionRail() {
     };
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      
-      element.scrollIntoView({
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-        block: "start",
-      });
-    }
-  };
-
   return (
-    <nav
-      className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40"
-      aria-label="Section navigation"
+    <div
+      className="hidden lg:flex fixed right-3 top-1/2 -translate-y-1/2 z-40"
+      aria-hidden="true"
     >
-      <ul className="flex flex-col gap-4">
-        {sections.map(({ id, label }) => {
+      <ul className="flex flex-col gap-3" role="presentation">
+        {sectionIds.map((id) => {
           const isActive = activeSection === id;
           return (
             <li key={id}>
-              <button
-                onClick={() => scrollToSection(id)}
-                aria-current={isActive ? "true" : undefined}
-                className="flex items-center gap-3 group"
-                aria-label={`Navigate to ${label}`}
-              >
-                {/* Dot */}
-                <div
-                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                    isActive
-                      ? "bg-accent-green w-3 h-3"
-                      : "bg-[#DED9D0] group-hover:bg-accent-green group-hover:w-2.5 group-hover:h-2.5"
-                  }`}
-                />
-                
-                {/* Label */}
-                <span
-                  className={`text-xs transition-all duration-200 ${
-                    isActive
-                      ? "text-accent-green font-medium opacity-100"
-                      : "text-[#8A857E] opacity-0 group-hover:opacity-100 group-hover:text-accent-green"
-                  }`}
-                >
-                  {label}
-                </span>
-              </button>
+              <span
+                className={`block w-2 h-2 rounded-full transition-all duration-200 ${
+                  isActive ? "bg-accent-green w-3 h-3" : "bg-[#DED9D0]"
+                }`}
+                aria-hidden="true"
+              />
             </li>
           );
         })}
       </ul>
-    </nav>
+    </div>
   );
 }

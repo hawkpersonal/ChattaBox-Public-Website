@@ -26,16 +26,25 @@ export function Hero() {
               </p>
               <ul className="space-y-2 text-base text-[#5F5B55] leading-relaxed">
                 <li className="flex items-baseline gap-2">
-                  <span className="text-[#C06040]">•</span>
-                  <span>No apps, no screens, no confusion — works on regular phones</span>
+                  <span className="text-accent-green">•</span>
+                  <span>
+                    No apps, no screens, no confusion —{" "}
+                    <span className="underline-wiggly">works on regular phones</span>
+                  </span>
                 </li>
                 <li className="flex items-baseline gap-2">
-                  <span className="text-[#C06040]">•</span>
-                  <span>Warm daily calls with gentle reminders and check-in's</span>
+                  <span className="text-accent-green">•</span>
+                  <span>
+                    Warm <span className="underline-wiggly">daily calls</span> with{" "}
+                    <span className="underline-wiggly">gentle reminders</span> and check-in's
+                  </span>
                 </li>
                 <li className="flex items-baseline gap-2">
-                  <span className="text-[#C06040]">•</span>
-                  <span>Simple family portal + daily updates so you stay in the loop and in control</span>
+                  <span className="text-accent-green">•</span>
+                  <span>
+                    Simple <span className="underline-wiggly">family portal</span> +{" "}
+                    <span className="underline-wiggly">daily updates</span> so you stay in the loop and in control
+                  </span>
                 </li>
               </ul>
             </div>

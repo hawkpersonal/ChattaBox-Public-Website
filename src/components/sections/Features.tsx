@@ -16,7 +16,7 @@ const PAUSE_AFTER_MANUAL_MS = 12000;
 const cadenceSteps = [
   {
     key: 'morning',
-    icon: Bell,
+    iconImage: "/icons/Gentle reminders.png",
     timeLabel: "9am",
     title: "Gentle reminders",
     audience: "For your parent",
@@ -27,7 +27,7 @@ const cadenceSteps = [
   },
   {
     key: 'midday',
-    icon: MessageCircle,
+    iconImage: "/icons/Friendly check-in.png",
     timeLabel: "2pm",
     title: "Friendly check-in",
     audience: "For your parent",
@@ -38,18 +38,18 @@ const cadenceSteps = [
   },
   {
     key: 'evening',
-    icon: Heart,
+    iconImage: "/icons/A comforting chat.png",
     timeLabel: "6pm",
     title: "A comforting chat",
     audience: "For your parent",
     how: "An evening conversation to wind down the day. ChattaBox remembers their stories and asks about the things they care about.",
     impact: "Regular conversation helps reduce loneliness and keeps their day feeling connected and positive.",
-    example: "\"Tell me about your day. I remember you mentioned your woodworking project yesterday.\"",
+    example: "\"Tell me about your day. I remember you mentioned your new puzzle yesterday.\"",
     linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
   },
   {
     key: 'anytime',
-    icon: Phone,
+    iconImage: "/icons/They can call.png",
     timeLabel: "Anytime",
     title: "They can call",
     audience: "For your parent",
@@ -60,7 +60,7 @@ const cadenceSteps = [
   },
   {
     key: 'daily-summary',
-    icon: FileText,
+    iconImage: "/icons/Your daily update.png",
     timeLabel: "Daily summary",
     title: "Your daily update",
     audience: "For you",
@@ -198,7 +198,7 @@ export function Features() {
 
         {/* Block 1: Card Carousel */}
         <div className="mb-12 md:mb-16">
-          <div className="relative group">
+          <div className="relative group max-w-2xl mx-auto">
             {/* Carousel container */}
             <div
               ref={scrollContainerRef}
@@ -211,7 +211,6 @@ export function Features() {
               {/* Card track */}
               <div className="flex gap-4 pb-4">
                 {cadenceSteps.map((step, index) => {
-                  const Icon = step.icon;
                   const isActive = index === activeStep;
                   return (
                     <div
@@ -234,9 +233,20 @@ export function Features() {
                         <div className="text-center">
                           {/* Top row: Icon + Title */}
                           <div className="flex flex-col items-center gap-3 mb-6">
-                            <div className="flex-shrink-0 p-3 rounded-xl bg-[#EFEDE5] border border-[#E6E2DA]">
-                              <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
-                            </div>
+                            {"iconImage" in step && step.iconImage ? (
+                              <div className="flex-shrink-0">
+                                <img
+                                  src={step.iconImage}
+                                  alt={`${step.title} icon`}
+                                  className="h-48 w-48 object-contain"
+                                  loading="lazy"
+                                />
+                              </div>
+                            ) : (
+                              <div className="flex-shrink-0 p-3 rounded-xl bg-[#EFEDE5] border border-[#E6E2DA]">
+                                <step.icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
+                              </div>
+                            )}
                             <h4 className="font-semibold text-base text-[#1B1B1A]">
                               {step.title}
                             </h4>

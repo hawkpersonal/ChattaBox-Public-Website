@@ -4,17 +4,19 @@ const highlights = [
   {
     icon: Heart,
     title: "Built with care",
-    description: "We started ChattaBox because too many older adults spend their days alone.",
+    description: "We started ChattaBox because too many older adults spend their days alone, and we think families need more support too.",
   },
   {
     icon: Shield,
     title: "Privacy first",
-    description: "ChattaBox is designed to fill the quiet moments with friendly conversation,",
+    description:
+      "Your family’s information is encrypted and stored securely, with restricted access so only authorised systems can use it to run our service. We only collect what we need, and we never sell your data.",
   },
   {
     icon: Users,
     title: "Family-focused",
-    description: "while giving families gentle insights — not intrusive monitoring.",
+    description:
+      "We share gentle summaries and important flags (like missed check-ins) to help you support your loved one — not intrusive monitoring or constant surveillance.",
   },
 ];
 

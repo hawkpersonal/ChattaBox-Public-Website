@@ -211,7 +211,7 @@
     bottom: -0.15em;
     width: 100%;
     height: 4px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='6' viewBox='0 0 60 6'%3E%3Cpath d='M0,3 Q8,1.2 15,3 Q22,5 30,2.5 Q38,1 45,3 Q52,5.2 60,3' stroke='%23C06040' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='6' viewBox='0 0 60 6'%3E%3Cpath d='M0,3 Q8,1.2 15,3 Q22,5 30,2.5 Q38,1 45,3 Q52,5.2 60,3' stroke='%232FAE6A' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-size: 60px 6px;
     background-repeat: repeat-x;
     opacity: 0.9;

@@ -1,10 +1,10 @@
-import { Wrench, Phone, FileText } from "lucide-react";
+import { Wrench, Phone, FileText, ChevronRight } from "lucide-react";
 
 const steps = [
   {
     number: "1",
     icon: Wrench,
-    title: "You Set It Up",
+    title: "You Set It Up (10mins)",
     description: "- Share info about your loved one to help ChattaBox to settle in\n- Configure reminders & check-ins & preferences through the family portal",
   },
   {
@@ -56,26 +56,26 @@ export function HowItWorks() {
                       {step.number === "1" ? (
                         <>
                           <li className="flex items-baseline gap-2">
-                            <span className="text-[#C06040]">•</span>
+                            <span className="text-accent-green">•</span>
                             <span>Share info about your loved one to help ChattaBox to settle in</span>
                           </li>
                           <li className="flex items-baseline gap-2">
-                            <span className="text-[#C06040]">•</span>
+                            <span className="text-accent-green">•</span>
                             <span>Configure reminders & check-ins & preferences through the family portal</span>
                           </li>
                         </>
                       ) : step.number === "2" ? (
                         <>
                           <li className="flex items-baseline gap-2">
-                            <span className="text-[#C06040]">•</span>
+                            <span className="text-accent-green">•</span>
                             <span>ChattaBox calls as you configured</span>
                           </li>
                           <li className="flex items-baseline gap-2">
-                            <span className="text-[#C06040]">•</span>
+                            <span className="text-accent-green">•</span>
                             <span>They can call ChattaBox whenever they want to talk too.</span>
                           </li>
                           <li className="flex items-baseline gap-2">
-                            <span className="text-[#C06040]">•</span>
+                            <span className="text-accent-green">•</span>
                             <span>It remembers their conversations and preferences.</span>
                           </li>
                         </>
@@ -95,7 +95,11 @@ export function HowItWorks() {
                   </div>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-12 -right-4 w-8 h-[1px] bg-[#E6E2DA]"></div>
+                  <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -right-7 w-9 h-9 items-center justify-center">
+                    <div className="rounded-full bg-[#EFEDE5] border border-[#E6E2DA] w-7 h-7 flex items-center justify-center shadow-elegant">
+                      <ChevronRight className="h-5 w-5 text-accent-green" strokeWidth={2.5} />
+                    </div>
+                  </div>
                 )}
               </div>
             );

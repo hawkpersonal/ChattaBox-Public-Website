@@ -48,7 +48,7 @@ export function FamilyPortal() {
           <div className="max-w-[520px] space-y-6">
             <div>
               <p className="text-lg text-[#5F5B55] leading-relaxed mb-6">
-                A simple daily update — so you don't have to constantly check in.
+                A simple daily update — so you can stay in the loop and have peace of mind.
               </p>
             </div>
 
@@ -72,7 +72,7 @@ export function FamilyPortal() {
             <div className="rounded-3xl border border-[#E6E2DA] bg-white p-5 md:p-6 shadow-elegant">
               {/* Card Header */}
               <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-3 py-1 rounded-full">
+                <span className="text-xs font-medium text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-3 py-1 rounded-full">
                   Daily update
                 </span>
                 <span className="text-xs text-[#8A857E]">
@@ -110,13 +110,13 @@ export function FamilyPortal() {
 
               {/* Footer Chips */}
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-2.5 py-1 rounded-md">
+                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-2.5 py-1 rounded-md">
                   Mood: stable
                 </span>
-                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-2.5 py-1 rounded-md">
+                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-2.5 py-1 rounded-md">
                   Routine: on track
                 </span>
-                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border-l-2 border-l-accent-green border border-[#E6E2DA] px-2.5 py-1 rounded-md">
+                <span className="text-xs text-[#5F5B55] bg-[#EFEDE5] border border-[#E6E2DA] px-2.5 py-1 rounded-md">
                   Engagement: normal
                 </span>
               </div>

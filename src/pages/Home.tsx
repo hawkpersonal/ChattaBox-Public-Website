@@ -8,7 +8,6 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Pricing } from "@/components/sections/Pricing";
 import { About } from "@/components/sections/About";
-import { CTA } from "@/components/sections/CTA";
 import { Contact } from "@/components/sections/Contact";
 
 export function Home() {
@@ -23,7 +22,6 @@ export function Home() {
       <Testimonials />
       <Pricing />
       <About />
-      <CTA />
       <Contact />
       <Footer />
     </main>
