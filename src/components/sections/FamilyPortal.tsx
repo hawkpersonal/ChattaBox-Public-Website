@@ -4,7 +4,7 @@ const valueBullets = [
   "A quick snapshot of how they're doing",
   "Gentle suggestions for when a call might help",
   "Trends over time, without overwhelming detail",
-  "Alerts when reminders and check in's are missed",
+  "Alerts when reminders and check-ins are missed",
 ];
 
 const dailyUpdateRows = [

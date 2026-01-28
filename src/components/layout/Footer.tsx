@@ -12,11 +12,11 @@ export function Footer() {
               <div className="h-9 w-9 flex items-center justify-center">
                 <img
                   src="/images/logo.png"
-                  alt="ChattaBox logo"
+                  alt="Chattabox logo"
                   className="h-full w-full object-contain"
                 />
               </div>
-              <span className="text-xl font-semibold font-serif">ChattaBox</span>
+              <span className="text-[19px] font-semibold font-wordmark tracking-tight" style={{ letterSpacing: '-0.02em' }}>Chattabox</span>
             </Link>
             <p className="text-sm text-[#8A857E] leading-relaxed">
               A friendly voice companion for older adults and peace of mind for families.
@@ -112,7 +112,7 @@ export function Footer() {
             TR10 8GZ.
           </p>
           <p className="text-sm text-[#8A857E]">
-            © {new Date().getFullYear()} ChattaBox. All rights reserved.
+            © {new Date().getFullYear()} Chattabox. All rights reserved.
           </p>
         </div>
       </div>

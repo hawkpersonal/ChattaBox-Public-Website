@@ -5,7 +5,7 @@ const highlights = [
     iconImage: "/icons/Built with care.png",
     icon: Heart,
     title: "Built with care",
-    description: "We started ChattaBox because too many older adults spend their days alone, and we think families need more support too.",
+    description: "We started Chattabox because too many older adults spend their days alone, and we think families need more support too.",
   },
   {
     iconImage: "/icons/Privacy first.png",
@@ -29,7 +29,7 @@ export function About() {
       <div className="container">
         <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
           <h2 className="font-serif">
-            About ChattaBox
+            About Chattabox
           </h2>
           <p className="text-lg text-[#5F5B55] leading-relaxed">
             We believe everyone deserves daily companionship and families deserve peace of mind.

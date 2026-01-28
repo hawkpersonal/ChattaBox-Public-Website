@@ -15,10 +15,10 @@ export function CTA() {
           <div className="rounded-[24px] bg-[#C06040] p-12 md:p-20 shadow-elegant">
             <div className="text-center space-y-8">
               <h2 className="text-3xl md:text-4xl font-serif font-semibold text-white">
-                Ready to Bring ChattaBox Home?
+                Ready to Bring Chattabox Home?
               </h2>
               <p className="text-lg text-white/95 leading-relaxed max-w-2xl mx-auto">
-                If you think ChattaBox could help your loved one, we'd love to hear from you.
+                If you think Chattabox could help your loved one, we'd love to hear from you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button

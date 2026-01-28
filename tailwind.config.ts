@@ -24,6 +24,7 @@ const config: Config = {
       fontFamily: {
         serif: ["Fraunces", "serif"],
         sans: ["Inter", "sans-serif"],
+        wordmark: ["Manrope", "Inter", "sans-serif"],
       },
       borderRadius: {
         sm: "var(--radius-small)",

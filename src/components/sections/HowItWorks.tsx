@@ -5,19 +5,19 @@ const steps = [
     number: "1",
     icon: Wrench,
     title: "You Set It Up (10mins)",
-    description: "- Share info about your loved one to help ChattaBox to settle in\n- Configure reminders & check-ins & preferences through the family portal",
+    description: "- Share info about your loved one to help Chattabox to settle in\n- Configure reminders & check-ins & preferences through the family portal",
   },
   {
     number: "2",
     icon: Phone,
-    title: "ChattaBox Calls Them",
-    description: "- ChattaBox calls as you configured it to\n- Your loved one can call ChattaBox whenever they want to talk.\nIt remembers their conversations and preferences.",
+    title: "Chattabox Calls Them",
+    description: "- Chattabox calls as you configured it to\n- Your loved one can call Chattabox whenever they want to talk.\nIt remembers their conversations and preferences.",
   },
   {
     number: "3",
     icon: FileText,
     title: "You Get Updates",
-    description: "- Receive simple daily summaries about your loved ones progress\n- Receive insights in how best you can help their wellbeing",
+    description: "- Receive simple daily summaries about your loved one's progress\n- Receive insights in how best you can help their wellbeing",
   },
 ];
 
@@ -57,7 +57,7 @@ export function HowItWorks() {
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Share info about your loved one to help ChattaBox to settle in</span>
+                            <span>Share info about your loved one to help Chattabox to settle in</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
@@ -68,11 +68,11 @@ export function HowItWorks() {
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>ChattaBox calls as you configured it to</span>
+                            <span>Chattabox calls as you configured it to</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Your loved one can call ChattaBox whenever they want to talk.</span>
+                            <span>Your loved one can call Chattabox whenever they want to talk.</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
@@ -83,7 +83,7 @@ export function HowItWorks() {
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Receive simple daily summaries about your loved ones progress</span>
+                            <span>Receive simple daily summaries about your loved one's progress</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>

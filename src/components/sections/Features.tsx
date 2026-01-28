@@ -19,8 +19,8 @@ const cadenceSteps = [
     iconImage: "/icons/Gentle reminders.png",
     timeLabel: "9am",
     title: "Gentle reminders",
-    audience: "For your parent",
-    how: "ChattaBox calls with helpful reminders for medications, meals, or daily routines — friendly prompts that feel like a caring check-in.",
+    audience: "For your loved one",
+    how: "Chattabox calls with helpful reminders for medications, meals, or daily routines — friendly prompts that feel like a caring check-in.",
     impact: "Your loved one stays on track with important routines, and you get reassurance that the essentials are being covered.",
     example: "\"Good morning! It's time for your vitamins. How did you sleep?\"",
     linkedBenefits: ["Works on Their Phone", "Helpful Reminders"],
@@ -30,21 +30,10 @@ const cadenceSteps = [
     iconImage: "/icons/Friendly check-in.png",
     timeLabel: "2pm",
     title: "Friendly check-in",
-    audience: "For your parent",
-    how: "A warm conversation during the day to see how things are going. ChattaBox asks about their day and listens to what matters to them.",
+    audience: "For your loved one",
+    how: "A warm conversation during the day to see how things are going. Chattabox asks about their day and listens to what matters to them.",
     impact: "Small check-ins catch issues early and help them feel supported — without you needing to call constantly.",
     example: "\"How's your day going? Did you get a chance to work on your garden today?\"",
-    linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
-  },
-  {
-    key: 'evening',
-    iconImage: "/icons/A comforting chat.png",
-    timeLabel: "6pm",
-    title: "A comforting chat",
-    audience: "For your parent",
-    how: "An evening conversation to wind down the day. ChattaBox remembers their stories and asks about the things they care about.",
-    impact: "Regular conversation helps reduce loneliness and keeps their day feeling connected and positive.",
-    example: "\"Tell me about your day. I remember you mentioned your new puzzle yesterday.\"",
     linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
   },
   {
@@ -52,11 +41,22 @@ const cadenceSteps = [
     iconImage: "/icons/They can call.png",
     timeLabel: "Anytime",
     title: "They can call",
-    audience: "For your parent",
-    how: "Your loved one can call ChattaBox whenever they want to talk. No schedules, no waiting — just a friendly voice ready to chat.",
+    audience: "For your loved one",
+    how: "Your loved one can call Chattabox whenever they want to talk. No schedules, no waiting — just a friendly voice ready to chat.",
     impact: "They can reach a friendly voice whenever they want, building confidence and reducing reliance on you for every small need.",
     example: "\"I'm here whenever you'd like to talk. What's on your mind today?\"",
     linkedBenefits: ["Daily Companionship", "Works on Their Phone"],
+  },
+  {
+    key: 'evening',
+    iconImage: "/icons/A comforting chat.png",
+    timeLabel: "6pm",
+    title: "A comforting chat",
+    audience: "For your loved one",
+    how: "An evening conversation to wind down the day. Chattabox remembers their stories and asks about the things they care about.",
+    impact: "Regular conversation helps reduce loneliness and keeps their day feeling connected and positive.",
+    example: "\"Tell me about your day. I remember you mentioned your new puzzle yesterday.\"",
+    linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
   },
   {
     key: 'daily-summary',
@@ -76,13 +76,13 @@ const parentBenefits = [
     id: "Works on Their Phone",
     icon: Phone,
     title: "Works on Their Phone",
-    description: "ChattaBox calls their mobile or landline. No new devices. No apps. Just their phone.",
+    description: "Chattabox calls their mobile or landline. No new devices. No apps. Just their phone.",
   },
   {
     id: "Daily Companionship",
     icon: Heart,
     title: "Daily Companionship",
-    description: "Friendly conversations whenever they want. They can call ChattaBox anytime to chat.",
+    description: "Friendly conversations whenever they want. They can call Chattabox anytime to chat.",
   },
   {
     id: "Remembers What Matters",
@@ -342,7 +342,7 @@ export function Features() {
                 }`}
                 style={{ outline: 'none' }}
               >
-                For your parent
+                For your loved one
               </button>
               <button
                 onClick={() => setBenefitAudience('you')}
@@ -365,7 +365,7 @@ export function Features() {
               <div className="space-y-6">
                 <div>
                   <h4 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
-                    For your parent
+                    For your loved one
                   </h4>
                   <p className="text-sm text-[#5F5B55]">
                     Simple, daily support and companionship that fits into their routine
@@ -403,7 +403,7 @@ export function Features() {
                     For you
                   </h4>
                   <p className="text-sm text-[#5F5B55]">
-                    Peace of mind through routine support and gentle insights on your loved ones wellbeing
+                    Peace of mind through routine support and gentle insights on your loved one's wellbeing
                   </p>
                 </div>
                 <div className="space-y-0">

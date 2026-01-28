@@ -22,7 +22,7 @@ export function Privacy() {
           </div>
 
           <h1 className="font-serif text-3xl md:text-4xl text-[#1B1B1A] mb-2">
-            Privacy Notice (ChattaBox)
+            Privacy Notice (Chattabox)
           </h1>
           <p className="text-sm text-[#8A857E] mb-10">
             Effective date: 29 January 2026
@@ -31,7 +31,7 @@ export function Privacy() {
           <div className="prose prose-neutral max-w-none text-[#5F5B55] space-y-6">
             <p>
               Chattabox is a product/service operated by SN PARTNERS LIMITED
-              (trading as ChattaBox). ChattaBox (“we”, “us”) is responsible for
+              (trading as Chattabox). Chattabox (“we”, “us”) is responsible for
               how we use personal information (the “data controller”).
             </p>
 
@@ -68,11 +68,11 @@ export function Privacy() {
             </ul>
 
             <h2 className="font-serif text-xl text-[#1B1B1A] mt-8 mb-2">
-              What ChattaBox does
+              What Chattabox does
             </h2>
             <p>
-              ChattaBox provides a friendly voice companion service for older
-              adults, with optional updates for family members. ChattaBox is not
+              Chattabox provides a friendly voice companion service for older
+              adults, with optional updates for family members. Chattabox is not
               an emergency service and does not provide medical advice. If
               you’re worried about someone’s immediate safety, call emergency
               services.
@@ -99,7 +99,7 @@ export function Privacy() {
               <li>Name and phone number</li>
               <li>Call preferences (e.g., preferred times)</li>
               <li>
-                Any preferences shared to help ChattaBox feel personal (e.g.,
+                Any preferences shared to help Chattabox feel personal (e.g.,
                 interests, routine reminders)
               </li>
             </ul>
@@ -137,7 +137,7 @@ export function Privacy() {
             <p>We use personal information to:</p>
 
             <p className="mt-4">
-              <strong className="text-[#1B1B1A]">A) Provide ChattaBox and support users</strong>
+              <strong className="text-[#1B1B1A]">A) Provide Chattabox and support users</strong>
             </p>
             <ul className="list-disc pl-6 space-y-1">
               <li>Set up accounts and call schedules</li>
@@ -192,14 +192,14 @@ export function Privacy() {
             </ul>
             <p className="text-sm italic">
               Lawful basis: legitimate interests (running, maintaining and
-              improving ChattaBox).
+              improving Chattabox).
             </p>
 
             <p className="mt-4">
               <strong className="text-[#1B1B1A]">D) Safety, fraud prevention and legal compliance</strong>
             </p>
             <ul className="list-disc pl-6 space-y-1">
-              <li>Protecting ChattaBox against misuse</li>
+              <li>Protecting Chattabox against misuse</li>
               <li>
                 Responding to lawful requests from regulators or law
                 enforcement
@@ -225,7 +225,7 @@ export function Privacy() {
             </h2>
             <p>
               We share personal information only with trusted suppliers who
-              help us run ChattaBox, for example:
+              help us run Chattabox, for example:
             </p>
             <ul className="list-disc pl-6 space-y-1">
               <li>Hosting and database providers (to store service data)</li>
@@ -342,7 +342,7 @@ export function Privacy() {
               10) Children
             </h2>
             <p>
-              ChattaBox is designed for adults and is not intended for children
+              Chattabox is designed for adults and is not intended for children
               under 18.
             </p>
 

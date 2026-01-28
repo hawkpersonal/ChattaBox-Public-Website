@@ -8,7 +8,7 @@ import {
 
 const faqItems = [
   {
-    question: "What does my parent need?",
+    question: "What does my loved one need?",
     answer:
       "Just their regular phone — mobile or landline. No apps, no screens, no new device to learn.",
   },

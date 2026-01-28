@@ -3,22 +3,22 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const testimonials = [
   {
-    quote: "Since we set up ChattaBox, Dad has someone to chat with every day. He tells it about his day, and it remembers to ask about his woodworking projects. As a daughter who lives hours away, it's such a relief.",
+    quote: "Since we set up Chattabox, Dad has someone to chat with every day. He tells it about his day, and it remembers to ask about his woodworking projects. As a daughter who lives hours away, it's such a relief.",
     author: "Sarah M.",
     role: "Daughter",
   },
   {
-    quote: "Mum was skeptical at first, but now she talks to ChattaBox every morning. It helps her with her routine and asks about her garden. She seems genuinely happier, and I love the daily insights.",
+    quote: "Mum was skeptical at first, but now she talks to Chattabox every morning. It helps her with her routine and asks about her garden. She seems genuinely happier, and I love the daily insights.",
     author: "James T.",
     role: "Son",
   },
   {
-    quote: "I can't visit my grandmother as often as I'd like. Knowing ChattaBox checks in daily gives me peace of mind. The insights help me understand how she's really doing without constantly worrying about her.",
+    quote: "I can't visit my grandmother as often as I'd like. Knowing Chattabox checks in daily gives me peace of mind. The insights help me understand how she's really doing without constantly worrying about her.",
     author: "Emma L.",
     role: "Granddaughter",
   },
   {
-    quote: "My mum doesn't do well with technology, but this just uses her regular phone. She can call ChattaBox whenever she's feeling lonely, and it remembers her stories and the little things she cares about. It's been genuinely wonderful for her.",
+    quote: "My mum doesn't do well with technology, but this just uses her regular phone. She can call Chattabox whenever she's feeling lonely, and it remembers her stories and the little things she cares about. It's been genuinely wonderful for her.",
     author: "Michael R.",
     role: "Son",
   },
@@ -33,7 +33,7 @@ export function Testimonials() {
             Real Stories from Families
           </h2>
           <p className="text-lg text-[#5F5B55] leading-relaxed">
-            Real stories from families using ChattaBox with their loved ones
+            Real stories from families using Chattabox with their loved ones
           </p>
         </div>
 

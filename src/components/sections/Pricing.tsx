@@ -10,7 +10,7 @@ const plans = [
     badge: "Limited Availability",
     features: [
       "Daily phone calls for your loved one",
-      "Customizable reminders",
+      "Customisable reminders",
       "Daily wellbeing updates",
       "Family portal access",
       "Priority support",

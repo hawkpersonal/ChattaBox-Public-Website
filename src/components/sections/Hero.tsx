@@ -22,7 +22,7 @@ export function Hero() {
             </h1>
             <div className="space-y-4">
               <p className="text-lg text-[#5F5B55] leading-relaxed">
-                ChattaBox is an AI-powered companion that calls your parent or loved one for check-ins, friendly chats and gentle reminders.
+                Chattabox is an AI-powered companion that calls your loved one (parent, grandparent, partner, friend or someone you care for) for check-ins, friendly chats and gentle reminders.
               </p>
               <ul className="space-y-2 text-base text-[#5F5B55] leading-relaxed">
                 <li className="flex items-baseline gap-2">
@@ -36,7 +36,7 @@ export function Hero() {
                   <span className="text-accent-green">•</span>
                   <span>
                     Warm <span className="underline-wiggly">daily calls</span> with{" "}
-                    <span className="underline-wiggly">gentle reminders</span> and check-in's
+                    <span className="underline-wiggly">gentle reminders</span> and check-ins
                   </span>
                 </li>
                 <li className="flex items-baseline gap-2">
@@ -55,7 +55,7 @@ export function Hero() {
             <div className="relative w-full max-w-lg border-0">
               <img
                 src="/images/hero/hero-illustration.png"
-                alt="Older adult and younger person connected through a smart device, with communication and care icons, representing family connection and peace of mind"
+                alt="Family connection and peace of mind — through simple phone calls"
                 className="w-full h-auto rounded-[24px] border-0 outline-none"
                 style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
                 loading="eager"

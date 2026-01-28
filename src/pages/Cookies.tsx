@@ -22,7 +22,7 @@ export function Cookies() {
           </div>
 
           <h1 className="font-serif text-3xl md:text-4xl text-[#1B1B1A] mb-2">
-            Cookie Policy (ChattaBox)
+            Cookie Policy
           </h1>
           <p className="text-sm text-[#8A857E] mb-10">
             Effective date: 29 January 2026
@@ -40,102 +40,64 @@ export function Cookies() {
             </h2>
             <p>
               Cookies are small text files stored on your device when you visit
-              a website. They help websites work properly and, if you allow them,
-              help website owners understand how the site is used.
+              a website. They help websites work properly and, in some cases,
+              help website owners understand how the site is used. The same rules
+              can apply to other technologies that store or access information
+              on your device.
             </p>
 
             <h2 className="font-serif text-xl text-[#1B1B1A] mt-8 mb-2">
-              Cookies we use
+              Do we use a cookie banner?
+            </h2>
+            <p>
+              We only need to ask for consent where we use non-essential
+              cookies/technologies. Cookies that are strictly necessary to
+              provide a service you request (for example, security-related
+              cookies) don’t require consent. Because our analytics setup is
+              cookieless (see below), we don’t currently show an “accept
+              cookies” banner for analytics.
+            </p>
+
+            <h2 className="font-serif text-xl text-[#1B1B1A] mt-8 mb-2">
+              Cookies and similar technologies we use
             </h2>
 
             <h3 className="font-semibold text-[#1B1B1A] mt-4 mb-2">
               1) Strictly necessary cookies (always on)
             </h3>
             <p>
-              These cookies are needed to make the website work (for example,
-              security, page navigation, and remembering essential settings).
-              Because they are essential, they don’t require consent.
+              These are needed to make the website work (for example, security,
+              page navigation, and remembering essential settings). Because
+              they’re essential, they don’t require consent.
             </p>
 
             <h3 className="font-semibold text-[#1B1B1A] mt-6 mb-2">
-              2) Analytics cookies (optional) — Google Analytics
+              2) Analytics (cookieless) — Vercel Web Analytics
             </h3>
             <p>
-              If you choose “Accept analytics”, we use Google Analytics to
-              understand how people use our website (for example, which pages
-              are visited most, and how visitors move around the site). This
-              helps us improve the website.
+              We use Vercel Web Analytics to understand overall website
+              traffic (e.g., which pages are visited) so we can improve the
+              site. Vercel’s Web Analytics is designed to work without
+              third-party cookies. Instead, it identifies visits using a hash
+              created from the incoming request, and the session identification
+              is discarded after 24 hours.
             </p>
-            <p>
-              We do not load Google Analytics unless you opt in via our cookie
-              banner (and you can change your choice at any time). UK guidance
-              requires non-essential cookies (like analytics) to be opt-in, and
-              for rejecting to be as easy as accepting.
-            </p>
-            <p className="font-medium text-[#1B1B1A] mt-4">
-              Google Analytics cookies commonly include:
-            </p>
-            <div className="overflow-x-auto my-4">
-              <table className="w-full border-collapse text-sm">
-                <thead>
-                  <tr className="border-b border-[#8A857E]">
-                    <th className="text-left py-2 pr-4 font-semibold text-[#1B1B1A]">
-                      Cookie
-                    </th>
-                    <th className="text-left py-2 pr-4 font-semibold text-[#1B1B1A]">
-                      What it does
-                    </th>
-                    <th className="text-left py-2 font-semibold text-[#1B1B1A]">
-                      Default expiry
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-[#C8C4BE]">
-                    <td className="py-2 pr-4 font-mono text-[#1B1B1A]">_ga</td>
-                    <td className="py-2 pr-4">Helps distinguish visitors</td>
-                    <td className="py-2">2 years</td>
-                  </tr>
-                  <tr className="border-b border-[#C8C4BE]">
-                    <td className="py-2 pr-4 font-mono text-[#1B1B1A]">
-                      _ga_&lt;container-id&gt;
-                    </td>
-                    <td className="py-2 pr-4">Helps maintain session state</td>
-                    <td className="py-2">2 years</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
 
             <h2 className="font-serif text-xl text-[#1B1B1A] mt-8 mb-2">
               Your choices
             </h2>
             <p>
-              When you first visit our website, you’ll see a cookie banner where
-              you can:
-            </p>
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Accept analytics</li>
-              <li>Reject analytics</li>
-            </ul>
-            <p className="mt-4">
-              You can also change your choice later using Cookie settings
-              (linked in the website footer). UK guidance emphasises that
-              consent must be a clear, positive choice.
-            </p>
-            <p>
-              You can also manage cookies through your browser settings (block
-              or delete cookies). If you block strictly necessary cookies, parts
-              of the website may not work properly.
+              You can control cookies through your browser settings (block or
+              delete cookies). If you block strictly necessary cookies, parts of
+              the website may not work properly.
             </p>
 
             <h2 className="font-serif text-xl text-[#1B1B1A] mt-8 mb-2">
               Third parties
             </h2>
             <p>
-              Google Analytics is provided by Google. Google may process
-              information about your visit according to its own documentation
-              and policies.
+              Our website is hosted on Vercel and uses Vercel Web Analytics as
+              described above.
             </p>
 
             <h2 className="font-serif text-xl text-[#1B1B1A] mt-8 mb-2">
@@ -143,7 +105,9 @@ export function Cookies() {
             </h2>
             <p>
               We may update this Cookie Policy from time to time. We’ll post the
-              latest version on our website and update the effective date above.
+              latest version on our website and update the effective date above
+              — especially if we add any analytics or marketing tools that use
+              cookies and require consent.
             </p>
 
             <h2 className="font-serif text-xl text-[#1B1B1A] mt-8 mb-2">

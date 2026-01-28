@@ -1,6 +1,6 @@
-# ChattaBox Public Website
+# Chattabox Public Website
 
-Marketing website for ChattaBox - A friendly voice companion for older adults.
+Marketing website for Chattabox - A friendly voice companion for older adults.
 
 ## Tech Stack
 
@@ -72,4 +72,4 @@ The website uses a warm, minimal design palette:
 
 ## License
 
-Copyright © 2024 ChattaBox. All rights reserved.
+Copyright © 2024 Chattabox. All rights reserved.
