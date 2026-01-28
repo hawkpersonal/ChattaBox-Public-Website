@@ -34,7 +34,7 @@ export function Contact() {
                       </svg>
                     </div>
                   </div>
-                  <h3 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
+                  <h3 className="text-xl font-semibold text-[#1B1B1A] mb-2">
                     You're on the list!
                   </h3>
                   <p className="text-base text-[#5F5B55]">
@@ -96,7 +96,7 @@ export function Contact() {
                         <Textarea
                           id="message"
                           name="message"
-                          placeholder="Mum/dad/grandparent — what would you like Chattabox to help with?"
+                          placeholder="Mum/dad/grandparent/friend — what would you like Chattabox to help with?"
                           rows={5}
                           disabled={state.submitting}
                           className="border-[#DED9D0] focus:ring-2 focus:ring-[rgba(192,96,64,0.35)]"
@@ -109,7 +109,7 @@ export function Contact() {
                             Submitting...
                           </>
                         ) : (
-                          "Join early access"
+                          "Get early access"
                         )}
                       </Button>
                       {state.errors && (

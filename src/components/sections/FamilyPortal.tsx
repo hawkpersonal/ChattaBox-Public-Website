@@ -77,7 +77,7 @@ export function FamilyPortal() {
                 </span>
               </div>
 
-              <h3 className="text-lg font-semibold font-serif text-[#1B1B1A] mb-6">
+              <h3 className="text-lg font-semibold text-[#1B1B1A] mb-6">
                 Your loved one's day
               </h3>
 

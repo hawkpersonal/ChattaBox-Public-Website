@@ -58,7 +58,7 @@ export function About() {
                     <Icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
                   </div>
                 )}
-                <h3 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
+                <h3 className="text-xl font-semibold text-[#1B1B1A] mb-2">
                   {highlight.title}
                 </h3>
                 <p className="text-sm text-[#5F5B55] leading-relaxed">

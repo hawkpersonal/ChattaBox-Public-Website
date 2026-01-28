@@ -4,8 +4,8 @@ const steps = [
   {
     number: "1",
     icon: Wrench,
-    title: "You Set It Up (10mins)",
-    description: "- Share info about your loved one to help Chattabox to settle in\n- Configure reminders & check-ins & preferences through the family portal",
+    title: "You Set It Up (10 mins)",
+    description: "- Share a little about your loved one to help Chattabox get to know them\n- Configure reminders & check-ins & preferences through the family portal",
   },
   {
     number: "2",
@@ -17,7 +17,7 @@ const steps = [
     number: "3",
     icon: FileText,
     title: "You Get Updates",
-    description: "- Receive simple daily summaries about your loved one's progress\n- Receive insights in how best you can help their wellbeing",
+    description: "- Receive simple daily summaries about your loved one's progress\n- Receive insights on how best you can support their wellbeing",
   },
 ];
 
@@ -49,7 +49,7 @@ export function HowItWorks() {
                         <Icon className="h-8 w-8 text-[#C06040]" strokeWidth={2} />
                       </div>
                     </div>
-                    <h3 className="text-xl font-serif font-semibold text-[#1B1B1A]">
+                    <h3 className="text-xl font-semibold text-[#1B1B1A]">
                       {step.title}
                     </h3>
                     <ul className="text-sm text-[#5F5B55] leading-relaxed space-y-2 text-left w-full">
@@ -57,7 +57,7 @@ export function HowItWorks() {
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Share info about your loved one to help Chattabox to settle in</span>
+                            <span>Share a little about your loved one to help Chattabox get to know them</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
@@ -87,7 +87,7 @@ export function HowItWorks() {
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Receive insights in how best you can help their wellbeing</span>
+                            <span>Receive insights on how best you can support their wellbeing</span>
                           </li>
                         </>
                       )}

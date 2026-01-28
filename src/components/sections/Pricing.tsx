@@ -4,7 +4,7 @@ import { Check, Building2 } from "lucide-react";
 const plans = [
   {
     name: "For Families",
-    description: "Chattabox is in early pilot. Join early access and we'll invite families in small batches as we refine the experience.",
+    description: "Chattabox is in early pilot. Get early access and we'll invite families in small batches as we refine the experience.",
     price: "Free (early access)",
     priceNote: "Free while we refine the experience.",
     badge: "Limited Availability",
@@ -23,7 +23,7 @@ const plans = [
     name: "For Care Providers",
     description: "Help your clients stay connected and supported. We'll work with you to understand your needs and show you how Chattabox can support your care delivery.",
     price: "Flexible pricing",
-    priceNote: "Custom pricing based on number of clients and support needs.",
+    priceNote: "Custom pricing based on number of clients and support needs. We'll share options on a quick call.",
     badge: "Now taking enquiries",
     features: [
       "Support for multiple clients",
@@ -86,7 +86,7 @@ export function Pricing() {
                 </span>
               </div>
 
-              <h3 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
+              <h3 className="text-xl font-semibold text-[#1B1B1A] mb-2">
                 {plan.name}
               </h3>
               <p className="text-sm text-[#5F5B55] mb-6 min-h-[4rem]">

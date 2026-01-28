@@ -324,7 +324,7 @@ export function Features() {
         {/* Block 2: Benefits */}
         <div>
           <div className="mx-auto max-w-3xl mb-8">
-            <h3 className="text-2xl font-serif font-semibold text-[#1B1B1A] mb-2 text-center">
+            <h3 className="text-2xl font-semibold text-[#1B1B1A] mb-2 text-center">
               Benefits
             </h3>
           </div>
@@ -364,7 +364,7 @@ export function Features() {
             {benefitAudience === 'parent' ? (
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
+                  <h4 className="text-xl font-semibold text-[#1B1B1A] mb-2">
                     For your loved one
                   </h4>
                   <p className="text-sm text-[#5F5B55]">
@@ -399,7 +399,7 @@ export function Features() {
             ) : (
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-xl font-serif font-semibold text-[#1B1B1A] mb-2">
+                  <h4 className="text-xl font-semibold text-[#1B1B1A] mb-2">
                     For you
                   </h4>
                   <p className="text-sm text-[#5F5B55]">

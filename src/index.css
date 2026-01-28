@@ -86,8 +86,15 @@
   html {
     scroll-behavior: smooth;
   }
-  h1, h2, h3, h4, h5, h6 {
+  /* Major headings: Serif (Fraunces) */
+  h1, h2 {
     @apply font-serif;
+    font-weight: 600;
+  }
+  
+  /* Smaller headings: Sans (Inter) for product-like feel */
+  h3, h4, h5, h6 {
+    @apply font-sans;
     font-weight: 600;
   }
   
