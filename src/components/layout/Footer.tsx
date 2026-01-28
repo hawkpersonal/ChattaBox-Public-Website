@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Twitter, Linkedin } from "lucide-react";
+import { Mail, Linkedin } from "lucide-react";
 
 export function Footer() {
   return (
@@ -98,9 +98,6 @@ export function Footer() {
               </li>
             </ul>
             <div className="flex gap-4 mt-4">
-              <a href="#" className="text-[#8A857E] hover:text-accent-green transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
               <a href="#" className="text-[#8A857E] hover:text-accent-green transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>

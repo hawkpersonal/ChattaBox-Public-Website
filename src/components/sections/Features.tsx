@@ -233,7 +233,7 @@ export function Features() {
                         <div className="text-center">
                           {/* Top row: Icon + Title */}
                           <div className="flex flex-col items-center gap-3 mb-6">
-                            {"iconImage" in step && step.iconImage ? (
+                            {step.iconImage && (
                               <div className="flex-shrink-0">
                                 <img
                                   src={step.iconImage}
@@ -241,10 +241,6 @@ export function Features() {
                                   className="h-48 w-48 object-contain"
                                   loading="lazy"
                                 />
-                              </div>
-                            ) : (
-                              <div className="flex-shrink-0 p-3 rounded-xl bg-[#EFEDE5] border border-[#E6E2DA]">
-                                <step.icon className="h-6 w-6 text-[#C06040]" strokeWidth={2} />
                               </div>
                             )}
                             <h4 className="font-semibold text-base text-[#1B1B1A]">

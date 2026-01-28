@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { Home } from "./pages/Home";
 import { Privacy } from "./pages/Privacy";
 import { Cookies } from "./pages/Cookies";
@@ -46,6 +47,7 @@ function App() {
       <Route path="/terms" element={<Terms />} />
       <Route path="/company-details" element={<CompanyDetails />} />
     </Routes>
+    <Analytics />
     </>
   );
 }
