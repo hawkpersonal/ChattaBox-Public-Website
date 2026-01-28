@@ -26,7 +26,7 @@ export function CTA() {
                   onClick={() => scrollToSection("contact")}
                   className="bg-white text-[#C06040] hover:bg-white/95"
                 >
-                  Request a Pilot
+                  Get early access
                 </Button>
               </div>
             </div>

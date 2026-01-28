@@ -55,7 +55,7 @@ export function Footer() {
               </li>
               <li>
                 <a href="#pricing" className="text-sm text-[#8A857E] hover:text-accent-green transition-colors">
-                  Pilot Program
+                  Early Access
                 </a>
               </li>
             </ul>

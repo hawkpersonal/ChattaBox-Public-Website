@@ -4,6 +4,7 @@ const sectionIds = [
   "features",
   "family-portal",
   "how-it-works",
+  "faq",
   "testimonials",
   "about",
   "pricing",
@@ -11,10 +12,22 @@ const sectionIds = [
 ];
 
 export function SectionRail() {
-  const [activeSection, setActiveSection] = useState<string>("");
+  const [activeSection, setActiveSection] = useState<string>(sectionIds[0]);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const scrollTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
+    // Check if we're at the top of the page
+    const checkScrollPosition = () => {
+      if (window.scrollY < 150) {
+        // If near the top, highlight the first section
+        setActiveSection(sectionIds[0]);
+      }
+    };
+
+    // Initial check
+    checkScrollPosition();
+
     observerRef.current = new IntersectionObserver(
       (entries) => {
         let maxRatio = 0;
@@ -31,6 +44,9 @@ export function SectionRail() {
         // is clearly in view (at least ~40%).
         if (mostVisibleSection && maxRatio > 0.4) {
           setActiveSection(mostVisibleSection);
+        } else if (window.scrollY < 150) {
+          // If no section is clearly visible and we're near top, use first section
+          setActiveSection(sectionIds[0]);
         }
       },
       {
@@ -46,9 +62,23 @@ export function SectionRail() {
       }
     });
 
+    // Listen to scroll events to handle top of page (throttled)
+    const handleScroll = () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = window.setTimeout(checkScrollPosition, 50);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
+      }
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
     };
   }, []);

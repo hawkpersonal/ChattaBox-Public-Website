@@ -49,11 +49,16 @@ export function Hero() {
               </ul>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Button size="lg" onClick={() => scrollToSection("contact")} className="group">
-                Request a Pilot
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+            <div className="space-y-3 pt-2">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button size="lg" onClick={() => scrollToSection("contact")} className="group">
+                  Get early access
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
+              <p className="text-sm text-[#8A857E]">
+                We're onboarding families in small batches while we refine the experience.
+              </p>
             </div>
           </div>
           

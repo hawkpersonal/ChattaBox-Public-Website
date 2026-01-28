@@ -8,6 +8,14 @@ import { CompanyDetails } from "./pages/CompanyDetails";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
+  
+  useEffect(() => {
+    // Prevent browser from restoring scroll position
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   useEffect(() => {
     if (hash) {
       // If there's a hash, scroll to that element after a short delay
@@ -19,10 +27,11 @@ function ScrollToTop() {
         }
       }, 100);
     } else {
-      // Otherwise scroll to top
+      // Otherwise scroll to top immediately
       window.scrollTo(0, 0);
     }
   }, [pathname, hash]);
+  
   return null;
 }
 

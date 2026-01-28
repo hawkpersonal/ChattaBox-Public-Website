@@ -13,7 +13,7 @@ export function Terms() {
           <div className="flex items-start justify-between gap-4 mb-8 flex-wrap">
             <LegalNav />
             <Link
-              to="/#contact"
+              to="/"
               className="inline-flex items-center gap-1 text-sm text-[#5F5B55] hover:text-accent-green transition-colors"
             >
               <ChevronLeft className="h-4 w-4" />
