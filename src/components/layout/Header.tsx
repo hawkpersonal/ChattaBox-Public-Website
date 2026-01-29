@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 
 export function Header() {
   return (
@@ -18,16 +17,15 @@ export function Header() {
           </Link>
 
           <div className="flex items-center gap-3">
-            <Button
-              size="sm"
-              variant="ghost"
+            <button
+              type="button"
               onClick={() => {
                 window.location.href = 'https://app.chattabox.io';
               }}
-              className="text-accent-green hover:text-accent-green"
+              className="rounded-full border border-accent-green text-accent-green font-medium px-4 py-2 text-sm transition-colors hover:bg-accent-green/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-green/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F9F8F4]"
             >
               Log in
-            </Button>
+            </button>
           </div>
         </div>
       </div>

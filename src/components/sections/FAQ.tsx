@@ -5,42 +5,66 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Phone,
+  PhoneIncoming,
+  MicOff,
+  LayoutDashboard,
+  Bell,
+  AlertTriangle,
+  Clock,
+  ShieldCheck,
+  Wallet,
+  MapPin,
+  type LucideIcon,
+} from "lucide-react";
 
-const faqItems = [
+const faqItems: Array<{
+  question: string;
+  answer: string | React.ReactNode;
+  icon: LucideIcon;
+}> = [
   {
     question: "What does my loved one need?",
     answer:
       "Just their regular phone — mobile or landline. No apps, no screens, no new device to learn.",
+    icon: Phone,
   },
   {
     question: "Can they call Chattabox whenever they want?",
     answer:
       "Yes. They can call whenever they feel like a chat. You can also set scheduled check-ins and reminders.",
+    icon: PhoneIncoming,
   },
   {
     question: "Do you record calls?",
     answer:
       "No — we don't record audio. We do create written transcripts to help Chattabox remember context, but these aren't viewable and are only used to power service analytics.",
+    icon: MicOff,
   },
   {
     question: "What will I see as a family member?",
     answer:
       "You'll get a gentle overview — like general topics discussed, mood trends, and helpful flags (for example, missed check-ins). You won't see word-for-word transcripts.",
+    icon: LayoutDashboard,
   },
   {
     question: "How do reminders work?",
     answer:
       "You set reminders in the family portal (e.g., medication, meals, routines). Chattabox weaves them into friendly calls — like a caring nudge, not an alarm.",
+    icon: Bell,
   },
   {
     question: "Is Chattabox an emergency or medical service?",
     answer:
       "No. Chattabox is for companionship and routine support. If you're concerned about immediate safety or health, contact a professional or emergency services.",
+    icon: AlertTriangle,
   },
   {
     question: "How quickly can we set it up?",
     answer:
       "Usually in about 10 minutes. You share a few basics, pick call times, and choose any reminders — then Chattabox starts calling.",
+    icon: Clock,
   },
   {
     question: "Is my family's information private?",
@@ -56,11 +80,19 @@ const faqItems = [
         any time.
       </>
     ),
+    icon: ShieldCheck,
   },
   {
     question: "What does Chattabox cost?",
     answer:
       "Chattabox is free during early access while we refine the experience. After that, we plan to offer a small range of simple plans — including a more affordable option — so most families can find something that fits their budget. We'll always be clear on pricing before anything changes.",
+    icon: Wallet,
+  },
+  {
+    question: "Where is Chattabox available?",
+    answer:
+      "Chattabox is currently UK-focused, and we're onboarding families here first during early access. Once we've refined the experience, we plan to expand to Europe and then the US.",
+    icon: MapPin,
   },
 ];
 
@@ -84,14 +116,20 @@ export function FAQ() {
           </div>
 
           <Accordion type="single" collapsible className="w-full space-y-0">
-            {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-base font-semibold text-[#1B1B1A] py-4 hover:no-underline">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent>{item.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
+            {faqItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="text-base font-semibold text-[#1B1B1A] py-4 hover:no-underline">
+                    <div className="flex items-center gap-3">
+                      <Icon className="h-[18px] w-[18px] md:h-5 md:w-5 shrink-0 text-accent-green" strokeWidth={2} />
+                      <span>{item.question}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>{item.answer}</AccordionContent>
+                </AccordionItem>
+              );
+            })}
           </Accordion>
 
           <div className="text-center mt-12">
