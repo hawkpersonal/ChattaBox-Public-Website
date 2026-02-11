@@ -20,9 +20,9 @@ const cadenceSteps = [
     timeLabel: "9am",
     title: "Gentle reminders",
     audience: "For your loved one",
-    how: "Chattabox calls with helpful reminders for medications, meals, or daily routines — friendly prompts that feel like a caring check-in.",
-    impact: "Your loved one stays on track with important routines, and you get reassurance that the essentials are being covered.",
-    example: "\"Good morning! It's time for your vitamins. How did you sleep?\"",
+    how: "Chattabox calls with friendly reminders for medication, meals, and everyday routines. It feels like a caring check-in.",
+    impact: "They stay on track, and you get peace of mind that the essentials aren't being missed.",
+    example: "\"Good morning! Time for your vitamins. How did you sleep?\"",
     linkedBenefits: ["Works on Their Phone", "Helpful Reminders"],
   },
   {
@@ -31,8 +31,8 @@ const cadenceSteps = [
     timeLabel: "2pm",
     title: "Friendly check-in",
     audience: "For your loved one",
-    how: "A warm conversation during the day to see how things are going. Chattabox asks about their day and listens to what matters to them.",
-    impact: "Small check-ins catch issues early and help them feel supported — without you needing to call constantly.",
+    how: "A warm phone chat to see how they're doing. Chattabox asks about their day and listens to what matters to them.",
+    impact: "Regular check-ins help spot issues early and help them feel supported. You don't need to call constantly.",
     example: "\"How's your day going? Did you get a chance to work on your garden today?\"",
     linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
   },
@@ -42,8 +42,8 @@ const cadenceSteps = [
     timeLabel: "Anytime",
     title: "They can call",
     audience: "For your loved one",
-    how: "Your loved one can call Chattabox whenever they want to talk. No schedules, no waiting — just a friendly voice ready to chat.",
-    impact: "They can reach a friendly voice whenever they want, building confidence and reducing reliance on you for every small need.",
+    how: "Your loved one can call Chattabox whenever they want to talk. No schedules. No waiting. Just a friendly voice ready to chat.",
+    impact: "They can reach a friendly voice whenever they need it. It helps them feel supported and gives you extra backup between your own calls.",
     example: "\"I'm here whenever you'd like to talk. What's on your mind today?\"",
     linkedBenefits: ["Daily Companionship", "Works on Their Phone"],
   },
@@ -53,9 +53,9 @@ const cadenceSteps = [
     timeLabel: "6pm",
     title: "A comforting chat",
     audience: "For your loved one",
-    how: "An evening conversation to wind down the day. Chattabox remembers their stories and asks about the things they care about.",
-    impact: "Regular conversation helps reduce loneliness and keeps their day feeling connected and positive.",
-    example: "\"Tell me about your day. I remember you mentioned your new puzzle yesterday.\"",
+    how: "A warm conversation to help them wind down. Chattabox remembers what they've shared and asks about the things they care about.",
+    impact: "Regular chats can reduce loneliness and help them feel more connected and positive day to day.",
+    example: "\"Tell me about your day. How did that new puzzle go?\"",
     linkedBenefits: ["Daily Companionship", "Remembers What Matters"],
   },
   {
@@ -64,9 +64,9 @@ const cadenceSteps = [
     timeLabel: "Daily summary",
     title: "Your daily update",
     audience: "For you",
-    how: "You receive a gentle summary of how your loved one is doing. Mood patterns, engagement levels, and any notable moments — all in one simple update.",
-    impact: "You get a simple, readable snapshot of how they're doing — plus gentle suggestions if a call might help.",
-    example: "\"Your loved one had a positive day with good engagement. They mentioned feeling happy about their garden progress.\"",
+    how: "You get a gentle summary of how your loved one is doing. It highlights mood, engagement, and any notable moments in one simple update.",
+    impact: "You get a clear snapshot of their day, with a gentle nudge if it looks like they could use some help.",
+    example: "\"Today felt positive, with good engagement. They mentioned feeling happy about their garden progress.\"",
     linkedBenefits: ["Daily Summary / Insights", "Family Portal"],
   },
 ];
@@ -75,20 +75,20 @@ const parentBenefits = [
   {
     id: "Works on Their Phone",
     icon: Phone,
-    title: "Works on Their Phone",
-    description: "Chattabox calls their mobile or landline. No new devices. No apps. Just their phone.",
+    title: "Works on their phone",
+    description: "Chattabox calls their mobile or landline. No apps. No new devices.",
   },
   {
     id: "Daily Companionship",
     icon: Heart,
-    title: "Daily Companionship",
-    description: "Friendly conversations whenever they want. They can call Chattabox anytime to chat.",
+    title: "Daily companionship",
+    description: "Warm conversations that fit naturally into their day and help them feel supported.",
   },
   {
     id: "Remembers What Matters",
     icon: Sparkles,
-    title: "Remembers What Matters",
-    description: "Remembers their stories and preferences. Asks about the things they care about.",
+    title: "Remembers what matters",
+    description: "It learns their preferences and follows up on the people, stories, and hobbies they care about.",
   },
 ];
 
@@ -96,20 +96,20 @@ const youBenefits = [
   {
     id: "Helpful Reminders",
     icon: Bell,
-    title: "Helpful Reminders",
-    description: "You set gentle reminders through the family portal — medications, meals, or daily habits.",
+    title: "Set gentle reminders",
+    description: "Add medication, meals, and routine prompts in the family portal when needed.",
   },
   {
     id: "Daily Summary / Insights",
     icon: TrendingUp,
-    title: "Daily Summary / Insights",
-    description: "See how they're doing with daily insights. Mood patterns, engagement, and notable moments.",
+    title: "Daily update",
+    description: "A simple summary of how they're doing, with mood, engagement, and notable moments.",
   },
   {
     id: "Family Portal",
     icon: Layout,
-    title: "Family Portal",
-    description: "Configure everything from an easy web portal. Set reminders, view insights, adjust preferences.",
+    title: "Family portal",
+    description: "One place to manage reminders, view updates, and adjust preferences.",
   },
 ];
 
@@ -192,7 +192,7 @@ export function Features() {
             How we help
           </h2>
           <p className="text-lg text-[#5F5B55] leading-relaxed">
-            Simple <span className="underline-wiggly">companionship & routine</span> support that brings <span className="underline-wiggly">help & comfort</span> to older adults & <span className="underline-wiggly">peace of mind</span> to families
+            Daily phone <span className="underline-wiggly">chats</span>, check-ins and <span className="underline-wiggly">reminders</span> — with <span className="underline-wiggly">reassuring updates</span> for families
           </p>
         </div>
 
@@ -403,7 +403,7 @@ export function Features() {
                     For you
                   </h4>
                   <p className="text-sm text-[#5F5B55]">
-                    Peace of mind through routine support and gentle insights on your loved one's wellbeing
+                    Peace of mind through routine support and gentle updates on your loved one's wellbeing
                   </p>
                 </div>
                 <div className="space-y-0">

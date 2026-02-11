@@ -22,28 +22,25 @@ export function Hero() {
             </h1>
             <div className="space-y-4">
               <p className="text-lg text-[#5F5B55] leading-relaxed">
-                Chattabox is an AI-powered companion that calls your loved one (parent, grandparent, partner, friend or someone you care for) for check-ins, friendly chats and gentle reminders.
+                Chattabox is an AI-powered companion that calls your loved one for check-ins, friendly chats and gentle reminders.
               </p>
               <ul className="space-y-2 text-base text-[#5F5B55] leading-relaxed">
                 <li className="flex items-baseline gap-2">
                   <span className="text-accent-green">•</span>
                   <span>
-                    No apps, no screens, no confusion —{" "}
-                    <span className="underline-wiggly">works on regular phones</span>
+                    Works on <span className="underline-wiggly">any phone</span> — no apps
                   </span>
                 </li>
                 <li className="flex items-baseline gap-2">
                   <span className="text-accent-green">•</span>
                   <span>
-                    Warm <span className="underline-wiggly">daily calls</span> with{" "}
-                    <span className="underline-wiggly">gentle reminders</span> and check-ins
+                    Warm <span className="underline-wiggly">daily calls</span> with reminders
                   </span>
                 </li>
                 <li className="flex items-baseline gap-2">
                   <span className="text-accent-green">•</span>
                   <span>
-                    Simple <span className="underline-wiggly">family portal</span> +{" "}
-                    <span className="underline-wiggly">daily updates</span> so you stay in the loop and in control
+                    Family dashboard with <span className="underline-wiggly">daily updates</span>
                   </span>
                 </li>
               </ul>
@@ -71,9 +68,6 @@ export function Hero() {
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
-            <p className="text-sm text-[#8A857E]">
-              We're onboarding families in small batches while we refine the experience.
-            </p>
           </div>
         </div>
       </div>
