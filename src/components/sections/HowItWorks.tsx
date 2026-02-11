@@ -5,19 +5,19 @@ const steps = [
     number: "1",
     icon: Wrench,
     title: "You Set It Up (10 mins)",
-    description: "- Share a little about your loved one to help Chattabox get to know them\n- Configure reminders & check-ins & preferences through the family portal",
+    description: "- Share a few details to register\n- Tell Chattabox about your loved one\n- Set reminders and check-ins",
   },
   {
     number: "2",
     icon: Phone,
-    title: "Chattabox Calls Them",
-    description: "- Chattabox calls as you configured it to\n- Your loved one can call Chattabox whenever they want to talk.\nIt remembers their conversations and preferences.",
+    title: "Calls Both Ways",
+    description: "- Calls on your schedule.\n- They can call Chattabox anytime too.\n- Remembers what matters.",
   },
   {
     number: "3",
     icon: FileText,
     title: "You Get Updates",
-    description: "- Receive simple daily summaries about your loved one's progress\n- Receive insights on how best you can support their wellbeing",
+    description: "- Receive a daily update\n- See mood and key moments\n- Know your loved one is doing well",
   },
 ];
 
@@ -57,37 +57,45 @@ export function HowItWorks() {
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Share a little about your loved one to help Chattabox get to know them</span>
+                            <span>Share a few details to register</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Configure reminders & check-ins & preferences through the family portal</span>
+                            <span>Tell Chattabox about your loved one</span>
+                          </li>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-accent-green">•</span>
+                            <span>Set reminders and check-ins</span>
                           </li>
                         </>
                       ) : step.number === "2" ? (
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Chattabox calls as you configured it to</span>
+                            <span>Calls on your schedule.</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Your loved one can call Chattabox whenever they want to talk.</span>
+                            <span>They can call Chattabox anytime too.</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>It remembers their conversations and preferences.</span>
+                            <span>Remembers what matters.</span>
                           </li>
                         </>
                       ) : (
                         <>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Receive simple daily summaries about your loved one's progress</span>
+                            <span>Receive a daily update</span>
                           </li>
                           <li className="flex items-baseline gap-2">
                             <span className="text-accent-green">•</span>
-                            <span>Receive insights on how best you can support their wellbeing</span>
+                            <span>See mood and key moments</span>
+                          </li>
+                          <li className="flex items-baseline gap-2">
+                            <span className="text-accent-green">•</span>
+                            <span>Know your loved one is doing well</span>
                           </li>
                         </>
                       )}

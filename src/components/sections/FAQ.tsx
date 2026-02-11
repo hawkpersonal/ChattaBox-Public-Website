@@ -39,13 +39,13 @@ const faqItems: Array<{
   {
     question: "Do you record calls?",
     answer:
-      "No — we don't record audio. We do create written transcripts to help Chattabox remember context, but these aren't viewable and are only used to power service analytics.",
+      "No. We don't store call audio. We create a private text transcript so Chattabox can remember context and improve the experience. Families don't see word-for-word transcripts, and access is tightly restricted.",
     icon: MicOff,
   },
   {
     question: "What will I see as a family member?",
     answer:
-      "You'll get a gentle overview — like general topics discussed, mood trends, and helpful flags (for example, missed check-ins). You won't see word-for-word transcripts.",
+      "You'll get a gentle daily update with general topics, mood and engagement trends, and practical flags like missed check-ins or repeated low mood. You won't see word-for-word transcripts.",
     icon: LayoutDashboard,
   },
   {
@@ -70,14 +70,14 @@ const faqItems: Array<{
     question: "Is my family's information private?",
     answer: (
       <>
-        Yes. We minimise what we collect, protect it with encryption and restricted access, and we never sell your data. You can contact{" "}
+        Yes. We minimise what we collect, protect it with encryption and restricted access, and we never sell your data. You can request deletion at any time. You can contact{" "}
         <a
           href="mailto:privacy@chattabox.io"
           className="text-[#C06040] hover:text-accent-green underline"
         >
           privacy@chattabox.io
         </a>{" "}
-        any time.
+        whenever you need.
       </>
     ),
     icon: ShieldCheck,
@@ -85,7 +85,7 @@ const faqItems: Array<{
   {
     question: "What does Chattabox cost?",
     answer:
-      "Chattabox is free during early access while we refine the experience. After that, we plan to offer a small range of simple plans — including a more affordable option — so most families can find something that fits their budget. We'll always be clear on pricing before anything changes.",
+      "Chattabox is free during early access while we refine the experience. We'll introduce simple paid plans later, and we'll always share pricing clearly and give notice before anything changes.",
     icon: Wallet,
   },
   {
