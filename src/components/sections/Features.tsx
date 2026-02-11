@@ -192,13 +192,31 @@ export function Features() {
             How we help
           </h2>
           <p className="text-lg text-[#5F5B55] leading-relaxed">
-            Daily phone <span className="underline-wiggly">chats</span>, check-ins and <span className="underline-wiggly">reminders</span> — with <span className="underline-wiggly">reassuring updates</span> for families
+            Daily phone <span className="underline-wiggly">chats</span>, check-ins and <span className="underline-wiggly">reminders</span>, with <span className="underline-wiggly">reassuring updates</span> for families
           </p>
         </div>
 
         {/* Block 1: Card Carousel */}
         <div className="mb-12 md:mb-16">
           <div className="relative group max-w-2xl mx-auto">
+            {/* Dot indicator - above slides */}
+            <div className="mb-4 flex justify-center items-center gap-2">
+              {cadenceSteps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleStepClick(index)}
+                  className="focus:outline-none transition-all focus-visible:ring-2 focus-visible:ring-accent-green/30 focus-visible:ring-offset-2 rounded"
+                  aria-label={`Go to step ${index + 1}`}
+                >
+                  {index === activeStep ? (
+                    <div className="w-8 h-0.5 bg-accent-green rounded-full" />
+                  ) : (
+                    <div className="w-2 h-2 rounded-full bg-[#DED9D0] hover:bg-accent-green transition-colors" />
+                  )}
+                </button>
+              ))}
+            </div>
+
             {/* Carousel container */}
             <div
               ref={scrollContainerRef}
@@ -300,24 +318,6 @@ export function Features() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
-
-            {/* Dot menu indicator */}
-            <div className="mt-6 flex justify-center items-center gap-2">
-              {cadenceSteps.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleStepClick(index)}
-                  className="focus:outline-none transition-all"
-                  aria-label={`Go to step ${index + 1}`}
-                >
-                  {index === activeStep ? (
-                    <div className="w-8 h-0.5 bg-accent-green rounded-full" />
-                  ) : (
-                    <div className="w-2 h-2 rounded-full bg-[#DED9D0] hover:bg-accent-green transition-colors" />
-                  )}
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -380,7 +380,7 @@ export function Features() {
                         className="flex items-start gap-4 py-5 border-b border-[#E6E2DA] last:border-b-0"
                         style={{ borderColor: 'rgba(230, 226, 218, 0.3)' }}
                       >
-                        <div className="flex-shrink-0 h-11 w-11 rounded-xl border border-[#E6E2DA] bg-[#EFEDE5] flex items-center justify-center">
+                        <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-[#EFEDE5] flex items-center justify-center">
                           <Icon className="h-5 w-5 text-[#C06040]" strokeWidth={2} />
                         </div>
                         <div className="flex-1">
@@ -415,7 +415,7 @@ export function Features() {
                         className="flex items-start gap-4 py-5 border-b border-[#E6E2DA] last:border-b-0"
                         style={{ borderColor: 'rgba(230, 226, 218, 0.3)' }}
                       >
-                        <div className="flex-shrink-0 h-11 w-11 rounded-xl border border-[#E6E2DA] bg-[#EFEDE5] flex items-center justify-center">
+                        <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-[#EFEDE5] flex items-center justify-center">
                           <Icon className="h-5 w-5 text-[#C06040]" strokeWidth={2} />
                         </div>
                         <div className="flex-1">

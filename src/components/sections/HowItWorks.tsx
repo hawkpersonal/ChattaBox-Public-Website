@@ -45,7 +45,7 @@ export function HowItWorks() {
                 <div className="bg-white rounded-[12px] p-6 border border-[#E6E2DA] shadow-elegant">
                   <div className="flex flex-col items-center text-center space-y-4">
                     <div className="relative">
-                      <div className="h-16 w-16 rounded-full bg-[#EFEDE5] border border-[#E6E2DA] flex items-center justify-center mb-4">
+                      <div className="h-16 w-16 rounded-full bg-[#EFEDE5] flex items-center justify-center mb-4">
                         <Icon className="h-8 w-8 text-[#C06040]" strokeWidth={2} />
                       </div>
                     </div>
