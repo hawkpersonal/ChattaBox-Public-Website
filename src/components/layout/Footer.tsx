@@ -11,7 +11,7 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-3">
               <div className="h-9 w-9 flex items-center justify-center">
                 <img
-                  src="/images/logo.png"
+                  src="/images/logo-white.png"
                   alt="Chattabox logo"
                   className="h-full w-full object-contain"
                 />
