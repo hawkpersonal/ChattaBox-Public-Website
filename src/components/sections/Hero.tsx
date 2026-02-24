@@ -1,12 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
-const scrollToSection = (id: string) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-};
+import { PILOT_URL } from "@/lib/constants";
 
 export function Hero() {
   return (
@@ -63,9 +57,11 @@ export function Hero() {
           {/* 3. CTA — third on mobile (below image), left column bottom on desktop */}
           <div className="space-y-3 pt-2 order-3 lg:col-start-1 lg:row-start-2">
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button size="lg" onClick={() => scrollToSection("contact")} className="group">
-                Get early access
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <Button size="lg" asChild className="group">
+                <a href={PILOT_URL}>
+                  Get early access
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
               </Button>
             </div>
           </div>

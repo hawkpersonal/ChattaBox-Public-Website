@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Building2 } from "lucide-react";
+import { PILOT_URL } from "@/lib/constants";
 
 const plans = [
   {
@@ -16,7 +17,7 @@ const plans = [
       "Priority support",
     ],
     buttonText: "Get early access",
-    buttonAction: "contact",
+    buttonAction: "pilot",
     highlighted: true,
   },
   {
@@ -50,6 +51,8 @@ export function Pricing() {
     if (plan.buttonAction === "mailto") {
       const subject = "Chattabox for care providers";
       window.location.href = `mailto:hello@chattabox.io?subject=${encodeURIComponent(subject)}`;
+    } else if (plan.buttonAction === "pilot") {
+      window.location.href = PILOT_URL;
     } else {
       scrollToSection("contact");
     }

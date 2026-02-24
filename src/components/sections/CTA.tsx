@@ -1,13 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { PILOT_URL } from "@/lib/constants";
 
 export function CTA() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
     <section className="py-14 md:py-24 bg-[#EFEDE5]">
       <div className="container">
@@ -23,10 +17,10 @@ export function CTA() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
-                  onClick={() => scrollToSection("contact")}
+                  asChild
                   className="bg-white text-[#C06040] hover:bg-white/95"
                 >
-                  Get early access
+                  <a href={PILOT_URL}>Get early access</a>
                 </Button>
               </div>
             </div>

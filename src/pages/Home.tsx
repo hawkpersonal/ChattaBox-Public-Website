@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { AnnouncementBanner } from "@/components/layout/AnnouncementBanner";
 import { SectionRail } from "@/components/layout/SectionRail";
 import { Hero } from "@/components/sections/Hero";
 import { Features } from "@/components/sections/Features";
@@ -14,6 +15,7 @@ import { Contact } from "@/components/sections/Contact";
 export function Home() {
   return (
     <main>
+      <AnnouncementBanner />
       <Header />
       <SectionRail />
       <Hero />
